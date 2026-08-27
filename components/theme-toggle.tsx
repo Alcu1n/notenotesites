@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 type Theme = "light" | "dark";
 
-const storageKey = "tucked-theme";
+const storageKey = "driftleaf-theme";
 
 export function ThemeToggle() {
   useEffect(() => {

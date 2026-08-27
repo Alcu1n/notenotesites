@@ -1,5 +1,5 @@
 export const siteConfig = {
-  name: "Tucked",
+  name: "Driftleaf",
   studio: "LRAI STUDIO",
   developer: "@lemon",
   supportEmail: "alcuin.ch@gmail.com",
@@ -9,4 +9,4 @@ export const siteConfig = {
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL?.trim() || null,
 } as const;
 
-export const legalLastUpdated = "August 27, 2026";
+export const legalLastUpdated = "August 28, 2026";

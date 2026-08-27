@@ -16,11 +16,11 @@ Design-conscious people who want to record everyday thoughts, photos, ideas, and
 
 ## Product Purpose
 
-Tucked is a highly designed notes and journaling app. It gives personal notes the feeling of paper: words, photos, stickers, and small context can live together on a page instead of disappearing into a plain list.
+Driftleaf is a highly designed notes and journaling app. It gives personal notes the feeling of paper: words, photos, stickers, and small context can live together on a page instead of disappearing into a plain list.
 
 ## Positioning
 
-A note is more than a row in a database. Tucked turns each memory into a tactile page and a stack worth returning to.
+A note is more than a row in a database. Driftleaf turns each memory into a tactile page and a stack worth returning to.
 
 ## Operating Context
 
@@ -37,12 +37,12 @@ The website is an English-language marketing and legal surface for the iPhone ap
 
 ## Brand Commitments
 
-- Product name: Tucked.
+- Product name: Driftleaf.
 - Studio: LRAI STUDIO.
 - Developer: @lemon.
 - Support: alcuin.ch@gmail.com.
 - Visual reference: warm paper, strong black outlines, offset shadows, colorful paper modules, compact labels, and expressive editorial typography.
-- The supplied reference image and website are visual references only; their content and claims are not part of Tucked.
+- The supplied reference image and website are visual references only; their content and claims are not part of Driftleaf.
 
 ## Evidence on Hand
 

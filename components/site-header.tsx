@@ -7,7 +7,7 @@ import { ThemeToggle } from "./theme-toggle";
 export function SiteHeader({ legal = false }: { legal?: boolean }) {
   return (
     <header className={`site-header${legal ? " site-header--legal" : ""}`}>
-      <Link className="wordmark" href="/" aria-label="Tucked home">
+      <Link className="wordmark" href="/" aria-label="Driftleaf home">
         <span className="wordmark-mark" aria-hidden="true">
           <span />
           <span />

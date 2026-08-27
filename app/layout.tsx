@@ -9,8 +9,8 @@ const metadataBase = siteConfig.siteUrl ? new URL(siteConfig.siteUrl) : undefine
 export const metadata: Metadata = {
   metadataBase,
   title: {
-    default: "Tucked — A beautiful place for the things worth keeping.",
-    template: "%s — Tucked",
+    default: "Driftleaf — A beautiful place for the things worth keeping.",
+    template: "%s — Driftleaf",
   },
   description: siteConfig.description,
   applicationName: siteConfig.name,
@@ -20,13 +20,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: siteConfig.name,
-    title: "Tucked — A beautiful place for the things worth keeping.",
+    title: "Driftleaf — A beautiful place for the things worth keeping.",
     description: siteConfig.description,
     images: ["/assets/tucked/hero-card-stack.jpg"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tucked — A beautiful place for the things worth keeping.",
+    title: "Driftleaf — A beautiful place for the things worth keeping.",
     description: siteConfig.description,
     images: ["/assets/tucked/hero-card-stack.jpg"],
   },
@@ -39,9 +39,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        {/* THESIS: Tucked turns the plain notes list into a tactile paper stack. */}
+        {/* THESIS: Driftleaf turns the plain notes list into a tactile paper stack. */}
         {/* OWN-WORLD: warm paper, ink-black outlines, offset shadows, vivid paper accents, editorial type. */}
-        {/* STORY: see a moment become a page, understand the local-first promise, and explore Tucked. */}
+        {/* STORY: see a moment become a page, understand the local-first promise, and explore Driftleaf. */}
         {/* FIRST VIEWPORT: copy and CTA on the left, the real card-stack image as the oversized proof on the right. */}
         {/* FORM: reference-pinned paper ledger language, adapted to a visual journal. */}
         {/* FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md */}

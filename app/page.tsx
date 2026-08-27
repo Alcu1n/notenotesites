@@ -14,7 +14,7 @@ export default function HomePage() {
           <div className="hero-copy">
             <h1>A beautiful place for the things worth keeping.</h1>
             <p className="hero-summary">
-              Tucked is a visual notebook for everyday thoughts, photos, and small moments — made to be
+              Driftleaf is a visual notebook for everyday thoughts, photos, and small moments — made to be
               written, shaped, and revisited.
             </p>
             <div className="hero-actions">
@@ -29,7 +29,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="hero-visual" aria-label="A stack of Tucked notes on a dark paper stage">
+          <div className="hero-visual" aria-label="A stack of Driftleaf notes on a dark paper stage">
             <div className="hero-visual__back hero-visual__back--yellow" aria-hidden="true" />
             <div className="hero-visual__back hero-visual__back--pink" aria-hidden="true" />
             <div className="hero-frame">
@@ -39,7 +39,7 @@ export default function HomePage() {
               </div>
               <Image
                 src="/assets/tucked/hero-card-stack.jpg"
-                alt="Tucked showing a layered stack of paper-like notes with a dated note in front"
+                alt="Driftleaf showing a layered stack of paper-like notes with a dated note in front"
                 width={1179}
                 height={2556}
                 priority
@@ -65,7 +65,7 @@ export default function HomePage() {
             <h2>A note is more than a line in a list.</h2>
             <div>
               <p>
-                Tucked gives your thoughts a page with room to breathe. Write a few words, place a photo,
+                Driftleaf gives your thoughts a page with room to breathe. Write a few words, place a photo,
                 add a sticker, and let the whole moment stay together.
               </p>
               <p className="handwritten-line">Keep the feeling, not just the timestamp.</p>
@@ -76,7 +76,7 @@ export default function HomePage() {
         <section className="stack-section page-section" id="details">
           <div className="stack-section__intro">
             <h2>Make something you will want to open again.</h2>
-            <p className="section-note">THE TUCKED WAY · A SMALL RITUAL FOR BIG FEELINGS</p>
+            <p className="section-note">THE DRIFTLEAF WAY · A SMALL RITUAL FOR BIG FEELINGS</p>
           </div>
           <div className="stack-stage">
             <div className="stack-card stack-card--back stack-card--back-one" aria-hidden="true">
@@ -128,7 +128,7 @@ export default function HomePage() {
             <h2>Somewhere between a diary and a little piece of design.</h2>
             <p className="section-note">A PAGE CAN HOLD A DAY</p>
             <p>
-              Tucked keeps the useful parts of a notes app and gives them the texture of a personal journal.
+              Driftleaf keeps the useful parts of a notes app and gives them the texture of a personal journal.
               Your pages can be spare, expressive, or wonderfully unfinished.
             </p>
           </div>
@@ -136,7 +136,7 @@ export default function HomePage() {
             <figure className="gallery-card gallery-card--lined">
               <Image
                 src="/assets/tucked/note-lined.jpg"
-                alt="A Tucked lined-paper note with a date, weather, location, and a short reflection"
+                alt="A Driftleaf lined-paper note with a date, weather, location, and a short reflection"
                 width={1170}
                 height={1540}
                 loading="eager"
@@ -147,7 +147,7 @@ export default function HomePage() {
             <figure className="gallery-card gallery-card--rainy">
               <Image
                 src="/assets/tucked/note-rainy-day.jpg"
-                alt="A Tucked English journal page titled Rainy Day Reflections"
+                alt="A Driftleaf English journal page titled Rainy Day Reflections"
                 width={1170}
                 height={1633}
                 loading="eager"
@@ -158,7 +158,7 @@ export default function HomePage() {
             <figure className="gallery-card gallery-card--type">
               <Image
                 src="/assets/tucked/type-styles.png"
-                alt="A Tucked typography sample showing serif and handwritten styles"
+                alt="A Driftleaf typography sample showing serif and handwritten styles"
                 width={1170}
                 height={1424}
                 loading="eager"
@@ -173,7 +173,7 @@ export default function HomePage() {
           <div className="final-cta__paper">
             <div>
               <h2>Give your everyday thoughts somewhere beautiful to land.</h2>
-              <p className="section-note">TUCK IT AWAY · TAKE IT WITH YOU</p>
+              <p className="section-note">LET IT DRIFT · TAKE IT WITH YOU</p>
             </div>
             <DownloadButton />
           </div>
