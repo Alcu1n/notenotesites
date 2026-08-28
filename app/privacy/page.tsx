@@ -3,23 +3,38 @@ import type { Metadata } from "next";
 import { LegalLayout } from "@/components/legal-layout";
 import { siteConfig } from "@/lib/site-config";
 
+const localizedProductDescription = `${siteConfig.name} (also known as “${siteConfig.chineseName}” in Chinese)`;
+const legalTitle = `Privacy Policy — ${siteConfig.name} (${siteConfig.chineseName})`;
+const metadataDescription = `How ${localizedProductDescription} handles notes, media, permissions, and support information.`;
+
 export const metadata: Metadata = {
-  title: "Privacy Policy",
-  description: `How ${siteConfig.name} handles notes, media, permissions, and support information.`,
+  title: { absolute: legalTitle },
+  description: metadataDescription,
+  applicationName: `${siteConfig.name} (${siteConfig.chineseName})`,
+  openGraph: {
+    siteName: `${siteConfig.name} (${siteConfig.chineseName})`,
+    title: legalTitle,
+    description: metadataDescription,
+  },
+  twitter: {
+    title: legalTitle,
+    description: metadataDescription,
+  },
 };
 
 export default function PrivacyPage() {
   return (
     <LegalLayout
       title="Privacy Policy"
-      summary="Driftleaf is designed to keep personal notes close: on your device, in your hands, and under your control."
+      summary={`${localizedProductDescription} is designed to keep personal notes close: on your device, in your hands, and under your control.`}
     >
       <section id="overview">
         <h2>1. Overview</h2>
         <p>
           This Privacy Policy explains how LRAI STUDIO, developed by {siteConfig.developer} (&quot;LRAI
-          STUDIO,&quot; &quot;we,&quot; or &quot;us&quot;), handles information in the Driftleaf app and this website.
-          Driftleaf is a local-first notes and journaling app. The current version does not require an account and
+          STUDIO,&quot; &quot;we,&quot; or &quot;us&quot;), handles information in the {siteConfig.name} app, also known as
+          “{siteConfig.chineseName}” in Chinese (the &quot;App&quot;), and on this website. The App is a local-first notes and
+          journaling app. The current version does not require an account and
           does not operate a remote account, advertising, analytics, or cross-app tracking system.
         </p>
         <p>
@@ -28,34 +43,33 @@ export default function PrivacyPage() {
       </section>
 
       <section id="data">
-        <h2>2. Information Driftleaf handles</h2>
+        <h2>2. Information the App handles</h2>
         <h3>Notes and media you create</h3>
         <p>
-          Driftleaf handles the text, photos, stickers, layouts, dates, and other content you choose to create or
-          add. This content is stored locally in the app&apos;s storage on your device. We do not receive or review
-          your notes through a Driftleaf server.
+          The App handles the text, photos, stickers, layouts, dates, and other content you choose to create or add.
+          This content is stored locally in the app&apos;s storage on your device. We do not receive or review your notes
+          through a server operated on behalf of the App.
         </p>
 
         <h3>Photos and camera access</h3>
         <p>
-          If you choose to add a photo, make a sticker, or export a note, Driftleaf may request access to Photos or
-          the camera. Photos and camera captures are used to complete the action you request. Sticker extraction
-          is performed on the device. Driftleaf does not upload your photo library or camera captures to LRAI STUDIO.
+          If you choose to add a photo, make a sticker, or export a note, the App may request access to Photos or the
+          camera. Photos and camera captures are used to complete the action you request. Sticker extraction is
+          performed on the device. The App does not upload your photo library or camera captures to LRAI STUDIO.
           You can decline or later change these permissions in iOS Settings.
         </p>
 
         <h3>Location and weather context</h3>
         <p>
-          If you grant When In Use location access, Driftleaf may use your current location while creating a new
-          note to obtain a city/country label and current weather context. Driftleaf does not request background
-          location access or continuously track your movements. When available, the resulting location label and
-          weather snapshot may be saved with that note; Driftleaf is not designed to keep a history of precise
-          coordinates.
+          If you grant When In Use location access, the App may use your current location while creating a new note to
+          obtain a city/country label and current weather context. The App does not request background location access
+          or continuously track your movements. When available, the resulting location label and weather snapshot may
+          be saved with that note; the App is not designed to keep a history of precise coordinates.
         </p>
 
         <h3>Purchases</h3>
         <p>
-          If you purchase an optional Driftleaf feature through the App Store, Apple processes the transaction through
+          If you purchase an optional feature in the App through the App Store, Apple processes the transaction through
           StoreKit. We do not receive your payment card number. Purchase history and subscription management are
           handled through your Apple account and Apple&apos;s services.
         </p>
@@ -70,7 +84,7 @@ export default function PrivacyPage() {
       <section id="third-parties">
         <h2>3. Third-party services</h2>
         <p>
-          Driftleaf uses Apple system services when you choose features that depend on them, including Photos,
+          The App uses Apple system services when you choose features that depend on them, including Photos,
           Camera, Core Location, WeatherKit, and StoreKit. Those services may process information under Apple&apos;s
           own terms and privacy policies. We do not sell your personal information or provide your note content to
           advertising networks, data brokers, or third-party analytics providers.
@@ -84,12 +98,12 @@ export default function PrivacyPage() {
       <section id="retention">
         <h2>4. Storage, retention, and deletion</h2>
         <p>
-          Your notes and locally stored media remain on your device until you delete them in Driftleaf, remove the
-          app, or otherwise clear the app&apos;s data. iOS device backups, if enabled by you, are controlled by Apple
+          Your notes and locally stored media remain on your device until you delete them in the App, remove the app,
+          or otherwise clear the app&apos;s data. iOS device backups, if enabled by you, are controlled by Apple
           and may contain app data according to your backup settings.
         </p>
         <p>
-          You can delete individual notes and saved stickers in Driftleaf. If you contact us about a support message,
+          You can delete individual notes and saved stickers in the App. If you contact us about a support message,
           you may ask us to delete that correspondence where we are able to do so, subject to records we must keep
           for legal, security, or accounting reasons.
         </p>
@@ -99,7 +113,7 @@ export default function PrivacyPage() {
         <h2>5. Your choices</h2>
         <p>
           You decide whether to grant Photos, Camera, and location permissions. You can change those choices in iOS
-          Settings. Driftleaf does not require location, camera, or photo access for basic note writing. You may also
+          Settings. The App does not require location, camera, or photo access for basic note writing. You may also
           delete local content directly in the app.
         </p>
       </section>
@@ -107,17 +121,17 @@ export default function PrivacyPage() {
       <section>
         <h2>6. Children&apos;s privacy</h2>
         <p>
-          Driftleaf is not directed to children under 13, or the minimum age required by applicable law in your
-          location. We do not knowingly collect personal information from children through a Driftleaf account because
-          Driftleaf does not require accounts.
+          The App is not directed to children under 13, or the minimum age required by applicable law in your location.
+          We do not knowingly collect personal information from children through an account for the App because the App
+          does not require accounts.
         </p>
       </section>
 
       <section>
         <h2>7. Changes to this policy</h2>
         <p>
-          We may update this policy when Driftleaf&apos;s features, services, or legal obligations change. The updated
-          version will be posted on this page with a new &quot;Last updated&quot; date. If a change materially affects how
+          We may update this policy when the App&apos;s features, services, or legal obligations change. The updated version
+          will be posted on this page with a new &quot;Last updated&quot; date. If a change materially affects how
           we handle information, we will make that change clear where appropriate.
         </p>
       </section>
@@ -127,7 +141,9 @@ export default function PrivacyPage() {
         <p>
           Privacy questions and requests: <a href={`mailto:${siteConfig.supportEmail}`}>{siteConfig.supportEmail}</a>.
         </p>
-        <p className="legal-signoff">LRAI STUDIO · {siteConfig.developer} · Driftleaf</p>
+        <p className="legal-signoff">
+          LRAI STUDIO · {siteConfig.developer} · {siteConfig.name} / <span lang="zh-Hans">{siteConfig.chineseName}</span>
+        </p>
       </section>
     </LegalLayout>
   );

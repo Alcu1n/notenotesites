@@ -2,11 +2,14 @@ import Link from "next/link";
 
 import { siteConfig } from "@/lib/site-config";
 
-export function SiteFooter() {
+export function SiteFooter({ legal = false }: { legal?: boolean }) {
   return (
     <footer className="site-footer">
       <div className="footer-brand">
-        <span className="footer-brand__name">{siteConfig.name}</span>
+        <span className="footer-brand__name">
+          {siteConfig.name}
+          {legal && <> / <span lang="zh-Hans">{siteConfig.chineseName}</span></>}
+        </span>
         <span className="footer-brand__tagline">Keep the good parts.</span>
       </div>
 

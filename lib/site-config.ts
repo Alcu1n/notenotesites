@@ -1,5 +1,6 @@
 export const siteConfig = {
   name: "Driftleaf",
+  chineseName: "拼拼笔记",
   studio: "LRAI STUDIO",
   developer: "@lemon",
   supportEmail: "alcuin.ch@gmail.com",

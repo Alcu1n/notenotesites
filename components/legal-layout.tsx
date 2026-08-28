@@ -19,7 +19,9 @@ export function LegalLayout({ title, summary, children }: LegalLayoutProps) {
         <section className="legal-hero">
           <h1>{title}</h1>
           <p>{summary}</p>
-          <div className="legal-hero__stamp">{siteConfig.studio} / {siteConfig.name}</div>
+          <div className="legal-hero__stamp">
+            {siteConfig.studio} / {siteConfig.name} / <span lang="zh-Hans">{siteConfig.chineseName}</span>
+          </div>
           <span className="legal-updated">Last updated {legalLastUpdated}</span>
         </section>
 
@@ -35,7 +37,7 @@ export function LegalLayout({ title, summary, children }: LegalLayoutProps) {
           <article className="legal-content">{children}</article>
         </div>
       </main>
-      <SiteFooter />
+      <SiteFooter legal />
     </div>
   );
 }
