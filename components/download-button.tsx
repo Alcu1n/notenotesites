@@ -1,5 +1,7 @@
 import { siteConfig } from "@/lib/site-config";
 
+import { AppStoreIcon, ArrowIcon } from "./icons";
+
 type DownloadButtonProps = {
   className?: string;
 };
@@ -10,28 +12,29 @@ export function DownloadButton({ className = "" }: DownloadButtonProps) {
   if (siteConfig.appStoreUrl) {
     return (
       <a className={classes} href={siteConfig.appStoreUrl} target="_blank" rel="noreferrer">
-        <span className="download-button__icon" aria-hidden="true">
-          <span />
-        </span>
+        <AppStoreIcon />
         <span>
           <small>Available on the</small>
           <strong>App Store</strong>
         </span>
-        <span className="arrow-mark" aria-hidden="true" />
+        <ArrowIcon />
       </a>
     );
   }
 
   return (
-    <span className={`${classes} download-button--pending`} aria-label="App Store link coming soon">
-      <span className="download-button__icon" aria-hidden="true">
-        <span />
-      </span>
+    <span
+      className={`${classes} download-button--pending`}
+      aria-label="App Store link coming soon"
+      aria-disabled="true"
+      title="App Store link coming soon"
+    >
+      <AppStoreIcon />
       <span>
         <small>Coming soon to the</small>
         <strong>App Store</strong>
       </span>
-      <span className="arrow-mark" aria-hidden="true" />
+      <ArrowIcon />
     </span>
   );
 }

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { siteConfig } from "@/lib/site-config";
@@ -6,10 +7,15 @@ export function SiteFooter({ legal = false }: { legal?: boolean }) {
   return (
     <footer className="site-footer">
       <div className="footer-brand">
-        <span className="footer-brand__name">
-          {siteConfig.name}
-          {legal && <> / <span lang="zh-Hans">{siteConfig.chineseName}</span></>}
-        </span>
+        <div className="footer-brand__top">
+          <span className="footer-brand__mark" aria-hidden="true">
+            <Image src="/assets/driftleaf/app-icon.png" alt="" width={1024} height={1024} />
+          </span>
+          <span className="footer-brand__name">
+            {siteConfig.name}
+            {legal && <> / <span lang="zh-Hans">{siteConfig.chineseName}</span></>}
+          </span>
+        </div>
         <span className="footer-brand__tagline">Keep the good parts.</span>
       </div>
 

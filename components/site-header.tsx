@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { siteConfig } from "@/lib/site-config";
@@ -10,14 +11,16 @@ export function SiteHeader({ legal = false }: { legal?: boolean }) {
       <Link
         className="wordmark"
         href="/"
-        aria-label={legal ? `${siteConfig.name} (known in Chinese as ${siteConfig.chineseName}) home` : `${siteConfig.name} home`}
+        aria-label={
+          legal
+            ? `${siteConfig.name} (known in Chinese as ${siteConfig.chineseName}) home`
+            : `${siteConfig.name} home`
+        }
       >
         <span className="wordmark-mark" aria-hidden="true">
-          <span />
-          <span />
-          <span />
+          <Image src="/assets/driftleaf/app-icon.png" alt="" width={1024} height={1024} loading="eager" />
         </span>
-        <span>
+        <span className="wordmark-label">
           {siteConfig.name}
           {legal && <> / <span lang="zh-Hans">{siteConfig.chineseName}</span></>}
         </span>

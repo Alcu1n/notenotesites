@@ -31,7 +31,8 @@ export const metadata: Metadata = {
     images: ["/assets/tucked/hero-card-stack.jpg"],
   },
   icons: {
-    icon: "/assets/tucked/hero-card-stack.jpg",
+    icon: "/assets/driftleaf/app-icon.png",
+    apple: "/assets/driftleaf/app-icon.png",
   },
 };
 

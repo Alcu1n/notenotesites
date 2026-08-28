@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { DownloadButton } from "@/components/download-button";
+import { ArrowIcon } from "@/components/icons";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 
@@ -20,7 +21,7 @@ export default function HomePage() {
             <div className="hero-actions">
               <DownloadButton />
               <a className="text-link" href="#inside">
-                See inside <span className="arrow-mark" aria-hidden="true" />
+                See inside <ArrowIcon />
               </a>
             </div>
             <div className="hero-note">
@@ -29,7 +30,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="hero-visual" aria-label="A stack of Driftleaf notes on a dark paper stage">
+          <div className="hero-visual">
             <div className="hero-visual__back hero-visual__back--yellow" aria-hidden="true" />
             <div className="hero-visual__back hero-visual__back--pink" aria-hidden="true" />
             <div className="hero-frame">
@@ -42,8 +43,8 @@ export default function HomePage() {
                 alt="Driftleaf showing a layered stack of paper-like notes with a dated note in front"
                 width={1179}
                 height={2556}
-                priority
-                sizes="(max-width: 760px) 78vw, 430px"
+                loading="eager"
+                sizes="(max-width: 760px) 86vw, (max-width: 860px) 78vw, (max-width: 1200px) 38vw, 420px"
               />
               <div className="hero-frame__rail" aria-hidden="true">
                 <span />
@@ -59,10 +60,10 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="statement-section page-section" id="inside">
+        <section className="statement-section page-section" id="inside" aria-labelledby="inside-title">
           <div className="section-rule" aria-hidden="true" />
           <div className="statement-grid">
-            <h2>A note is more than a line in a list.</h2>
+            <h2 id="inside-title">A note is more than a line in a list.</h2>
             <div>
               <p>
                 Driftleaf gives your thoughts a page with room to breathe. Write a few words, place a photo,
@@ -73,9 +74,9 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="stack-section page-section" id="details">
+        <section className="stack-section page-section" id="details" aria-labelledby="details-title">
           <div className="stack-section__intro">
-            <h2>Make something you will want to open again.</h2>
+            <h2 id="details-title">Make something you will want to open again.</h2>
             <p className="section-note">THE DRIFTLEAF WAY · A SMALL RITUAL FOR BIG FEELINGS</p>
           </div>
           <div className="stack-stage">
@@ -123,9 +124,9 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="gallery-section page-section">
+        <section className="gallery-section page-section" aria-labelledby="gallery-title">
           <div className="gallery-copy">
-            <h2>Somewhere between a diary and a little piece of design.</h2>
+            <h2 id="gallery-title">Somewhere between a diary and a little piece of design.</h2>
             <p className="section-note">A PAGE CAN HOLD A DAY</p>
             <p>
               Driftleaf keeps the useful parts of a notes app and gives them the texture of a personal journal.
@@ -139,7 +140,7 @@ export default function HomePage() {
                 alt="A Driftleaf lined-paper note with a date, weather, location, and a short reflection"
                 width={1170}
                 height={1540}
-                loading="eager"
+                loading="lazy"
                 sizes="(max-width: 760px) 86vw, 360px"
               />
               <figcaption>Leave room for the details.</figcaption>
@@ -150,7 +151,7 @@ export default function HomePage() {
                 alt="A Driftleaf English journal page titled Rainy Day Reflections"
                 width={1170}
                 height={1633}
-                loading="eager"
+                loading="lazy"
                 sizes="(max-width: 760px) 86vw, 360px"
               />
               <figcaption>Make the ordinary worth keeping.</figcaption>
@@ -161,7 +162,7 @@ export default function HomePage() {
                 alt="A Driftleaf typography sample showing serif and handwritten styles"
                 width={1170}
                 height={1424}
-                loading="eager"
+                loading="lazy"
                 sizes="(max-width: 760px) 86vw, 360px"
               />
               <figcaption>Find a voice for the page.</figcaption>
