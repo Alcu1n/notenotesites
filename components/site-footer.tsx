@@ -3,18 +3,15 @@ import Link from "next/link";
 
 import { siteConfig } from "@/lib/site-config";
 
-export function SiteFooter({ legal = false }: { legal?: boolean }) {
+export function SiteFooter() {
   return (
     <footer className="site-footer">
       <div className="footer-brand">
         <div className="footer-brand__top">
           <span className="footer-brand__mark" aria-hidden="true">
-            <Image src="/assets/driftleaf/app-icon.png" alt="" width={1024} height={1024} />
+            <Image src="/assets/pinnia/app-icon.png" alt="" width={1024} height={1024} />
           </span>
-          <span className="footer-brand__name">
-            {siteConfig.name}
-            {legal && <> / <span lang="zh-Hans">{siteConfig.chineseName}</span></>}
-          </span>
+          <span className="footer-brand__name">{siteConfig.name}</span>
         </div>
         <span className="footer-brand__tagline">Keep the good parts.</span>
       </div>

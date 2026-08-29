@@ -3,16 +3,16 @@ import type { Metadata } from "next";
 import { LegalLayout } from "@/components/legal-layout";
 import { siteConfig } from "@/lib/site-config";
 
-const localizedProductDescription = `${siteConfig.name} (also known as “${siteConfig.chineseName}” in Chinese)`;
-const legalTitle = `Terms of Service — ${siteConfig.name} (${siteConfig.chineseName})`;
-const metadataDescription = `Terms for using ${localizedProductDescription} and its related website.`;
+const productName = siteConfig.name;
+const legalTitle = `Terms of Service — ${productName}`;
+const metadataDescription = `Terms for using ${productName} and its related website.`;
 
 export const metadata: Metadata = {
   title: { absolute: legalTitle },
   description: metadataDescription,
-  applicationName: `${siteConfig.name} (${siteConfig.chineseName})`,
+  applicationName: productName,
   openGraph: {
-    siteName: `${siteConfig.name} (${siteConfig.chineseName})`,
+    siteName: productName,
     title: legalTitle,
     description: metadataDescription,
   },
@@ -26,13 +26,13 @@ export default function TermsPage() {
   return (
     <LegalLayout
       title="Terms of Service"
-      summary={`These terms explain the simple rules for using the ${siteConfig.name} app, also known as “${siteConfig.chineseName}” in Chinese, a local-first place for notes and personal moments.`}
+      summary={`These terms explain the simple rules for using the ${productName} app, a local-first place for notes and personal moments.`}
     >
       <section id="overview">
         <h2>1. Agreement</h2>
         <p>
-          These Terms of Service (&quot;Terms&quot;) govern your use of the {siteConfig.name} app, also known as
-          “{siteConfig.chineseName}” in Chinese (the &quot;App&quot;), and this website, operated by LRAI STUDIO and developed
+          These Terms of Service (&quot;Terms&quot;) govern your use of the {siteConfig.name} app (the &quot;App&quot;), and this
+          website, operated by LRAI STUDIO and developed
           by {siteConfig.developer}. By using the App, you agree to these Terms. If you do not agree, do not use the
           app or website.
         </p>
@@ -155,7 +155,7 @@ export default function TermsPage() {
           Questions about these Terms can be sent to <a href={`mailto:${siteConfig.supportEmail}`}>{siteConfig.supportEmail}</a>.
         </p>
         <p className="legal-signoff">
-          LRAI STUDIO · {siteConfig.developer} · {siteConfig.name} / <span lang="zh-Hans">{siteConfig.chineseName}</span>
+          LRAI STUDIO · {siteConfig.developer} · {siteConfig.name}
         </p>
       </section>
     </LegalLayout>

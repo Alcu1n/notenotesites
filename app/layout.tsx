@@ -5,12 +5,13 @@ import "./globals.css";
 import { siteConfig } from "@/lib/site-config";
 
 const metadataBase = siteConfig.siteUrl ? new URL(siteConfig.siteUrl) : undefined;
+const siteTitle = `${siteConfig.name} — A beautiful place for the things worth keeping.`;
 
 export const metadata: Metadata = {
   metadataBase,
   title: {
-    default: "Driftleaf — A beautiful place for the things worth keeping.",
-    template: "%s — Driftleaf",
+    default: siteTitle,
+    template: `%s — ${siteConfig.name}`,
   },
   description: siteConfig.description,
   applicationName: siteConfig.name,
@@ -20,19 +21,19 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: siteConfig.name,
-    title: "Driftleaf — A beautiful place for the things worth keeping.",
+    title: siteTitle,
     description: siteConfig.description,
-    images: ["/assets/tucked/hero-card-stack.jpg"],
+    images: ["/assets/pinnia/hero-card-stack.jpg"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Driftleaf — A beautiful place for the things worth keeping.",
+    title: siteTitle,
     description: siteConfig.description,
-    images: ["/assets/tucked/hero-card-stack.jpg"],
+    images: ["/assets/pinnia/hero-card-stack.jpg"],
   },
   icons: {
-    icon: "/assets/driftleaf/app-icon.png",
-    apple: "/assets/driftleaf/app-icon.png",
+    icon: "/assets/pinnia/app-icon.png",
+    apple: "/assets/pinnia/app-icon.png",
   },
 };
 
@@ -40,9 +41,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        {/* THESIS: Driftleaf turns the plain notes list into a tactile paper stack. */}
+        {/* THESIS: Pinnia turns the plain notes list into a tactile paper stack. */}
         {/* OWN-WORLD: warm paper, ink-black outlines, offset shadows, vivid paper accents, editorial type. */}
-        {/* STORY: see a moment become a page, understand the local-first promise, and explore Driftleaf. */}
+        {/* STORY: see a moment become a page, understand the local-first promise, and explore Pinnia. */}
         {/* FIRST VIEWPORT: copy and CTA on the left, the real card-stack image as the oversized proof on the right. */}
         {/* FORM: reference-pinned paper ledger language, adapted to a visual journal. */}
         {/* FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md */}

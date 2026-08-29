@@ -11,19 +11,12 @@ export function SiteHeader({ legal = false }: { legal?: boolean }) {
       <Link
         className="wordmark"
         href="/"
-        aria-label={
-          legal
-            ? `${siteConfig.name} (known in Chinese as ${siteConfig.chineseName}) home`
-            : `${siteConfig.name} home`
-        }
+        aria-label={`${siteConfig.name} home`}
       >
         <span className="wordmark-mark" aria-hidden="true">
-          <Image src="/assets/driftleaf/app-icon.png" alt="" width={1024} height={1024} loading="eager" />
+          <Image src="/assets/pinnia/app-icon.png" alt="" width={1024} height={1024} loading="eager" />
         </span>
-        <span className="wordmark-label">
-          {siteConfig.name}
-          {legal && <> / <span lang="zh-Hans">{siteConfig.chineseName}</span></>}
-        </span>
+        <span className="wordmark-label">{siteConfig.name}</span>
       </Link>
 
       <nav className="site-nav" aria-label="Primary navigation">

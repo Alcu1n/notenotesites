@@ -4,7 +4,8 @@ import { useEffect, useSyncExternalStore } from "react";
 
 type Theme = "light" | "dark";
 
-const storageKey = "driftleaf-theme";
+const storageKey = "pinnia-theme";
+const legacyStorageKey = "driftleaf-theme";
 
 const themeListeners = new Set<() => void>();
 
@@ -18,7 +19,8 @@ function getTheme(): Theme {
     return appliedTheme;
   }
 
-  const savedTheme = window.localStorage.getItem(storageKey) as Theme | null;
+  const savedTheme = (window.localStorage.getItem(storageKey) ??
+    window.localStorage.getItem(legacyStorageKey)) as Theme | null;
   if (savedTheme === "dark" || savedTheme === "light") {
     return savedTheme;
   }

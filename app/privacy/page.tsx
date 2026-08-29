@@ -3,16 +3,16 @@ import type { Metadata } from "next";
 import { LegalLayout } from "@/components/legal-layout";
 import { siteConfig } from "@/lib/site-config";
 
-const localizedProductDescription = `${siteConfig.name} (also known as “${siteConfig.chineseName}” in Chinese)`;
-const legalTitle = `Privacy Policy — ${siteConfig.name} (${siteConfig.chineseName})`;
-const metadataDescription = `How ${localizedProductDescription} handles notes, media, permissions, and support information.`;
+const productName = siteConfig.name;
+const legalTitle = `Privacy Policy — ${productName}`;
+const metadataDescription = `How ${productName} handles notes, media, permissions, and support information.`;
 
 export const metadata: Metadata = {
   title: { absolute: legalTitle },
   description: metadataDescription,
-  applicationName: `${siteConfig.name} (${siteConfig.chineseName})`,
+  applicationName: productName,
   openGraph: {
-    siteName: `${siteConfig.name} (${siteConfig.chineseName})`,
+    siteName: productName,
     title: legalTitle,
     description: metadataDescription,
   },
@@ -26,14 +26,14 @@ export default function PrivacyPage() {
   return (
     <LegalLayout
       title="Privacy Policy"
-      summary={`${localizedProductDescription} is designed to keep personal notes close: on your device, in your hands, and under your control.`}
+      summary={`${productName} is designed to keep personal notes close: on your device, in your hands, and under your control.`}
     >
       <section id="overview">
         <h2>1. Overview</h2>
         <p>
           This Privacy Policy explains how LRAI STUDIO, developed by {siteConfig.developer} (&quot;LRAI
-          STUDIO,&quot; &quot;we,&quot; or &quot;us&quot;), handles information in the {siteConfig.name} app, also known as
-          “{siteConfig.chineseName}” in Chinese (the &quot;App&quot;), and on this website. The App is a local-first notes and
+          STUDIO,&quot; &quot;we,&quot; or &quot;us&quot;), handles information in the {siteConfig.name} app (the &quot;App&quot;), and on this
+          website. The App is a local-first notes and
           journaling app. The current version does not require an account and
           does not operate a remote account, advertising, analytics, or cross-app tracking system.
         </p>
@@ -142,7 +142,7 @@ export default function PrivacyPage() {
           Privacy questions and requests: <a href={`mailto:${siteConfig.supportEmail}`}>{siteConfig.supportEmail}</a>.
         </p>
         <p className="legal-signoff">
-          LRAI STUDIO · {siteConfig.developer} · {siteConfig.name} / <span lang="zh-Hans">{siteConfig.chineseName}</span>
+          LRAI STUDIO · {siteConfig.developer} · {siteConfig.name}
         </p>
       </section>
     </LegalLayout>

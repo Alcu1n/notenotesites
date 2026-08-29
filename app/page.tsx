@@ -4,6 +4,7 @@ import { DownloadButton } from "@/components/download-button";
 import { ArrowIcon } from "@/components/icons";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { siteConfig } from "@/lib/site-config";
 
 export default function HomePage() {
   return (
@@ -15,7 +16,7 @@ export default function HomePage() {
           <div className="hero-copy">
             <h1>A beautiful place for the things worth keeping.</h1>
             <p className="hero-summary">
-              Driftleaf is a visual notebook for everyday thoughts, photos, and small moments — made to be
+              {siteConfig.name} is a visual notebook for everyday thoughts, photos, and small moments — made to be
               written, shaped, and revisited.
             </p>
             <div className="hero-actions">
@@ -39,8 +40,8 @@ export default function HomePage() {
                 <span>01 / 01</span>
               </div>
               <Image
-                src="/assets/tucked/hero-card-stack.jpg"
-                alt="Driftleaf showing a layered stack of paper-like notes with a dated note in front"
+                src="/assets/pinnia/hero-card-stack.jpg"
+                alt={`${siteConfig.name} showing a layered stack of paper-like notes with a dated note in front`}
                 width={1179}
                 height={2556}
                 loading="eager"
@@ -66,7 +67,7 @@ export default function HomePage() {
             <h2 id="inside-title">A note is more than a line in a list.</h2>
             <div>
               <p>
-                Driftleaf gives your thoughts a page with room to breathe. Write a few words, place a photo,
+                {siteConfig.name} gives your thoughts a page with room to breathe. Write a few words, place a photo,
                 add a sticker, and let the whole moment stay together.
               </p>
               <p className="handwritten-line">Keep the feeling, not just the timestamp.</p>
@@ -77,7 +78,7 @@ export default function HomePage() {
         <section className="stack-section page-section" id="details" aria-labelledby="details-title">
           <div className="stack-section__intro">
             <h2 id="details-title">Make something you will want to open again.</h2>
-            <p className="section-note">THE DRIFTLEAF WAY · A SMALL RITUAL FOR BIG FEELINGS</p>
+            <p className="section-note">THE {siteConfig.name.toUpperCase()} WAY · A SMALL RITUAL FOR BIG FEELINGS</p>
           </div>
           <div className="stack-stage">
             <div className="stack-card stack-card--back stack-card--back-one" aria-hidden="true">
@@ -129,15 +130,15 @@ export default function HomePage() {
             <h2 id="gallery-title">Somewhere between a diary and a little piece of design.</h2>
             <p className="section-note">A PAGE CAN HOLD A DAY</p>
             <p>
-              Driftleaf keeps the useful parts of a notes app and gives them the texture of a personal journal.
+              {siteConfig.name} keeps the useful parts of a notes app and gives them the texture of a personal journal.
               Your pages can be spare, expressive, or wonderfully unfinished.
             </p>
           </div>
           <div className="gallery-grid">
             <figure className="gallery-card gallery-card--lined">
               <Image
-                src="/assets/tucked/note-lined.jpg"
-                alt="A Driftleaf lined-paper note with a date, weather, location, and a short reflection"
+                src="/assets/pinnia/note-lined.jpg"
+                alt={`A ${siteConfig.name} lined-paper note with a date, weather, location, and a short reflection`}
                 width={1170}
                 height={1540}
                 loading="lazy"
@@ -147,8 +148,8 @@ export default function HomePage() {
             </figure>
             <figure className="gallery-card gallery-card--rainy">
               <Image
-                src="/assets/tucked/note-rainy-day.jpg"
-                alt="A Driftleaf English journal page titled Rainy Day Reflections"
+                src="/assets/pinnia/note-rainy-day.jpg"
+                alt={`A ${siteConfig.name} English journal page titled Rainy Day Reflections`}
                 width={1170}
                 height={1633}
                 loading="lazy"
@@ -158,8 +159,8 @@ export default function HomePage() {
             </figure>
             <figure className="gallery-card gallery-card--type">
               <Image
-                src="/assets/tucked/type-styles.png"
-                alt="A Driftleaf typography sample showing serif and handwritten styles"
+                src="/assets/pinnia/type-styles.png"
+                alt={`A ${siteConfig.name} typography sample showing serif and handwritten styles`}
                 width={1170}
                 height={1424}
                 loading="lazy"
