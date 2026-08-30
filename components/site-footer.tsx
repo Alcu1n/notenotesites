@@ -3,6 +3,8 @@ import Link from "next/link";
 
 import { siteConfig } from "@/lib/site-config";
 
+import { ArrowIcon } from "./icons";
+
 export function SiteFooter() {
   return (
     <footer className="site-footer">
@@ -32,6 +34,9 @@ export function SiteFooter() {
       <div className="footer-bottom">
         <span>© {new Date().getFullYear()} {siteConfig.studio}</span>
         <span>Made for the moments between the lines.</span>
+        <a className="footer-back-to-top" href="#main-content">
+          Back to top <ArrowIcon />
+        </a>
       </div>
     </footer>
   );

@@ -41,6 +41,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
+        <a className="skip-link" href="#main-content">
+          Skip to content
+        </a>
         {/* THESIS: Pinnia turns the plain notes list into a tactile paper stack. */}
         {/* OWN-WORLD: warm paper, ink-black outlines, offset shadows, vivid paper accents, editorial type. */}
         {/* STORY: see a moment become a page, understand the local-first promise, and explore Pinnia. */}

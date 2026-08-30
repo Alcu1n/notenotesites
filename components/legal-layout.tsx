@@ -15,7 +15,7 @@ export function LegalLayout({ title, summary, children }: LegalLayoutProps) {
   return (
     <div className="site-shell legal-page">
       <SiteHeader legal />
-      <main>
+      <main id="main-content">
         <section className="legal-hero">
           <h1>{title}</h1>
           <p>{summary}</p>
@@ -26,15 +26,17 @@ export function LegalLayout({ title, summary, children }: LegalLayoutProps) {
         </section>
 
         <div className="legal-layout">
-          <aside className="legal-index" aria-label="On this page">
+          <nav className="legal-index" aria-label="On this page">
             <span>ON THIS PAGE</span>
             <a href="#overview">Overview</a>
             <a href="#data">Data and choices</a>
             <a href="#third-parties">Third parties</a>
             <a href="#retention">Retention</a>
             <a href="#contact">Contact</a>
-          </aside>
-          <article className="legal-content">{children}</article>
+          </nav>
+          <article className="legal-content" aria-label={title}>
+            {children}
+          </article>
         </div>
       </main>
       <SiteFooter />

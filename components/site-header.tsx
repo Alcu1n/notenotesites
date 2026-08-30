@@ -14,7 +14,7 @@ export function SiteHeader({ legal = false }: { legal?: boolean }) {
         aria-label={`${siteConfig.name} home`}
       >
         <span className="wordmark-mark" aria-hidden="true">
-          <Image src="/assets/pinnia/app-icon.png" alt="" width={1024} height={1024} loading="eager" />
+          <Image src="/assets/pinnia/app-icon.png" alt="" width={1024} height={1024} />
         </span>
         <span className="wordmark-label">{siteConfig.name}</span>
       </Link>

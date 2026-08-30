@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import { DownloadButton } from "@/components/download-button";
-import { ArrowIcon } from "@/components/icons";
+import { ArrowIcon, FeatureIcon, LockIcon, SparkIcon } from "@/components/icons";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { siteConfig } from "@/lib/site-config";
@@ -11,7 +11,7 @@ export default function HomePage() {
     <div className="site-shell home-page">
       <SiteHeader />
 
-      <main>
+      <main id="main-content">
         <section className="hero-section page-section">
           <div className="hero-copy">
             <h1>A beautiful place for the things worth keeping.</h1>
@@ -26,7 +26,7 @@ export default function HomePage() {
               </a>
             </div>
             <div className="hero-note">
-              <span className="hero-note__dot" aria-hidden="true" />
+              <LockIcon />
               <span>Made for iPhone · kept on your device</span>
             </div>
           </div>
@@ -44,7 +44,7 @@ export default function HomePage() {
                 alt={`${siteConfig.name} showing a layered stack of paper-like notes with a dated note in front`}
                 width={1179}
                 height={2556}
-                loading="eager"
+                fetchPriority="high"
                 sizes="(max-width: 760px) 86vw, (max-width: 860px) 78vw, (max-width: 1200px) 38vw, 420px"
               />
               <div className="hero-frame__rail" aria-hidden="true">
@@ -107,21 +107,36 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="feature-section page-section">
-          <div className="feature-card feature-card--yellow">
-            <h3>Write like you mean it.</h3>
-            <span className="feature-card__mark">TEXT</span>
-            <p>Quiet pages for quick thoughts, long entries, and everything in between.</p>
+        <section className="feature-section page-section" aria-labelledby="features-title">
+          <div className="feature-section__intro">
+            <h2 id="features-title">Keep every piece of the moment together.</h2>
+            <p className="section-note">WORDS · IMAGES · LITTLE DETAILS</p>
           </div>
-          <div className="feature-card feature-card--pink">
-            <h3>Keep the whole scene.</h3>
-            <span className="feature-card__mark">PHOTO</span>
-            <p>Let images sit beside your words, just like they do in a real notebook.</p>
-          </div>
-          <div className="feature-card feature-card--blue">
-            <h3>Make the page yours.</h3>
-            <span className="feature-card__mark">STICKER</span>
-            <p>Choose the paper, ink, type, and little visual details that fit the day.</p>
+          <div className="feature-grid">
+            <article className="feature-card feature-card--yellow">
+              <div className="feature-card__head">
+                <FeatureIcon kind="text" />
+                <span className="feature-card__mark">TEXT</span>
+              </div>
+              <h3>Write like you mean it.</h3>
+              <p>Quiet pages for quick thoughts, long entries, and everything in between.</p>
+            </article>
+            <article className="feature-card feature-card--pink">
+              <div className="feature-card__head">
+                <FeatureIcon kind="photo" />
+                <span className="feature-card__mark">PHOTO</span>
+              </div>
+              <h3>Keep the whole scene.</h3>
+              <p>Let images sit beside your words, just like they do in a real notebook.</p>
+            </article>
+            <article className="feature-card feature-card--blue">
+              <div className="feature-card__head">
+                <FeatureIcon kind="sticker" />
+                <span className="feature-card__mark">STICKER</span>
+              </div>
+              <h3>Make the page yours.</h3>
+              <p>Choose the paper, ink, type, and little visual details that fit the day.</p>
+            </article>
           </div>
         </section>
 
@@ -173,9 +188,23 @@ export default function HomePage() {
 
         <section className="final-cta page-section">
           <div className="final-cta__paper">
-            <div>
+            <div className="final-cta__copy">
               <h2>Give your everyday thoughts somewhere beautiful to land.</h2>
               <p className="section-note">LET IT DRIFT · TAKE IT WITH YOU</p>
+            </div>
+            <div className="final-cta__motif" aria-hidden="true">
+              <div className="mini-note mini-note--back">
+                <span>PHOTO</span>
+                <SparkIcon />
+              </div>
+              <div className="mini-note mini-note--middle">
+                <span>ONE DAY</span>
+                <strong>26</strong>
+              </div>
+              <div className="mini-note mini-note--front">
+                <span>KEEP IT</span>
+                <strong>close.</strong>
+              </div>
             </div>
             <DownloadButton />
           </div>
