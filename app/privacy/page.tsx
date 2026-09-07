@@ -25,6 +25,16 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <LegalLayout
+      sections={[
+        { id: "overview", label: "Overview" },
+        { id: "data", label: "Information the App handles" },
+        { id: "third-parties", label: "Third-party services" },
+        { id: "retention", label: "Storage, retention, and deletion" },
+        { id: "choices", label: "Your choices" },
+        { id: "children", label: "Children's privacy" },
+        { id: "changes", label: "Changes to this policy" },
+        { id: "contact", label: "Contact" }
+      ]}
       title="Privacy Policy"
       summary={`${productName} is designed to keep personal notes close: on your device, in your hands, and under your control.`}
     >
@@ -32,7 +42,7 @@ export default function PrivacyPage() {
         <h2>1. Overview</h2>
         <p>
           This Privacy Policy explains how LRAI STUDIO, developed by {siteConfig.developer} (&quot;LRAI
-          STUDIO,&quot; &quot;we,&quot; or &quot;us&quot;), handles information in the {siteConfig.name} app (the &quot;App&quot;), and on this
+          STUDIO,&quot; &quot;we,&quot; or &quot;us&quot;), handles information in the {siteConfig.name} ({siteConfig.chineseName}) app (the &quot;App&quot;), and on this
           website. The App is a local-first notes and
           journaling app. The current version does not require an account and
           does not operate a remote account, advertising, analytics, or cross-app tracking system.
@@ -109,7 +119,7 @@ export default function PrivacyPage() {
         </p>
       </section>
 
-      <section>
+      <section id="choices">
         <h2>5. Your choices</h2>
         <p>
           You decide whether to grant Photos, Camera, and location permissions. You can change those choices in iOS
@@ -118,7 +128,7 @@ export default function PrivacyPage() {
         </p>
       </section>
 
-      <section>
+      <section id="children">
         <h2>6. Children&apos;s privacy</h2>
         <p>
           The App is not directed to children under 13, or the minimum age required by applicable law in your location.
@@ -127,7 +137,7 @@ export default function PrivacyPage() {
         </p>
       </section>
 
-      <section>
+      <section id="changes">
         <h2>7. Changes to this policy</h2>
         <p>
           We may update this policy when the App&apos;s features, services, or legal obligations change. The updated version

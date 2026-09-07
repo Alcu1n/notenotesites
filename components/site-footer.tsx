@@ -11,7 +11,7 @@ export function SiteFooter() {
       <div className="footer-brand">
         <div className="footer-brand__top">
           <span className="footer-brand__mark" aria-hidden="true">
-            <Image src="/assets/pinnia/app-icon.png" alt="" width={1024} height={1024} />
+            <Image src="/assets/pinypiny/app-icon.png" alt="" width={1024} height={1024} />
           </span>
           <span className="footer-brand__name">{siteConfig.name}</span>
         </div>

@@ -9,9 +9,10 @@ type LegalLayoutProps = {
   title: string;
   summary: string;
   children: ReactNode;
+  sections: { id: string; label: string }[];
 };
 
-export function LegalLayout({ title, summary, children }: LegalLayoutProps) {
+export function LegalLayout({ title, summary, children, sections }: LegalLayoutProps) {
   return (
     <div className="site-shell legal-page">
       <SiteHeader legal />
@@ -28,11 +29,9 @@ export function LegalLayout({ title, summary, children }: LegalLayoutProps) {
         <div className="legal-layout">
           <nav className="legal-index" aria-label="On this page">
             <span>ON THIS PAGE</span>
-            <a href="#overview">Overview</a>
-            <a href="#data">Data and choices</a>
-            <a href="#third-parties">Third parties</a>
-            <a href="#retention">Retention</a>
-            <a href="#contact">Contact</a>
+            {sections.map(({ id, label }) => (
+              <a key={id} href={`#${id}`}>{label}</a>
+            ))}
           </nav>
           <article className="legal-content" aria-label={title}>
             {children}

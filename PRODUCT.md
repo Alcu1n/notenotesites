@@ -16,11 +16,11 @@ Design-conscious people who want to record everyday thoughts, photos, ideas, and
 
 ## Product Purpose
 
-Pinnia is a highly designed notes and journaling app. It gives personal notes the feeling of paper: words, photos, stickers, and small context can live together on a page instead of disappearing into a plain list.
+PinyPiny is a highly designed notes and journaling app. It gives personal notes the feeling of paper: words, photos, stickers, and small context can live together on a page instead of disappearing into a plain list.
 
 ## Positioning
 
-A note is more than a row in a database. Pinnia turns each memory into a tactile page and a stack worth returning to.
+A note is more than a row in a database. PinyPiny turns each memory into a tactile page and a stack worth returning to.
 
 ## Operating Context
 
@@ -33,16 +33,16 @@ The website is an English-language marketing and legal surface for the iPhone ap
 - Optional location and WeatherKit data can be captured once as context for a new note when the user grants permission.
 - Pro purchases are handled with Apple StoreKit; the website must not invent prices, trials, or purchase claims.
 - The website has no login, backend, email collection, analytics, advertising, or tracking.
-- Production site URL: `https://pinnia.lraitech.com`. The App Store URL is not confirmed yet.
+- Production site URL: `https://pinypiny.lraitech.com`. The App Store URL is not confirmed yet.
 
 ## Brand Commitments
 
-- Product name: Pinnia.
+- Product name: PinyPiny. Chinese name: 拼拼笔记.
 - Studio: LRAI STUDIO.
 - Developer: @lemon.
 - Support: alcuin.ch@gmail.com.
-- Visual reference: warm paper, strong black outlines, offset shadows, colorful paper modules, compact labels, and expressive editorial typography.
-- The supplied reference image and website are visual references only; their content and claims are not part of Pinnia.
+- Visual direction: warm paper, quiet ink, restrained terracotta accents, Space Grotesk with Instrument Serif emphasis, and real app screenshots. Use whitespace and fine rules instead of heavy outlines, hard shadows, or decorative mock notes.
+- The supplied reference image and website are visual references only; their content and claims are not part of PinyPiny.
 
 ## Evidence on Hand
 

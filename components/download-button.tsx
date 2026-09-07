@@ -1,6 +1,6 @@
 import { siteConfig } from "@/lib/site-config";
 
-import { AppStoreIcon, ArrowIcon } from "./icons";
+import { AppleIcon, ArrowIcon } from "./icons";
 
 type DownloadButtonProps = {
   className?: string;
@@ -12,7 +12,7 @@ export function DownloadButton({ className = "" }: DownloadButtonProps) {
   if (siteConfig.appStoreUrl) {
     return (
       <a className={classes} href={siteConfig.appStoreUrl} target="_blank" rel="noreferrer">
-        <AppStoreIcon />
+        <AppleIcon />
         <span>
           <small>Available on the</small>
           <strong>App Store</strong>
@@ -29,7 +29,7 @@ export function DownloadButton({ className = "" }: DownloadButtonProps) {
       aria-disabled="true"
       title="App Store link coming soon"
     >
-      <AppStoreIcon />
+      <AppleIcon />
       <span>
         <small>Coming soon to the</small>
         <strong>App Store</strong>

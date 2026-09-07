@@ -25,13 +25,27 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   return (
     <LegalLayout
+      sections={[
+        { id: "overview", label: "Agreement" },
+        { id: "data", label: "Your content" },
+        { id: "third-parties", label: "Permissions and third-party services" },
+        { id: "license", label: "License to use the App" },
+        { id: "purchases", label: "App Store purchases" },
+        { id: "acceptable-use", label: "Acceptable use" },
+        { id: "availability", label: "Availability and updates" },
+        { id: "disclaimers", label: "Disclaimers" },
+        { id: "liability", label: "Limitation of liability" },
+        { id: "changes", label: "Changes to these Terms" },
+        { id: "retention", label: "Apple as a third-party beneficiary" },
+        { id: "contact", label: "Contact" }
+      ]}
       title="Terms of Service"
       summary={`These terms explain the simple rules for using the ${productName} app, a local-first place for notes and personal moments.`}
     >
       <section id="overview">
         <h2>1. Agreement</h2>
         <p>
-          These Terms of Service (&quot;Terms&quot;) govern your use of the {siteConfig.name} app (the &quot;App&quot;), and this
+          These Terms of Service (&quot;Terms&quot;) govern your use of the {siteConfig.name} ({siteConfig.chineseName}) app (the &quot;App&quot;), and this
           website, operated by LRAI STUDIO and developed
           by {siteConfig.developer}. By using the App, you agree to these Terms. If you do not agree, do not use the
           app or website.
@@ -71,7 +85,7 @@ export default function TermsPage() {
         </p>
       </section>
 
-      <section>
+      <section id="license">
         <h2>4. License to use the App</h2>
         <p>
           Subject to these Terms, we grant you a limited, personal, non-exclusive, non-transferable, revocable
@@ -81,7 +95,7 @@ export default function TermsPage() {
         </p>
       </section>
 
-      <section>
+      <section id="purchases">
         <h2>5. App Store purchases</h2>
         <p>
           Optional features may be offered as in-app purchases through Apple. The price, billing period, introductory
@@ -95,7 +109,7 @@ export default function TermsPage() {
         </p>
       </section>
 
-      <section>
+      <section id="acceptable-use">
         <h2>6. Acceptable use</h2>
         <p>
           You agree not to use the App to violate law or another person&apos;s rights, distribute malicious code, interfere
@@ -104,7 +118,7 @@ export default function TermsPage() {
         </p>
       </section>
 
-      <section>
+      <section id="availability">
         <h2>7. Availability and updates</h2>
         <p>
           We may change, pause, or discontinue parts of the App or this website, and we may release updates that fix
@@ -113,7 +127,7 @@ export default function TermsPage() {
         </p>
       </section>
 
-      <section>
+      <section id="disclaimers">
         <h2>8. Disclaimers</h2>
         <p>
           The App is provided on an &quot;as available&quot; and &quot;as is&quot; basis to the maximum extent permitted by law. We do
@@ -122,7 +136,7 @@ export default function TermsPage() {
         </p>
       </section>
 
-      <section>
+      <section id="liability">
         <h2>9. Limitation of liability</h2>
         <p>
           To the maximum extent permitted by applicable law, LRAI STUDIO and its developer will not be liable for
@@ -132,7 +146,7 @@ export default function TermsPage() {
         </p>
       </section>
 
-      <section>
+      <section id="changes">
         <h2>10. Changes to these Terms</h2>
         <p>
           We may update these Terms as the App evolves. We will post the updated Terms on this page and update the date
