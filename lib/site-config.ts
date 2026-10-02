@@ -6,7 +6,8 @@ export const siteConfig = {
   supportEmail: "alcuin.ch@gmail.com",
   description:
     "A visual notebook for everyday thoughts, photos, and the small moments worth keeping.",
-  appStoreUrl: process.env.NEXT_PUBLIC_APP_STORE_URL?.trim() || null,
+  appStoreUrl:
+    process.env.NEXT_PUBLIC_APP_STORE_URL?.trim() || "https://apps.apple.com/app/id6804919805",
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://pinypiny.lraitech.com",
 } as const;
 

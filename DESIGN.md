@@ -11,7 +11,7 @@ The site keeps the app's paper character while giving its real screenshots prior
 
 ## Page composition
 
-Home: a concise introduction and real card-stack screenshot, three examples of note content, a text-led feature section, and an App Store close. Gallery offsets disappear on phones. Download availability follows NEXT_PUBLIC_APP_STORE_URL; the absent-link state remains explicitly “Coming soon”.
+Home: a concise introduction and real card-stack screenshot, three examples of note content, a text-led feature section, and an App Store close. Gallery offsets disappear on phones. Download buttons default to https://apps.apple.com/app/id6804919805; NEXT_PUBLIC_APP_STORE_URL can override the destination.
 
 Privacy and terms: a plain reading surface, complete route-specific contents, 72ch maximum article width, and 1.8 body line height. Desktop contents are sticky; phone contents are inline. Existing fragment IDs remain compatible.
 
