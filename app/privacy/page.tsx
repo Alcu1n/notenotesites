@@ -36,6 +36,7 @@ export default function PrivacyPage() {
         { id: "contact", label: "Contact" }
       ]}
       title="Privacy Policy"
+      lastUpdated="September 15, 2026"
       summary={`${productName} is designed to keep personal notes close: on your device, in your hands, and under your control.`}
     >
       <section id="overview">
@@ -72,7 +73,7 @@ export default function PrivacyPage() {
         <h3>Location and weather context</h3>
         <p>
           If you grant When In Use location access, the App may use your current location while creating a new note to
-          obtain a city/country label and current weather context. The App does not request background location access
+          obtain a city/country label and a weather forecast for that time. The App does not request background location access
           or continuously track your movements. When available, the resulting location label and weather snapshot may
           be saved with that note; the App is not designed to keep a history of precise coordinates.
         </p>
@@ -95,13 +96,28 @@ export default function PrivacyPage() {
         <h2>3. Third-party services</h2>
         <p>
           The App uses Apple system services when you choose features that depend on them, including Photos,
-          Camera, Core Location, WeatherKit, and StoreKit. Those services may process information under Apple&apos;s
+          Camera, Core Location, and StoreKit. Those services may process information under Apple&apos;s
           own terms and privacy policies. We do not sell your personal information or provide your note content to
           advertising networks, data brokers, or third-party analytics providers.
         </p>
         <p>
-          Weather information is provided through Apple Weather / WeatherKit. WeatherKit attribution and data-source
-          information are available in Apple&apos;s <a href="https://developer.apple.com/documentation/weatherkit/weatherattribution" target="_blank" rel="noreferrer">WeatherKit attribution documentation</a>.
+          Weather forecasts are provided by MET Norway through a Cloudflare-hosted proxy operated for the App.
+          Before transmission, the App rounds latitude and longitude to two decimal places. The proxy receives
+          these approximate coordinates and the connection IP address; it does not receive note contents,
+          account identifiers, or precise coordinates. It sends only the approximate coordinates to MET Norway
+          and does not forward your IP address. Cloudflare processes connections under its own privacy policies.
+          Our application does not log IP addresses, coordinates, or request bodies. Public forecasts are cached
+          by geographic grid, without user identifiers, until at most one day after their cache expiry.
+          MET Norway may log the proxy IP address and approximate coordinates under its
+          <a href="https://www.met.no/en/About-us/privacy" target="_blank" rel="noreferrer"> privacy policy</a>.
+          Forecasts are used to provide the requested feature, not for advertising or tracking.
+        </p>
+        <p>
+          Weather snapshots remain with their notes and are not continuously refreshed. Forecasts are not measured
+          observations. Data is attributed to MET Norway under
+          <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer"> CC BY 4.0</a>;
+          temperature units and weather icons are adapted for display. Existing Apple weather snapshots are no
+          longer displayed; the migration does not delete stored note data.
         </p>
       </section>
 

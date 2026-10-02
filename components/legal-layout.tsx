@@ -7,12 +7,13 @@ import { SiteHeader } from "./site-header";
 
 type LegalLayoutProps = {
   title: string;
+  lastUpdated?: string;
   summary: string;
   children: ReactNode;
   sections: { id: string; label: string }[];
 };
 
-export function LegalLayout({ title, summary, children, sections }: LegalLayoutProps) {
+export function LegalLayout({ title, summary, children, sections, lastUpdated = legalLastUpdated }: LegalLayoutProps) {
   return (
     <div className="site-shell legal-page">
       <SiteHeader legal />
@@ -23,7 +24,7 @@ export function LegalLayout({ title, summary, children, sections }: LegalLayoutP
           <div className="legal-hero__stamp">
             {siteConfig.studio} / {siteConfig.name}
           </div>
-          <span className="legal-updated">Last updated {legalLastUpdated}</span>
+          <span className="legal-updated">Last updated {lastUpdated}</span>
         </section>
 
         <div className="legal-layout">
