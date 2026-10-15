@@ -1,0 +1,178 @@
+{
+  "schemaVersion": 4,
+  "defaultLayoutRevision": 1,
+  "canvas": {
+    "logicalWidth": 390,
+    "minimumHeight": 980
+  },
+  "titleObjectID": "9087F8B1-8CFD-4545-A19E-4B3C198C5721",
+  "readingOrder": [
+    "9087F8B1-8CFD-4545-A19E-4B3C198C5721",
+    "DB311C70-EECB-40C2-9353-0D88C09EA18F",
+    "CEBFB147-C864-47F2-BB40-1AAED7A904B0",
+    "1FEFD68B-BC18-4BE8-A5A9-D73413A826C9"
+  ],
+  "objects": [
+    {
+      "id": "9087F8B1-8CFD-4545-A19E-4B3C198C5721",
+      "frame": {
+        "x": 27,
+        "y": 112,
+        "width": 336
+      },
+      "zIndex": 10,
+      "payload": {
+        "richText": {
+          "_0": {
+            "paragraphs": [
+              {
+                "kind": "body",
+                "alignment": "left",
+                "runs": [
+                  {
+                    "text": {
+                      "_0": {
+                        "text": "Seaside stories.",
+                        "style": {
+                          "fontToken": "bundled.instrument-serif",
+                          "pointSize": 38,
+                          "isBold": false,
+                          "isItalic": false,
+                          "foregroundToken": "graphite",
+                          "highlightIntensity": 0.34,
+                          "isUnderlined": false,
+                          "isStruckThrough": false
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "rotationDegrees": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "DB311C70-EECB-40C2-9353-0D88C09EA18F",
+      "frame": {
+        "x": 32,
+        "y": 565,
+        "width": 320
+      },
+      "zIndex": 10,
+      "payload": {
+        "richText": {
+          "_0": {
+            "paragraphs": [
+              {
+                "kind": "body",
+                "alignment": "left",
+                "runs": [
+                  {
+                    "text": {
+                      "_0": {
+                        "text": "TAKE THE SCENIC ROUTE",
+                        "style": {
+                          "fontToken": "system.sans",
+                          "pointSize": 17,
+                          "isBold": true,
+                          "isItalic": false,
+                          "foregroundToken": "teal",
+                          "highlightIntensity": 0.34,
+                          "isUnderlined": false,
+                          "isStruckThrough": false,
+                          "highlightToken": "yellow"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "rotationDegrees": -3
+          }
+        }
+      }
+    },
+    {
+      "id": "CEBFB147-C864-47F2-BB40-1AAED7A904B0",
+      "frame": {
+        "x": 65,
+        "y": 625,
+        "width": 230
+      },
+      "zIndex": 10,
+      "payload": {
+        "richText": {
+          "_0": {
+            "paragraphs": [
+              {
+                "kind": "body",
+                "alignment": "left",
+                "runs": [
+                  {
+                    "text": {
+                      "_0": {
+                        "text": "warm light\nsalty air\nslow days",
+                        "style": {
+                          "fontToken": "bundled.instrument-serif",
+                          "pointSize": 24,
+                          "isBold": false,
+                          "isItalic": false,
+                          "foregroundToken": "teal",
+                          "highlightIntensity": 0.34,
+                          "isUnderlined": false,
+                          "isStruckThrough": false
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "rotationDegrees": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "1FEFD68B-BC18-4BE8-A5A9-D73413A826C9",
+      "frame": {
+        "x": 265,
+        "y": 470,
+        "width": 88
+      },
+      "zIndex": 12,
+      "payload": {
+        "floatingEmbed": {
+          "_0": {
+            "assetID": "34F772D2-14F5-41AF-A67F-039D014AD755",
+            "typeIdentifier": "com.cardstack.embed.image",
+            "rotationDegrees": 14,
+            "cropScale": 1,
+            "cropOffsetX": 0,
+            "cropOffsetY": 0,
+            "cropRotationDegrees": 0,
+            "altText": "Lemon photo cutout",
+            "stickerHasCutout": true,
+            "stickerWhiteBorder": true,
+            "stickerShadow": true
+          }
+        }
+      }
+    }
+  ],
+  "assets": [
+    {
+      "id": "34F772D2-14F5-41AF-A67F-039D014AD755",
+      "kind": "sticker",
+      "assetPath": "Stickers/showcase-lemon.png",
+      "renderPath": "Stickers/showcase-lemon.png",
+      "thumbnailPath": "Stickers/showcase-lemon.png",
+      "pixelWidth": 700,
+      "pixelHeight": 700
+    }
+  ]
+}

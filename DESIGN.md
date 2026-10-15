@@ -1,22 +1,24 @@
 # PinyPiny website design
 
-The site keeps the app's paper character while giving its real screenshots priority. The English brand is PinyPiny; the Chinese name is 拼拼笔记. Product facts live in PRODUCT.md.
+## Direction
+
+A warm-paper portfolio with a dark card-stack stage. The visitor sees a finished real page, learns how it was made, then downloads. Keep product content visible; no web-editor imitation, decorative mock notes or fabricated social proof.
 
 ## Visual system
 
-- Warm paper (#faf7ef), dark ink (#292b24), muted text (#62645b), and restrained terracotta (#a3462e). Dark mode uses the corresponding tokens in app/globals.css.
-- Self-hosted Space Grotesk for text and headings; Instrument Serif italic for selected heading emphasis. Display type is capped at 6rem, tracking at -0.04em.
-- A 1160px content maximum, fine rules, and whitespace establish hierarchy. Avoid hard shadows, simulated note decorations, and colored feature cards.
-- Actual app screenshots retain their full aspect ratios. The hero has a soft shadow; gallery images sit on quiet paper surfaces. Do not tint screenshots for dark mode.
+- Paper `#faf7ef`, ink `#292b24`, muted `#62645b`, accent `#934138`, stage `#1c211c`. Dark mode uses the same semantic variables in app/globals.css.
+- Self-hosted Space Grotesk and Instrument Serif. Chinese titles use native Songti fallback; body uses native CJK sans. Clear scale, fine rules and deliberate spacing.
+- Content maximum 1160px, outer shell 1440px. On mobile, the hero places the actual page result before its download action so both fit a 390×844 screen. The compact stage shows a crop of the real page; galleries preserve complete screenshots.
+- The current main app icon is used for branding and generated favicon / touch icons. No alternate icon is substituted for dark mode.
 
-## Page composition
+## Composition and interaction
 
-Home: a concise introduction and real card-stack screenshot, three examples of note content, a text-led feature section, and an App Store close. Gallery offsets disappear on phones. Download buttons default to https://apps.apple.com/app/id6804919805; NEXT_PUBLIC_APP_STORE_URL can override the destination.
+Home: actual collage + card-stack hero; three concrete use cases; native recording; three native layouts from one photo; factual features and Pro boundaries; seven prompts; three guides; FAQ; download close.
 
-Privacy and terms: a plain reading surface, complete route-specific contents, 72ch maximum article width, and 1.8 body line height. Desktop contents are sticky; phone contents are inline. Existing fragment IDs remain compatible.
+Scenario pages pair a finished page with practical explanations and an associated guide. Guides offer author/date, contents, actual steps, screenshots and related scenes. About/support give verifiable product information. Both policies preserve old fragment identifiers and use a comfortable reading measure.
 
-## Interaction and verification
+Native disclosures provide mobile navigation, QR and FAQ. The style selector uses pressed buttons and an announced selection. Video has user controls, captions and no eager video download. On mobile the download bar appears after the primary download leaves the viewport; reserved footer space prevents covering content. Theme choice, language equivalents, keyboard focus and reduced motion remain available.
 
-Links and controls have visible keyboard focus. Navigation and contents links have 44px minimum height. The skip link, reduced-motion behavior, and persistent theme choice remain supported, including older stored theme keys.
+## Verification
 
-Verified locally at 1440px and 390px in a production build, with additional overflow checks at 320px and 768px. Light/dark home screenshots and both legal pages were inspected. Brand text, page titles, loaded images, fragment destinations, theme persistence, and keyboard focus passed. No production deployment is implied.
+See docs/verification.md for the exact build, browser, screen-size and service boundaries of the completed acceptance run. A build is not rendered acceptance; website click tests are not live App Store install attribution.

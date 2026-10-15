@@ -1,36 +1,71 @@
 import Image from "next/image";
 import Link from "next/link";
-
-import { siteConfig } from "@/lib/site-config";
-
+import { localizedPath, type Locale } from "@/lib/routes";
 import { ThemeToggle } from "./theme-toggle";
-
-export function SiteHeader({ legal = false }: { legal?: boolean }) {
+import { DownloadButton } from "./download-button";
+import { MobileNavigation } from "./mobile-navigation";
+export function SiteHeader({
+  locale = "en",
+  page = "",
+}: {
+  locale?: Locale;
+  page?: string;
+}) {
+  const zh = locale === "zh";
+  const items = [
+    {
+      href: `${localizedPath(locale)}#inside`,
+      text: zh ? "作品" : "Made with PinyPiny",
+    },
+    {
+      href: localizedPath(locale, "digital-scrapbook"),
+      text: zh ? "使用场景" : "What you can make",
+    },
+    { href: localizedPath(locale, "guides"), text: zh ? "教程" : "Guides" },
+  ];
   return (
-    <header className={`site-header${legal ? " site-header--legal" : ""}`}>
+    <header className="site-header">
       <Link
         className="wordmark"
-        href="/"
-        aria-label={`${siteConfig.name} home`}
+        href={localizedPath(locale)}
+        aria-label={zh ? "拼拼笔记首页" : "PinyPiny home"}
       >
-        <span className="wordmark-mark" aria-hidden="true">
-          <Image src="/assets/pinypiny/app-icon.png" alt="" width={1024} height={1024} />
-        </span>
-        <span className="wordmark-label">{siteConfig.name}</span>
+        <Image
+          src="/assets/pinypiny/app-icon.png"
+          alt=""
+          width={44}
+          height={44}
+        />
+        <span>PinyPiny</span>
       </Link>
-
-      <nav className="site-nav" aria-label="Primary navigation">
-        {!legal && (
-          <>
-            <a href="#inside">Inside</a>
-            <a href="#details">Details</a>
-          </>
-        )}
-        <Link href="/privacy">Privacy</Link>
-        <Link href="/terms">Terms</Link>
+      <nav
+        className="desktop-nav"
+        aria-label={zh ? "主导航" : "Main navigation"}
+      >
+        {items.map((item) => (
+          <Link href={item.href} key={item.href}>
+            {item.text}
+          </Link>
+        ))}
       </nav>
-
-      <ThemeToggle />
+      <div className="header-tools">
+        <Link
+          className="language-switch"
+          href={localizedPath(zh ? "en" : "zh", page)}
+          lang={zh ? "en" : "zh-CN"}
+          hrefLang={zh ? "en" : "zh-CN"}
+        >
+          {zh ? "English" : "简体中文"}
+        </Link>
+        <ThemeToggle locale={locale} />
+        <DownloadButton
+          locale={locale}
+          page={page}
+          position="header"
+          className="header-download"
+        />
+        <MobileNavigation locale={locale} page={page} items={items} />
+      </div>
     </header>
   );
 }

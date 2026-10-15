@@ -1,0 +1,5 @@
+output/
+.playwright-mcp/
+docs/
+tests/
+playwright.config.ts

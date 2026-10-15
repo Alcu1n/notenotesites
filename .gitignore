@@ -11,3 +11,7 @@ dist/
 # Local visual verification captures
 .impeccable/review/
 .vercel
+
+# Reproducible browser reports; summary and replay instructions live in docs/verification.md.
+output/playwright/
+.playwright-mcp/

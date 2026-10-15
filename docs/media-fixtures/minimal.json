@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 4,
+  "defaultLayoutRevision": 1,
+  "canvas": {
+    "logicalWidth": 390,
+    "minimumHeight": 980
+  },
+  "titleObjectID": "9EA992B1-C04D-4D95-A648-00B8FC5B2968",
+  "readingOrder": [
+    "9EA992B1-C04D-4D95-A648-00B8FC5B2968",
+    "0D23E36B-FCC7-45EB-941D-C5CDC1D6B561",
+    "BD96B455-7493-44CD-8B3C-198E17B1D8A1",
+    "AC916096-4986-45EB-A958-83F3CFDE29F3"
+  ],
+  "objects": [
+    {
+      "id": "9EA992B1-C04D-4D95-A648-00B8FC5B2968",
+      "frame": {
+        "x": 27,
+        "y": 112,
+        "width": 336
+      },
+      "zIndex": 10,
+      "payload": {
+        "richText": {
+          "_0": {
+            "paragraphs": [
+              {
+                "kind": "body",
+                "alignment": "left",
+                "runs": [
+                  {
+                    "text": {
+                      "_0": {
+                        "text": "Slow days.",
+                        "style": {
+                          "fontToken": "bundled.instrument-serif",
+                          "pointSize": 40,
+                          "isBold": false,
+                          "isItalic": false,
+                          "foregroundToken": "graphite",
+                          "highlightIntensity": 0.34,
+                          "isUnderlined": false,
+                          "isStruckThrough": false
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "rotationDegrees": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "0D23E36B-FCC7-45EB-941D-C5CDC1D6B561",
+      "frame": {
+        "x": 27,
+        "y": 350,
+        "width": 336
+      },
+      "zIndex": 5,
+      "payload": {
+        "floatingEmbed": {
+          "_0": {
+            "assetID": "6EF78307-E86F-47C5-A3FD-79125438E3EA",
+            "typeIdentifier": "com.cardstack.embed.image",
+            "rotationDegrees": 0,
+            "cropScale": 1,
+            "cropOffsetX": 0,
+            "cropOffsetY": 0,
+            "cropRotationDegrees": 0,
+            "altText": "Colorful houses by the Ligurian coast"
+          }
+        }
+      }
+    },
+    {
+      "id": "BD96B455-7493-44CD-8B3C-198E17B1D8A1",
+      "frame": {
+        "x": 27,
+        "y": 500,
+        "width": 336
+      },
+      "zIndex": 10,
+      "payload": {
+        "richText": {
+          "_0": {
+            "paragraphs": [
+              {
+                "kind": "body",
+                "alignment": "left",
+                "runs": [
+                  {
+                    "text": {
+                      "_0": {
+                        "text": "A little sea air. A little room to breathe.",
+                        "style": {
+                          "fontToken": "bundled.instrument-serif",
+                          "pointSize": 19,
+                          "isBold": false,
+                          "isItalic": false,
+                          "foregroundToken": "graphite",
+                          "highlightIntensity": 0.34,
+                          "isUnderlined": false,
+                          "isStruckThrough": false
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "rotationDegrees": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "AC916096-4986-45EB-A958-83F3CFDE29F3",
+      "frame": {
+        "x": 27,
+        "y": 575,
+        "width": 336
+      },
+      "zIndex": 10,
+      "payload": {
+        "richText": {
+          "_0": {
+            "paragraphs": [
+              {
+                "kind": "body",
+                "alignment": "left",
+                "runs": [
+                  {
+                    "text": {
+                      "_0": {
+                        "text": "LIGURIAN COAST  /  A MOMENT TO KEEP",
+                        "style": {
+                          "fontToken": "system.sans",
+                          "pointSize": 11,
+                          "isBold": false,
+                          "isItalic": false,
+                          "foregroundToken": "teal",
+                          "highlightIntensity": 0.34,
+                          "isUnderlined": false,
+                          "isStruckThrough": false
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "rotationDegrees": 0
+          }
+        }
+      }
+    }
+  ],
+  "assets": [
+    {
+      "id": "6EF78307-E86F-47C5-A3FD-79125438E3EA",
+      "kind": "photo",
+      "assetPath": "Photos/showcase-coast.jpg",
+      "renderPath": "Photos/showcase-coast.jpg",
+      "thumbnailPath": "Photos/showcase-coast.jpg",
+      "pixelWidth": 900,
+      "pixelHeight": 598
+    }
+  ]
+}

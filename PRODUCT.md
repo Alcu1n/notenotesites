@@ -8,56 +8,38 @@ web
 
 ## Stack
 
-Next.js App Router with TypeScript, local CSS, and static content; Vercel-ready.
+Next.js 16 App Router, React, TypeScript, local CSS, static content. Two language roots, no CMS or database.
 
 ## Users
 
-Design-conscious people who want to record everyday thoughts, photos, ideas, and small moments as a visual journal they will enjoy revisiting.
+People who want personal photo journals, freeform digital scrapbooks, travel memories and visual notes on iPhone and iPad.
 
 ## Product Purpose
 
-PinyPiny is a highly designed notes and journaling app. It gives personal notes the feeling of paper: words, photos, stickers, and small context can live together on a page instead of disappearing into a plain list.
-
-## Positioning
-
-A note is more than a row in a database. PinyPiny turns each memory into a tactile page and a stack worth returning to.
+PinyPiny / 拼拼笔记 turns words, photos and stickers into personal paper-like pages, revisited in a distinctive card stack. The website helps a visitor see a finished result, understand how it is made and download the app.
 
 ## Operating Context
 
-The website is an English-language marketing and legal surface for the iPhone app. It should help a first-time visitor understand the product quickly, see the product in use, and find the privacy policy and terms of service.
+English at the original URLs and Simplified Chinese under `/zh`. The canonical origin remains https://pinypiny.lraitech.com. App Store ID 6804919805. No automatic language redirection. No online editor or email collection.
 
 ## Capabilities and Constraints
 
-- The app is local-first: notes and media are stored on the device.
-- The app supports rich text, photos, camera capture for stickers, saved stickers, search, autosave, undo, and delete recovery.
-- Optional location and WeatherKit data can be captured once as context for a new note when the user grants permission.
-- Pro purchases are handled with Apple StoreKit; the website must not invent prices, trials, or purchase claims.
-- The website has no login, backend, email collection, analytics, advertising, or tracking.
-- Production site URL: `https://pinypiny.lraitech.com`. The App Store URL is not confirmed yet.
+- iPhone and iPad, iOS/iPadOS 18+. The App supports English, Simplified/Traditional Chinese, Japanese and Korean.
+- Writing, ordinary photos, freeform layouts, on-device photo stickers, card-stack browsing, search and image export.
+- Free download with optional Pro. Pro includes additional paper/fonts, inline photos, special photo frames, animation and private Apple iCloud sync. No hardcoded regional prices or invented trial claims.
+- Core editing is local-first and works offline. Fonts not yet cached, weather, store transactions and sync need a connection.
+- Marketing facts were checked against the public 1.0.3 listing and App source on 2026-10-15. Local source is 1.0.4; newly unreleased features such as favorites are not promoted.
+- Optional Umami website analytics uses predefined events, without note contents, distinct user identity or session replay. It is disabled without configuration and on previews.
+- App Store campaign attribution requires a real Apple provider token. Plain download links remain the fallback.
 
 ## Brand Commitments
 
-- Product name: PinyPiny. Chinese name: 拼拼笔记.
-- Studio: LRAI STUDIO.
-- Developer: @lemon.
-- Support: alcuin.ch@gmail.com.
-- Visual direction: warm paper, quiet ink, restrained terracotta accents, Space Grotesk with Instrument Serif emphasis, and real app screenshots. Use whitespace and fine rules instead of heavy outlines, hard shadows, or decorative mock notes.
-- The supplied reference image and website are visual references only; their content and claims are not part of PinyPiny.
+PinyPiny / 拼拼笔记, LRAI STUDIO, developer @lemon, support alcuin.ch@gmail.com. Main app icon comes unchanged from AppIcon.appiconset/app-icon.png. Warm paper, dark card stage and a restrained red ink accent; the real work leads the site.
 
 ## Evidence on Hand
 
-- Primary app image: `/Users/alcuin/Coding/NoteNote/素材/素材主图.jpeg`.
-- Secondary app images: `/Users/alcuin/Coding/NoteNote/素材/2.jpeg`, `/Users/alcuin/Coding/NoteNote/素材/3.jpeg`, and `/Users/alcuin/Coding/NoteNote/素材/5.PNG`.
-- Additional supplied images contain visible third-party character imagery and are excluded from the public site unless publishing rights are confirmed.
-- Product facts are grounded in `/Users/alcuin/Coding/NoteNote/CardStack_UI/PRODUCT.md` and `/Users/alcuin/Coding/NoteNote/CardStack_UI/CONTEXT.md`.
-
-## Product Principles
-
-1. Make recording feel direct, quiet, and personal.
-2. Give text, images, and stickers one continuous page to live on.
-3. Make revisiting feel tactile and rewarding, not like searching a database.
-4. Keep personal content local and explain permissions clearly.
+Real native screenshots, same-photo layouts and recordings are documented in docs/media-provenance.md. Product source is read-only. Examples are labeled as examples, not testimonials, customer work or importable templates. Premium styling is disclosed nearby. No invented ratings, awards, users or ranking guarantees.
 
 ## Accessibility & Inclusion
 
-The website must preserve readable contrast, visible keyboard focus, touch targets of at least 44px, reduced-motion alternatives, semantic headings, descriptive image alt text, and a responsive mobile layout.
+Keyboard focus, semantic headings, localized navigation, accessible native disclosure controls, reduced motion, readable contrast, mobile download access and JavaScript-free essential content.

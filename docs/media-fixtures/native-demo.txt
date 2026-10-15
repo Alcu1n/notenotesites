@@ -1,0 +1,165 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild test-without-building -xctestrun /tmp/pinypiny-native-media/media.xctestrun -destination "platform=iOS Simulator,id=41C66100-D627-4C4F-A1F3-6BC7A2C28717" -resultBundlePath /tmp/pinypiny-native-media/demo-release.xcresult -parallel-testing-enabled NO
+
+Writing result bundle at path:
+	/tmp/pinypiny-native-media/demo-release.xcresult
+
+    t =      nans Interface orientation changed to Portrait
+Test Suite 'Selected tests' started at 2026-10-15 14:55:14.723.
+Test Suite 'CardStack_UIUITests.xctest' started at 2026-10-15 14:55:14.726.
+Test Suite 'MediaTests' started at 2026-10-15 14:55:14.726.
+Test Case '-[CardStack_UIUITests.MediaTests testNativePhotoToCardStackDemo]' started.
+    t =     0.00s Start Test at 2026-10-15 14:55:14.727
+objc[30950]: Class UIAccessibilityLoaderWebShared is implemented in both /Library/Developer/CoreSimulator/Volumes/iOS_23F77/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 26.5.simruntime/Contents/Resources/RuntimeRoot/System/Library/AccessibilityBundles/WebCore.axbundle/WebCore (0x104ee8310) and /Library/Developer/CoreSimulator/Volumes/iOS_23F77/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 26.5.simruntime/Contents/Resources/RuntimeRoot/System/Library/AccessibilityBundles/WebKit.axbundle/WebKit (0x104f64398). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+    t =     0.10s Set Up
+    t =     0.17s Open com.lraistudio.notenote
+    t =     0.17s     Activate com.lraistudio.notenote
+    t =     0.23s         Wait for com.lraistudio.notenote to idle
+    t =     0.25s Waiting 20.0s for "cardstack.editor.fullscreen" Other to exist
+    t =     1.31s     Checking `Expect predicate `existsNoRetry == 1` for object "cardstack.editor.fullscreen" Other`
+    t =     1.31s         Checking existence of `"cardstack.editor.fullscreen" Other`
+MEDIA_DEMO_START
+    t =     2.23s Tap "cardstack.editor.add" Button
+    t =     2.23s     Wait for com.lraistudio.notenote to idle
+    t =     2.24s     Find the "cardstack.editor.add" Button
+    t =     2.30s     Check for interrupting elements affecting "cardstack.editor.add" Button
+    t =     2.37s     Synthesize event
+    t =     2.69s     Wait for com.lraistudio.notenote to idle
+    t =     3.51s Tap "cardstack.editor.add.photo" Button
+    t =     3.51s     Wait for com.lraistudio.notenote to idle
+    t =     3.51s     Find the "cardstack.editor.add.photo" Button
+    t =     3.56s     Check for interrupting elements affecting "cardstack.editor.add.photo" Button
+    t =     3.58s     Synthesize event
+    t =     3.87s     Wait for com.lraistudio.notenote to idle
+    t =     4.28s Waiting 4.0s for "cardstack.editor.photo.floating" Button to exist
+    t =     5.33s     Checking `Expect predicate `existsNoRetry == 1` for object "cardstack.editor.photo.floating" Button`
+    t =     5.33s         Checking existence of `"cardstack.editor.photo.floating" Button`
+    t =     5.42s Tap "cardstack.editor.photo.floating" Button
+    t =     5.42s     Wait for com.lraistudio.notenote to idle
+    t =     5.42s     Find the "cardstack.editor.photo.floating" Button
+    t =     5.45s     Check for interrupting elements affecting "cardstack.editor.photo.floating" Button
+    t =     5.48s     Synthesize event
+    t =     5.76s     Wait for com.lraistudio.notenote to idle
+    t =     5.97s Waiting 15.0s for "PXGGridLayout-Info" Image to exist
+    t =     7.00s     Checking `Expect predicate `existsNoRetry == 1` for object "PXGGridLayout-Info" Image`
+    t =     7.00s         Checking existence of `"PXGGridLayout-Info" Image`
+    t =     7.06s         Capturing element debug description
+    t =     7.99s     Checking `Expect predicate `existsNoRetry == 1` for object "PXGGridLayout-Info" Image`
+    t =     7.99s         Checking existence of `"PXGGridLayout-Info" Image`
+    t =     8.07s         Capturing element debug description
+    t =     9.01s     Checking `Expect predicate `existsNoRetry == 1` for object "PXGGridLayout-Info" Image`
+    t =     9.01s         Checking existence of `"PXGGridLayout-Info" Image`
+    t =    10.17s Tap "PXGGridLayout-Info" Image[0.50, 0.50]
+    t =    10.17s     Wait for com.lraistudio.notenote to idle
+    t =    10.18s     Find the "PXGGridLayout-Info" Image
+    t =    10.41s     Check for interrupting elements affecting "PXGGridLayout-Info" Image
+    t =    10.62s     Synthesize event
+    t =    10.62s         Find the "PXGGridLayout-Info" Image
+    t =    10.84s         Find the "PXGGridLayout-Info" Image
+    t =    11.05s         Find the "PXGGridLayout-Info" Image
+    t =    11.54s     Wait for com.lraistudio.notenote to idle
+    t =    11.55s Waiting 10.0s for Button (First Match) to exist
+    t =    12.58s     Checking `Expect predicate `existsNoRetry == 1` for object Button (First Match)`
+    t =    12.58s         Checking existence of `Button (First Match)`
+    t =    12.63s Find the Button (First Match)
+    t =    12.65s Tap "cardstack.media.style.13BB337E-E35F-4890-980B-4E296FE6A6C2" Button
+    t =    12.65s     Wait for com.lraistudio.notenote to idle
+    t =    12.65s     Find the "cardstack.media.style.13BB337E-E35F-4890-980B-4E296FE6A6C2" Button
+    t =    12.67s     Check for interrupting elements affecting "cardstack.media.style.13BB337E-E35F-4890-980B-4E296FE6A6C2" Button
+    t =    12.70s     Synthesize event
+    t =    13.00s     Wait for com.lraistudio.notenote to idle
+    t =    13.09s Waiting 4.0s for "cardstack.media.style.option.polaroid" Button to exist
+    t =    14.13s     Checking `Expect predicate `existsNoRetry == 1` for object "cardstack.media.style.option.polaroid" Button`
+    t =    14.13s         Checking existence of `"cardstack.media.style.option.polaroid" Button`
+    t =    14.18s Tap "cardstack.media.style.option.polaroid" Button
+    t =    14.18s     Wait for com.lraistudio.notenote to idle
+    t =    14.18s     Find the "cardstack.media.style.option.polaroid" Button
+    t =    14.21s     Check for interrupting elements affecting "cardstack.media.style.option.polaroid" Button
+    t =    14.24s     Synthesize event
+    t =    14.52s     Wait for com.lraistudio.notenote to idle
+    t =    15.74s Press "cardstack.media.resize.13BB337E-E35F-4890-980B-4E296FE6A6C2" Other[0.50, 0.50] for 0.2 seconds, then drag to "cardstack.media.resize.13BB337E-E35F-4890-980B-4E296FE6A6C2" Other[0.50, 0.50] -> (38.0, 30.0) with velocity of 500.00 pixels per second, and then hold for 0.0 seconds
+    t =    15.74s     Wait for com.lraistudio.notenote to idle
+    t =    15.75s     Find the "cardstack.media.resize.13BB337E-E35F-4890-980B-4E296FE6A6C2" Other
+    t =    15.80s     Check for interrupting elements affecting "cardstack.media.resize.13BB337E-E35F-4890-980B-4E296FE6A6C2" Other
+    t =    15.83s     Synthesize event
+    t =    15.83s         Find the "cardstack.media.resize.13BB337E-E35F-4890-980B-4E296FE6A6C2" Other
+    t =    15.86s         Find the "cardstack.media.resize.13BB337E-E35F-4890-980B-4E296FE6A6C2" Other
+    t =    15.89s         Find the "cardstack.media.resize.13BB337E-E35F-4890-980B-4E296FE6A6C2" Other
+    t =    15.91s         Find the "cardstack.media.resize.13BB337E-E35F-4890-980B-4E296FE6A6C2" Other
+    t =    15.94s         Find the "cardstack.media.resize.13BB337E-E35F-4890-980B-4E296FE6A6C2" Other
+    t =    16.51s     Wait for com.lraistudio.notenote to idle
+    t =    16.86s Find the Target Application 'com.lraistudio.notenote'
+    t =    17.67s Press Image (First Match)[0.50, 0.50] for 0.2 seconds, then drag to Target Application 'com.lraistudio.notenote'[0.48, 0.48] with velocity of 500.00 pixels per second, and then hold for 0.0 seconds
+    t =    17.67s     Wait for com.lraistudio.notenote to idle
+    t =    17.67s     Find the Image (First Match)
+    t =    17.82s     Check for interrupting elements affecting Image
+    t =    17.84s     Synthesize event
+    t =    17.85s         Find the Image at {{42.3, 326.7}, {305.3, 246.7}}
+    t =    17.88s         Find the Image at {{42.3, 326.7}, {305.3, 246.7}}
+    t =    17.91s         Find the Target Application 'com.lraistudio.notenote'
+    t =    17.92s         Find the Target Application 'com.lraistudio.notenote'
+    t =    17.94s         Find the Image at {{42.3, 326.7}, {305.3, 246.7}}
+    t =    18.53s     Wait for com.lraistudio.notenote to idle
+    t =    19.59s Tap Target Application 'com.lraistudio.notenote'[0.94, 0.20]
+    t =    19.59s     Wait for com.lraistudio.notenote to idle
+    t =    19.60s     Find the Target Application 'com.lraistudio.notenote'
+    t =    19.64s     Check for interrupting elements affecting "PinyPiny" Application
+    t =    19.66s     Synthesize event
+    t =    19.66s         Find the Target Application 'com.lraistudio.notenote'
+    t =    19.67s         Find the Target Application 'com.lraistudio.notenote'
+    t =    19.69s         Find the Target Application 'com.lraistudio.notenote'
+    t =    19.99s     Wait for com.lraistudio.notenote to idle
+    t =    19.99s Find the Target Application 'com.lraistudio.notenote'
+    t =    20.18s Added attachment named 'demo-finished-native-page'
+    t =    21.19s Tap Other (First Match)
+    t =    21.19s     Wait for com.lraistudio.notenote to idle
+    t =    21.20s     Find the Other (First Match)
+    t =    21.23s     Check for interrupting elements affecting "cardstack.media.1FEFD68B-BC18-4BE8-A5A9-D73413A826C9" Other
+    t =    21.25s     Synthesize event
+    t =    21.55s     Wait for com.lraistudio.notenote to idle
+    t =    22.06s Find the Target Application 'com.lraistudio.notenote'
+    t =    22.24s Added attachment named 'demo-native-sticker-selected'
+    t =    22.25s Tap Target Application 'com.lraistudio.notenote'[0.94, 0.20]
+    t =    22.25s     Wait for com.lraistudio.notenote to idle
+    t =    22.25s     Find the Target Application 'com.lraistudio.notenote'
+    t =    22.26s     Check for interrupting elements affecting "PinyPiny" Application
+    t =    22.28s     Synthesize event
+    t =    22.28s         Find the Target Application 'com.lraistudio.notenote'
+    t =    22.30s         Find the Target Application 'com.lraistudio.notenote'
+    t =    22.31s         Find the Target Application 'com.lraistudio.notenote'
+    t =    22.61s     Wait for com.lraistudio.notenote to idle
+    t =    22.62s Tap "cardstack.editor.paper-menu" Button
+    t =    22.62s     Wait for com.lraistudio.notenote to idle
+    t =    22.63s     Find the "cardstack.editor.paper-menu" Button
+    t =    22.65s     Check for interrupting elements affecting "cardstack.editor.paper-menu" Button
+    t =    22.68s     Synthesize event
+    t =    22.96s     Wait for com.lraistudio.notenote to idle
+    t =    24.29s Waiting 4.0s for "cardstack.editor.finish" Button to exist
+    t =    25.36s     Checking `Expect predicate `existsNoRetry == 1` for object "cardstack.editor.finish" Button`
+    t =    25.37s         Checking existence of `"cardstack.editor.finish" Button`
+    t =    25.42s Tap "cardstack.editor.finish" Button
+    t =    25.42s     Wait for com.lraistudio.notenote to idle
+    t =    25.42s     Find the "cardstack.editor.finish" Button
+    t =    25.45s     Check for interrupting elements affecting "cardstack.editor.finish" Button
+    t =    25.48s     Synthesize event
+    t =    25.77s     Wait for com.lraistudio.notenote to idle
+    t =    29.29s Checking existence of `"cardstack.editor.fullscreen" Other`
+MEDIA_DEMO_END
+    t =    29.32s Tear Down
+Test Case '-[CardStack_UIUITests.MediaTests testNativePhotoToCardStackDemo]' passed (29.718 seconds).
+Test Suite 'MediaTests' passed at 2026-10-15 14:55:44.445.
+	 Executed 1 test, with 0 failures (0 unexpected) in 29.718 (29.719) seconds
+Test Suite 'CardStack_UIUITests.xctest' passed at 2026-10-15 14:55:44.447.
+	 Executed 1 test, with 0 failures (0 unexpected) in 29.718 (29.721) seconds
+Test Suite 'Selected tests' passed at 2026-10-15 14:55:44.448.
+	 Executed 1 test, with 0 failures (0 unexpected) in 29.718 (29.724) seconds
+2026-10-15 14:55:44.891 xcodebuild[30928:185895] [MT] IDETestOperationsObserverDebug: 33.967 elapsed -- Testing started completed.
+2026-10-15 14:55:44.891 xcodebuild[30928:185895] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-10-15 14:55:44.891 xcodebuild[30928:185895] [MT] IDETestOperationsObserverDebug: 33.967 sec, +33.967 sec -- end
+
+Test session results, code coverage, and logs:
+	/tmp/pinypiny-native-media/demo-release.xcresult
+
+** TEST EXECUTE SUCCEEDED **
+
+Testing started

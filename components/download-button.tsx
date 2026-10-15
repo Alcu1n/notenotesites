@@ -1,40 +1,32 @@
-import { siteConfig } from "@/lib/site-config";
-
+"use client";
+import { downloadLink } from "@/lib/download";
+import { trackEvent } from "@/lib/analytics";
+import type { Locale } from "@/lib/routes";
 import { AppleIcon, ArrowIcon } from "./icons";
-
-type DownloadButtonProps = {
+export function DownloadButton({
+  locale = "en",
+  page = "",
+  position = "hero",
+  className = "",
+}: {
+  locale?: Locale;
+  page?: string;
+  position?: string;
   className?: string;
-};
-
-export function DownloadButton({ className = "" }: DownloadButtonProps) {
-  const classes = `download-button ${className}`.trim();
-
-  if (siteConfig.appStoreUrl) {
-    return (
-      <a className={classes} href={siteConfig.appStoreUrl} target="_blank" rel="noreferrer">
-        <AppleIcon />
-        <span>
-          <small>Available on the</small>
-          <strong>App Store</strong>
-        </span>
-        <ArrowIcon />
-      </a>
-    );
-  }
-
+}) {
   return (
-    <span
-      className={`${classes} download-button--pending`}
-      aria-label="App Store link coming soon"
-      aria-disabled="true"
-      title="App Store link coming soon"
+    <a
+      className={`download-button ${className}`}
+      href={downloadLink(locale, page)}
+      data-download={position}
+      onClick={() => trackEvent("download_click", { locale, page, position })}
     >
       <AppleIcon />
       <span>
-        <small>Coming soon to the</small>
-        <strong>App Store</strong>
+        {locale === "zh" ? "免费下载" : "Download free"}
+        <small>App Store</small>
       </span>
       <ArrowIcon />
-    </span>
+    </a>
   );
 }

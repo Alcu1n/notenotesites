@@ -1,0 +1,212 @@
+{
+  "assets": [
+    {
+      "assetPath": "Stickers/showcase-lemon.png",
+      "id": "34F772D2-14F5-41AF-A67F-039D014AD755",
+      "kind": "sticker",
+      "pixelHeight": 700,
+      "pixelWidth": 700,
+      "renderPath": "Stickers/showcase-lemon.png",
+      "thumbnailPath": "Stickers/showcase-lemon.png"
+    },
+    {
+      "assetPath": "Photos/0fe77d86-e8aa-48ac-be16-bff179b9f46b.jpeg",
+      "id": "23FF849D-BE5F-4A05-8D66-807454735BAB",
+      "kind": "photo",
+      "renderPath": "Renders/d29bd502-1579-4687-b5ab-a2fd82f5224d.png",
+      "thumbnailPath": "Thumbnails/d29bd502-1579-4687-b5ab-a2fd82f5224d.png"
+    }
+  ],
+  "canvas": {
+    "logicalWidth": 390,
+    "minimumHeight": 980
+  },
+  "defaultLayoutRevision": 1,
+  "objects": [
+    {
+      "frame": {
+        "width": 336,
+        "x": 27,
+        "y": 112
+      },
+      "id": "9087F8B1-8CFD-4545-A19E-4B3C198C5721",
+      "payload": {
+        "richText": {
+          "_0": {
+            "paragraphs": [
+              {
+                "alignment": "left",
+                "kind": "body",
+                "runs": [
+                  {
+                    "text": {
+                      "_0": {
+                        "style": {
+                          "fontToken": "bundled.instrument-serif",
+                          "foregroundToken": "graphite",
+                          "highlightIntensity": 0.34,
+                          "isBold": false,
+                          "isItalic": false,
+                          "isStruckThrough": false,
+                          "isUnderlined": false,
+                          "pointSize": 38
+                        },
+                        "text": "Seaside stories."
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "rotationDegrees": 0
+          }
+        }
+      },
+      "zIndex": 10
+    },
+    {
+      "frame": {
+        "width": 320,
+        "x": 32,
+        "y": 565
+      },
+      "id": "DB311C70-EECB-40C2-9353-0D88C09EA18F",
+      "payload": {
+        "richText": {
+          "_0": {
+            "paragraphs": [
+              {
+                "alignment": "left",
+                "kind": "body",
+                "runs": [
+                  {
+                    "text": {
+                      "_0": {
+                        "style": {
+                          "fontToken": "system.sans",
+                          "foregroundToken": "teal",
+                          "highlightIntensity": 0.34,
+                          "highlightToken": "yellow",
+                          "isBold": true,
+                          "isItalic": false,
+                          "isStruckThrough": false,
+                          "isUnderlined": false,
+                          "pointSize": 17
+                        },
+                        "text": "TAKE THE SCENIC ROUTE"
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "rotationDegrees": -3
+          }
+        }
+      },
+      "zIndex": 10
+    },
+    {
+      "frame": {
+        "width": 230,
+        "x": 65,
+        "y": 625
+      },
+      "id": "CEBFB147-C864-47F2-BB40-1AAED7A904B0",
+      "payload": {
+        "richText": {
+          "_0": {
+            "paragraphs": [
+              {
+                "alignment": "left",
+                "kind": "body",
+                "runs": [
+                  {
+                    "text": {
+                      "_0": {
+                        "style": {
+                          "fontToken": "bundled.instrument-serif",
+                          "foregroundToken": "teal",
+                          "highlightIntensity": 0.34,
+                          "isBold": false,
+                          "isItalic": false,
+                          "isStruckThrough": false,
+                          "isUnderlined": false,
+                          "pointSize": 24
+                        },
+                        "text": "warm light\nsalty air\nslow days"
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "rotationDegrees": 0
+          }
+        }
+      },
+      "zIndex": 10
+    },
+    {
+      "frame": {
+        "width": 88,
+        "x": 265,
+        "y": 470
+      },
+      "id": "1FEFD68B-BC18-4BE8-A5A9-D73413A826C9",
+      "payload": {
+        "floatingEmbed": {
+          "_0": {
+            "altText": "Lemon photo cutout",
+            "assetID": "34F772D2-14F5-41AF-A67F-039D014AD755",
+            "cropOffsetX": 0,
+            "cropOffsetY": 0,
+            "cropRotationDegrees": 0,
+            "cropScale": 1,
+            "rotationDegrees": 14,
+            "stickerHasCutout": true,
+            "stickerShadow": true,
+            "stickerWhiteBorder": true,
+            "typeIdentifier": "com.cardstack.embed.image"
+          }
+        }
+      },
+      "zIndex": 12
+    },
+    {
+      "frame": {
+        "width": 305.2992565836449,
+        "x": 42.35037170817756,
+        "y": 345
+      },
+      "id": "13BB337E-E35F-4890-980B-4E296FE6A6C2",
+      "payload": {
+        "floatingEmbed": {
+          "_0": {
+            "altText": "Photo",
+            "assetID": "23FF849D-BE5F-4A05-8D66-807454735BAB",
+            "cropOffsetX": 0,
+            "cropOffsetY": 0,
+            "cropRotationDegrees": 0,
+            "cropScale": 1,
+            "photoPresentationStyleRawValue": "polaroid",
+            "photoSourceRenderPath": "Thumbnails/0fe77d86-e8aa-48ac-be16-bff179b9f46b.jpg",
+            "photoSourceThumbnailPath": "Thumbnails/0fe77d86-e8aa-48ac-be16-bff179b9f46b.jpg",
+            "rotationDegrees": 0,
+            "typeIdentifier": "com.cardstack.embed.image"
+          }
+        }
+      },
+      "zIndex": 13
+    }
+  ],
+  "readingOrder": [
+    "9087F8B1-8CFD-4545-A19E-4B3C198C5721",
+    "DB311C70-EECB-40C2-9353-0D88C09EA18F",
+    "CEBFB147-C864-47F2-BB40-1AAED7A904B0",
+    "1FEFD68B-BC18-4BE8-A5A9-D73413A826C9",
+    "13BB337E-E35F-4890-980B-4E296FE6A6C2"
+  ],
+  "schemaVersion": 4,
+  "titleObjectID": "9087F8B1-8CFD-4545-A19E-4B3C198C5721"
+}

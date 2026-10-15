@@ -1,0 +1,216 @@
+{
+  "schemaVersion": 4,
+  "defaultLayoutRevision": 1,
+  "canvas": {
+    "logicalWidth": 390,
+    "minimumHeight": 980
+  },
+  "titleObjectID": "AD09762D-832E-47E5-9729-EA9A6F49AE1A",
+  "readingOrder": [
+    "AD09762D-832E-47E5-9729-EA9A6F49AE1A",
+    "7995B95E-9560-49C7-89AC-371BE3597A09",
+    "B9D93BE9-AC5D-434C-AF80-80FD3986D3FE",
+    "7790C264-5703-4C3D-9310-5DBE336477D3",
+    "4005B36F-042E-4718-B3BD-1545D573BACD"
+  ],
+  "objects": [
+    {
+      "id": "AD09762D-832E-47E5-9729-EA9A6F49AE1A",
+      "frame": {
+        "x": 27,
+        "y": 112,
+        "width": 336
+      },
+      "zIndex": 10,
+      "payload": {
+        "richText": {
+          "_0": {
+            "paragraphs": [
+              {
+                "kind": "body",
+                "alignment": "left",
+                "runs": [
+                  {
+                    "text": {
+                      "_0": {
+                        "text": "Dear seaside,",
+                        "style": {
+                          "fontToken": "bundled.instrument-serif",
+                          "pointSize": 40,
+                          "isBold": false,
+                          "isItalic": false,
+                          "foregroundToken": "graphite",
+                          "highlightIntensity": 0.34,
+                          "isUnderlined": false,
+                          "isStruckThrough": false
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "rotationDegrees": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "7995B95E-9560-49C7-89AC-371BE3597A09",
+      "frame": {
+        "x": 27,
+        "y": 320,
+        "width": 336
+      },
+      "zIndex": 5,
+      "payload": {
+        "floatingEmbed": {
+          "_0": {
+            "assetID": "D4C7EF3A-3D70-4E0A-AF7C-9AC28C5A4122",
+            "typeIdentifier": "com.cardstack.embed.image",
+            "rotationDegrees": 0,
+            "cropScale": 1,
+            "cropOffsetX": 0,
+            "cropOffsetY": 0,
+            "cropRotationDegrees": 0,
+            "altText": "Colorful houses by the Ligurian coast"
+          }
+        }
+      }
+    },
+    {
+      "id": "B9D93BE9-AC5D-434C-AF80-80FD3986D3FE",
+      "frame": {
+        "x": 27,
+        "y": 450,
+        "width": 336
+      },
+      "zIndex": 10,
+      "payload": {
+        "richText": {
+          "_0": {
+            "paragraphs": [
+              {
+                "kind": "body",
+                "alignment": "left",
+                "runs": [
+                  {
+                    "text": {
+                      "_0": {
+                        "text": "Nowhere to hurry.",
+                        "style": {
+                          "fontToken": "bundled.instrument-serif",
+                          "pointSize": 26,
+                          "isBold": false,
+                          "isItalic": false,
+                          "foregroundToken": "teal",
+                          "highlightIntensity": 0.34,
+                          "isUnderlined": false,
+                          "isStruckThrough": false
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "rotationDegrees": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "7790C264-5703-4C3D-9310-5DBE336477D3",
+      "frame": {
+        "x": 27,
+        "y": 525,
+        "width": 336
+      },
+      "zIndex": 10,
+      "payload": {
+        "richText": {
+          "_0": {
+            "paragraphs": [
+              {
+                "kind": "body",
+                "alignment": "left",
+                "runs": [
+                  {
+                    "text": {
+                      "_0": {
+                        "text": "Pastel houses, salt in the air, and a slow walk along the water. I want to remember how the afternoon felt.",
+                        "style": {
+                          "fontToken": "bundled.instrument-serif",
+                          "pointSize": 19,
+                          "isBold": false,
+                          "isItalic": false,
+                          "foregroundToken": "graphite",
+                          "highlightIntensity": 0.34,
+                          "isUnderlined": false,
+                          "isStruckThrough": false
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "rotationDegrees": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "4005B36F-042E-4718-B3BD-1545D573BACD",
+      "frame": {
+        "x": 27,
+        "y": 680,
+        "width": 336
+      },
+      "zIndex": 10,
+      "payload": {
+        "richText": {
+          "_0": {
+            "paragraphs": [
+              {
+                "kind": "body",
+                "alignment": "left",
+                "runs": [
+                  {
+                    "text": {
+                      "_0": {
+                        "text": "One photo. One small memory.",
+                        "style": {
+                          "fontToken": "system.sans",
+                          "pointSize": 15,
+                          "isBold": false,
+                          "isItalic": false,
+                          "foregroundToken": "ochre",
+                          "highlightIntensity": 0.34,
+                          "isUnderlined": false,
+                          "isStruckThrough": false
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "rotationDegrees": 0
+          }
+        }
+      }
+    }
+  ],
+  "assets": [
+    {
+      "id": "D4C7EF3A-3D70-4E0A-AF7C-9AC28C5A4122",
+      "kind": "photo",
+      "assetPath": "Photos/showcase-coast.jpg",
+      "renderPath": "Photos/showcase-coast.jpg",
+      "thumbnailPath": "Photos/showcase-coast.jpg",
+      "pixelWidth": 900,
+      "pixelHeight": 598
+    }
+  ]
+}

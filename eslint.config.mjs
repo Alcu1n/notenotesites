@@ -1,3 +1,8 @@
 import nextConfig from "eslint-config-next";
 
-export default nextConfig;
+const config = [
+  { ignores: ["output/**", ".playwright-mcp/**"] },
+  ...nextConfig,
+];
+
+export default config;

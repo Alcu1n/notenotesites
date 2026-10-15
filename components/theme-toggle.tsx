@@ -19,14 +19,21 @@ function getTheme(): Theme {
     return appliedTheme;
   }
 
-  const savedTheme = (window.localStorage.getItem(storageKey) ??
-    window.localStorage.getItem("pinnia-theme") ??
-    window.localStorage.getItem(legacyStorageKey)) as Theme | null;
+  let savedTheme: Theme | null = null;
+  try {
+    savedTheme = (window.localStorage.getItem(storageKey) ??
+      window.localStorage.getItem("pinnia-theme") ??
+      window.localStorage.getItem(legacyStorageKey)) as Theme | null;
+  } catch {
+    /* Storage can be unavailable in private contexts. */
+  }
   if (savedTheme === "dark" || savedTheme === "light") {
     return savedTheme;
   }
 
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
 }
 
 function subscribeToTheme(listener: () => void) {
@@ -40,8 +47,12 @@ function getServerTheme(): Theme {
   return "light";
 }
 
-export function ThemeToggle() {
-  const theme = useSyncExternalStore(subscribeToTheme, getTheme, getServerTheme);
+export function ThemeToggle({ locale = "en" }: { locale?: "en" | "zh" }) {
+  const theme = useSyncExternalStore(
+    subscribeToTheme,
+    getTheme,
+    getServerTheme,
+  );
 
   useEffect(() => {
     document.documentElement.dataset.theme = getTheme();
@@ -50,15 +61,28 @@ export function ThemeToggle() {
   function toggleTheme() {
     const nextTheme: Theme = theme === "dark" ? "light" : "dark";
     document.documentElement.dataset.theme = nextTheme;
-    window.localStorage.setItem(storageKey, nextTheme);
+    try {
+      window.localStorage.setItem(storageKey, nextTheme);
+    } catch {
+      /* The current page still changes theme. */
+    }
     themeListeners.forEach((listener) => listener());
   }
 
   const nextTheme = theme === "dark" ? "light" : "dark";
-  const label = `Switch to ${nextTheme} mode`;
+  const label =
+    locale === "zh"
+      ? `切换为${nextTheme === "dark" ? "深" : "浅"}色模式`
+      : `Switch to ${nextTheme} mode`;
 
   return (
-    <button className="theme-toggle" type="button" onClick={toggleTheme} aria-label={label} title={label}>
+    <button
+      className="theme-toggle"
+      type="button"
+      onClick={toggleTheme}
+      aria-label={label}
+      title={label}
+    >
       {theme === "dark" ? (
         <svg
           className="theme-icon"
