@@ -4,6 +4,7 @@ import { SiteHeader } from "./site-header";
 import { SiteFooter } from "./site-footer";
 import { StickyDownload } from "./sticky-download";
 import { ScrollChoreography } from "./scroll-choreography";
+import { MotionProvider } from "./motion-provider";
 
 export function SiteFrame({
   locale,
@@ -15,12 +16,14 @@ export function SiteFrame({
   children: ReactNode;
 }) {
   return (
-    <div className="site-shell">
-      <ScrollChoreography />
-      <SiteHeader locale={locale} page={page} />
-      <main id="main-content">{children}</main>
-      <SiteFooter locale={locale} />
-      <StickyDownload locale={locale} page={page} />
-    </div>
+    <MotionProvider>
+      <div className="site-shell">
+        <ScrollChoreography locale={locale} />
+        <SiteHeader locale={locale} page={page} />
+        <main id="main-content">{children}</main>
+        <SiteFooter locale={locale} />
+        <StickyDownload locale={locale} page={page} />
+      </div>
+    </MotionProvider>
   );
 }

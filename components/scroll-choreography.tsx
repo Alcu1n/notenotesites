@@ -1,16 +1,68 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Lenis from "lenis";
+import { motion, useScroll, useSpring } from "motion/react";
+import type { Locale } from "@/lib/routes";
 
-export function ScrollChoreography() {
+export function ScrollChoreography({ locale = "en" }: { locale?: Locale }) {
+  const zh = locale === "zh";
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 220,
+    damping: 32,
+    restDelta: 0.0005,
+  });
+  const [showBackTop, setShowBackTop] = useState(false);
+  const [ringProgress, setRingProgress] = useState(0);
+
   useEffect(() => {
     const root = document.documentElement;
     const reducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
 
-    let rafId = 0;
+    // Inertial Lenis smooth scrolling on desktop / standard motion
+    let lenis: Lenis | null = null;
+    let lenisRaf = 0;
 
+    if (!reducedMotion && window.matchMedia("(pointer: fine)").matches) {
+      lenis = new Lenis({
+        lerp: 0.095,
+        smoothWheel: true,
+        wheelMultiplier: 0.95,
+      });
+
+      const raf = (time: number) => {
+        lenis?.raf(time);
+        lenisRaf = window.requestAnimationFrame(raf);
+      };
+      lenisRaf = window.requestAnimationFrame(raf);
+
+      // Enhance same-page hash anchors cleanly with Lenis
+      const onAnchorClick = (event: MouseEvent) => {
+        const anchor = (event.target as Element | null)?.closest<HTMLAnchorElement>(
+          'a[href^="#"]',
+        );
+        if (!anchor) return;
+        const hash = anchor.getAttribute("href");
+        if (!hash || hash === "#") return;
+        const target = document.getElementById(hash.slice(1));
+        if (!target || !lenis) return;
+        event.preventDefault();
+        lenis.scrollTo(target, { offset: -88, duration: 1.05 });
+        window.history.pushState(null, "", hash);
+      };
+      document.addEventListener("click", onAnchorClick);
+
+      const cleanupLenisClick = () =>
+        document.removeEventListener("click", onAnchorClick);
+
+      (lenis as Lenis & { __cleanupClick?: () => void }).__cleanupClick =
+        cleanupLenisClick;
+    }
+
+    let rafId = 0;
     const syncScroll = () => {
       rafId = 0;
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
@@ -21,6 +73,8 @@ export function ScrollChoreography() {
       const progress = Math.min(1, Math.max(0, scrollTop / maxScroll));
       root.style.setProperty("--scroll-progress", progress.toFixed(4));
       root.dataset.scrolled = scrollTop > 24 ? "true" : "false";
+      setShowBackTop(scrollTop > 520);
+      setRingProgress(progress);
     };
 
     const onScroll = () => {
@@ -89,7 +143,7 @@ export function ScrollChoreography() {
       }
     }
 
-    // Progressive scroll reveal choreography (strictly opt-in via JS; never hides content without JS or with reduced motion)
+    // Progressive scroll reveal choreography (opt-in; 100% visible without JS or under reduced motion)
     let revealObserver: IntersectionObserver | null = null;
     if (!reducedMotion && "IntersectionObserver" in window) {
       const nodes = Array.from(
@@ -117,7 +171,7 @@ export function ScrollChoreography() {
               }
             }
           },
-          { rootMargin: "0px 0px -6% 0px", threshold: 0.05 },
+          { rootMargin: "0px 0px -6% 0px", threshold: 0.04 },
         );
 
         for (const el of nodes) {
@@ -130,6 +184,11 @@ export function ScrollChoreography() {
 
     return () => {
       if (rafId) window.cancelAnimationFrame(rafId);
+      if (lenisRaf) window.cancelAnimationFrame(lenisRaf);
+      if (lenis) {
+        (lenis as Lenis & { __cleanupClick?: () => void }).__cleanupClick?.();
+        lenis.destroy();
+      }
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
       tocObserver?.disconnect();
@@ -137,5 +196,58 @@ export function ScrollChoreography() {
     };
   }, []);
 
-  return <div className="scroll-progress-bar" aria-hidden="true" />;
+  const circumference = 2 * Math.PI * 19;
+
+  return (
+    <>
+      <motion.div
+        className="scroll-progress-bar"
+        style={{ scaleX }}
+        aria-hidden="true"
+      />
+      <button
+        type="button"
+        className={`orbital-top-btn${showBackTop ? " is-visible" : ""}`}
+        aria-label={zh ? "回到顶部" : "Back to top"}
+        title={zh ? "回到顶部" : "Back to top"}
+        tabIndex={showBackTop ? 0 : -1}
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      >
+        <svg className="orbital-ring" viewBox="0 0 44 44" aria-hidden="true">
+          <circle
+            className="orbital-track"
+            cx="22"
+            cy="22"
+            r="19"
+            fill="none"
+            strokeWidth="1.5"
+          />
+          <circle
+            className="orbital-progress"
+            cx="22"
+            cy="22"
+            r="19"
+            fill="none"
+            strokeWidth="1.75"
+            strokeDasharray={circumference}
+            strokeDashoffset={circumference * (1 - ringProgress)}
+            strokeLinecap="round"
+          />
+        </svg>
+        <svg
+          className="orbital-arrow"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M12 19V5" />
+          <path d="m6 11 6-6 6 6" />
+        </svg>
+      </button>
+    </>
+  );
 }

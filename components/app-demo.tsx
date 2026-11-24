@@ -1,10 +1,18 @@
 "use client";
 
 import { useRef, useState, type ReactNode } from "react";
+import { motion } from "motion/react";
 import type { Locale } from "@/lib/routes";
 import { trackEvent } from "@/lib/analytics";
 
 const CHAPTER_MARKS = [0, 7, 14] as const;
+
+function formatClock(sec: number) {
+  const clamped = Math.max(0, Math.floor(sec));
+  const m = String(Math.floor(clamped / 60)).padStart(2, "0");
+  const s = String(clamped % 60).padStart(2, "0");
+  return `${m}:${s}`;
+}
 
 export function AppDemo({
   locale,
@@ -28,11 +36,13 @@ export function AppDemo({
   const [activeStep, setActiveStep] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [currentSec, setCurrentSec] = useState(0);
 
   function handleTimeUpdate() {
     const video = videoRef.current;
     if (!video || !video.duration) return;
     const t = video.currentTime;
+    setCurrentSec(t);
     setProgress(Math.min(100, (t / video.duration) * 100));
     if (t >= CHAPTER_MARKS[2]) setActiveStep(2);
     else if (t >= CHAPTER_MARKS[1]) setActiveStep(1);
@@ -77,24 +87,39 @@ export function AppDemo({
           className="demo-steps"
           aria-label={zh ? "录屏步骤" : "Recording moments"}
         >
-          {steps.map((step, index) => (
-            <li
-              key={step}
-              className={activeStep === index ? "is-current" : undefined}
-            >
-              <button
-                type="button"
-                className="demo-step-btn"
-                onClick={() => jumpToStep(index)}
-                aria-current={activeStep === index ? "step" : undefined}
+          {steps.map((step, index) => {
+            const isCurrent = activeStep === index;
+            return (
+              <li
+                key={step}
+                className={isCurrent ? "is-current" : undefined}
               >
-                <span className="step-num">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <span className="step-text">{step}</span>
-              </button>
-            </li>
-          ))}
+                <button
+                  type="button"
+                  className="demo-step-btn"
+                  onClick={() => jumpToStep(index)}
+                  aria-current={isCurrent ? "step" : undefined}
+                >
+                  {isCurrent && (
+                    <motion.span
+                      layoutId="demo-chapter-bg"
+                      className="demo-step-active-bg"
+                      transition={{
+                        type: "spring",
+                        stiffness: 380,
+                        damping: 32,
+                      }}
+                      aria-hidden="true"
+                    />
+                  )}
+                  <span className="step-num">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span className="step-text">{step}</span>
+                </button>
+              </li>
+            );
+          })}
         </ol>
         <div className="demo-cta">{downloadSlot}</div>
       </div>
@@ -103,8 +128,18 @@ export function AppDemo({
         <div className="demo-bezel">
           <div className="demo-bezel-bar" aria-hidden="true">
             <span className="demo-dot" />
-            <span>{zh ? "真实录屏 · 1× 原速" : "REAL CAPTURE · 1× SPEED"}</span>
-            <span className="demo-time">00:21</span>
+            <span>
+              {playing
+                ? zh
+                  ? "正在播放 · 1× 原速"
+                  : "PLAYING · 1× SPEED"
+                : zh
+                  ? "真实录屏 · 1× 原速"
+                  : "REAL CAPTURE · 1× SPEED"}
+            </span>
+            <span className="demo-time">
+              {playing ? `${formatClock(currentSec)} / 00:21` : "00:21"}
+            </span>
           </div>
           <div className="demo-video-wrap">
             <video

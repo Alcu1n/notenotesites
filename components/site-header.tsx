@@ -4,6 +4,7 @@ import { localizedPath, type Locale } from "@/lib/routes";
 import { ThemeToggle } from "./theme-toggle";
 import { DownloadButton } from "./download-button";
 import { MobileNavigation } from "./mobile-navigation";
+import { DesktopNav } from "./desktop-nav";
 
 export function SiteHeader({
   locale = "en",
@@ -52,21 +53,10 @@ export function SiteHeader({
             {zh && <small className="wordmark-sub">拼拼笔记</small>}
           </span>
         </Link>
-        <nav
-          className="desktop-nav"
-          aria-label={zh ? "主导航" : "Main navigation"}
-        >
-          {items.map((item) => (
-            <Link
-              href={item.href}
-              key={item.href}
-              className={item.active ? "is-active" : undefined}
-              aria-current={item.active ? "page" : undefined}
-            >
-              {item.text}
-            </Link>
-          ))}
-        </nav>
+        <DesktopNav
+          label={zh ? "主导航" : "Main navigation"}
+          items={items}
+        />
         <div className="header-tools">
           <Link
             className="language-switch"

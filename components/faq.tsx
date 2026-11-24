@@ -13,7 +13,8 @@ export function Faq({
             </span>
             <span className="faq-question">{item.question}</span>
             <span className="faq-toggle" aria-hidden="true">
-              +
+              <span className="faq-plus-h" />
+              <span className="faq-plus-v" />
             </span>
           </summary>
           <p>{item.answer}</p>
