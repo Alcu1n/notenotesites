@@ -3,6 +3,8 @@ import type { Locale } from "@/lib/routes";
 import { SiteHeader } from "./site-header";
 import { SiteFooter } from "./site-footer";
 import { StickyDownload } from "./sticky-download";
+import { ScrollChoreography } from "./scroll-choreography";
+
 export function SiteFrame({
   locale,
   page = "",
@@ -14,6 +16,7 @@ export function SiteFrame({
 }) {
   return (
     <div className="site-shell">
+      <ScrollChoreography />
       <SiteHeader locale={locale} page={page} />
       <main id="main-content">{children}</main>
       <SiteFooter locale={locale} />

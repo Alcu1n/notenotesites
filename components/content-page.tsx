@@ -36,36 +36,51 @@ function Breadcrumbs({
       <Link href={localizedPath(locale)}>
         {locale === "zh" ? "首页" : "Home"}
       </Link>
-      <span aria-hidden="true">/</span>
+      <span className="breadcrumb-sep" aria-hidden="true">
+        /
+      </span>
       {page.startsWith("guides/") && (
         <>
           <Link href={localizedPath(locale, "guides")}>
             {locale === "zh" ? "教程" : "Guides"}
           </Link>
-          <span aria-hidden="true">/</span>
+          <span className="breadcrumb-sep" aria-hidden="true">
+            /
+          </span>
         </>
       )}
       <span aria-current="page">{label}</span>
     </nav>
   );
 }
+
 function Closing({ locale, page }: { locale: Locale; page: string }) {
   return (
-    <section className="article-closing page-section">
-      <div>
-        <h2>
-          {locale === "zh" ? "这一页，换你来写。" : "Make the next page yours."}
-        </h2>
-        <p>
-          {locale === "zh"
-            ? "从手机里的一张照片开始。免费下载，可选 Pro 高级功能。"
-            : "Start with a photo already on your phone. Free to download, with optional Pro."}
-        </p>
+    <section className="article-closing-wrap page-section" data-reveal>
+      <div className="article-closing">
+        <span className="stage-corner stage-corner--tl" aria-hidden="true" />
+        <span className="stage-corner stage-corner--tr" aria-hidden="true" />
+        <span className="stage-corner stage-corner--bl" aria-hidden="true" />
+        <span className="stage-corner stage-corner--br" aria-hidden="true" />
+        <div className="article-closing-copy">
+          <p className="eyebrow">
+            {locale === "zh" ? "开始你的第一页" : "START YOUR FIRST PAGE"}
+          </p>
+          <h2>
+            {locale === "zh" ? "这一页，换你来写。" : "Make the next page yours."}
+          </h2>
+          <p>
+            {locale === "zh"
+              ? "从手机里的一张照片开始。免费下载，可选 Pro 高级功能。"
+              : "Start with a photo already on your phone. Free to download, with optional Pro."}
+          </p>
+        </div>
+        <DownloadArea locale={locale} page={page} position="article-end" />
       </div>
-      <DownloadArea locale={locale} page={page} position="article-end" />
     </section>
   );
 }
+
 function EditorialSections({
   sections,
   locale,
@@ -75,39 +90,50 @@ function EditorialSections({
 }) {
   return (
     <>
-      {sections.map((section) => (
-        <section id={section.id} key={section.id}>
-          <h2>{section.title}</h2>
-          {section.paragraphs.map((text) => (
-            <p key={text}>{text}</p>
-          ))}
-          {section.steps && (
-            <ol>
-              {section.steps.map((step) => (
-                <li key={step}>{step}</li>
-              ))}
-            </ol>
-          )}
-          {section.image && (
-            <figure className="article-figure">
-              <Image
-                {...media[section.image]}
-                alt={section.caption || section.title}
-                sizes="(max-width:700px) 86vw, 400px"
-              />
-              <figcaption>
-                {section.caption ||
-                  (locale === "zh"
-                    ? "真实 App 制作示例，部分样式使用 Pro 功能。"
-                    : "A real app example. Some styling uses Pro features.")}
-              </figcaption>
-            </figure>
-          )}
-        </section>
-      ))}
+      {sections.map((section, index) => {
+        const hasLeadingNum = /^\d+\./.test(section.title);
+        return (
+          <section id={section.id} key={section.id} data-reveal>
+            {!hasLeadingNum && (
+              <span className="article-sec-num" aria-hidden="true">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+            )}
+            <h2>{section.title}</h2>
+            {section.paragraphs.map((text) => (
+              <p key={text}>{text}</p>
+            ))}
+            {section.steps && (
+              <ol className="editorial-steps">
+                {section.steps.map((step) => (
+                  <li key={step}>{step}</li>
+                ))}
+              </ol>
+            )}
+            {section.image && (
+              <figure className="article-figure">
+                <div className="article-figure-frame">
+                  <Image
+                    {...media[section.image]}
+                    alt={section.caption || section.title}
+                    sizes="(max-width:700px) 86vw, 400px"
+                  />
+                </div>
+                <figcaption>
+                  {section.caption ||
+                    (locale === "zh"
+                      ? "真实 App 制作示例，部分样式使用 Pro 功能。"
+                      : "A real app example. Some styling uses Pro features.")}
+                </figcaption>
+              </figure>
+            )}
+          </section>
+        );
+      })}
     </>
   );
 }
+
 function ScenarioPage({
   locale,
   slug,
@@ -121,8 +147,11 @@ function ScenarioPage({
     <>
       <Breadcrumbs locale={locale} page={slug} label={c.eyebrow} />
       <section className="scenario-hero page-section">
-        <div>
-          <p className="eyebrow">{c.eyebrow}</p>
+        <div className="scenario-copy">
+          <p className="eyebrow">
+            <span className="eyebrow-dot" aria-hidden="true" />
+            {c.eyebrow}
+          </p>
           <h1>{c.heading}</h1>
           <p className="lead">{c.intro}</p>
           <div data-primary-download>
@@ -134,14 +163,26 @@ function ScenarioPage({
               : "iPhone & iPad · Free to download, optional Pro"}
           </p>
         </div>
-        <figure>
-          <Image
-            {...media[c.image]}
-            alt={c.imageAlt}
-            sizes="(max-width:700px) 75vw, 340px"
-            loading="eager"
-          />
+        <figure className="scenario-figure">
+          <div className="scenario-stage">
+            <span className="stage-corner stage-corner--tl" aria-hidden="true" />
+            <span className="stage-corner stage-corner--tr" aria-hidden="true" />
+            <span className="stage-corner stage-corner--bl" aria-hidden="true" />
+            <span className="stage-corner stage-corner--br" aria-hidden="true" />
+            <span className="scenario-stage-label" aria-hidden="true">
+              {zh ? "真实 App 示例" : "REAL APP PAGE"}
+            </span>
+            <div className="scenario-shot">
+              <Image
+                {...media[c.image]}
+                alt={c.imageAlt}
+                sizes="(max-width:700px) 75vw, 340px"
+                loading="eager"
+              />
+            </div>
+          </div>
           <figcaption>
+            <span className="caption-dot" aria-hidden="true" />
             {zh
               ? "真实 App 作品示例 · 部分样式使用 Pro"
               : "Made in the app · Some styling uses Pro"}
@@ -151,15 +192,19 @@ function ScenarioPage({
       <div className="article-layout page-section">
         <aside className="article-index">
           <p>{zh ? "这一页里" : "On this page"}</p>
-          {c.sections.map((s) => (
+          {c.sections.map((s, index) => (
             <a href={`#${s.id}`} key={s.id}>
-              {s.title}
+              <span className="toc-num" aria-hidden="true">
+                0{index + 1}
+              </span>
+              <span>{s.title}</span>
             </a>
           ))}
         </aside>
         <article className="article-body">
           <EditorialSections sections={c.sections} locale={locale} />
-          <section>
+          <section className="article-callout" data-reveal>
+            <p className="eyebrow">{zh ? "配套教程" : "COMPANION GUIDE"}</p>
             <h2>{zh ? "跟着做一页" : "Make your first page"}</h2>
             <p>{getGuide(locale, c.guide).intro}</p>
             <Link
@@ -170,7 +215,7 @@ function ScenarioPage({
               <ArrowIcon />
             </Link>
           </section>
-          <section>
+          <section data-reveal>
             <h2>{zh ? "你可能还想知道" : "A few useful answers"}</h2>
             <Faq items={c.faq} />
           </section>
@@ -181,6 +226,7 @@ function ScenarioPage({
     </>
   );
 }
+
 function RelatedScenarios({
   locale,
   current,
@@ -189,7 +235,7 @@ function RelatedScenarios({
   current: string;
 }) {
   return (
-    <section>
+    <section className="related-section" data-reveal>
       <h2>
         {locale === "zh" ? "还有这些记录方式" : "More ways to keep a moment"}
       </h2>
@@ -206,6 +252,7 @@ function RelatedScenarios({
     </section>
   );
 }
+
 function GuidePage({ locale, slug }: { locale: Locale; slug: GuideSlug }) {
   const c = getGuide(locale, slug),
     page = `guides/${slug}`,
@@ -215,17 +262,26 @@ function GuidePage({ locale, slug }: { locale: Locale; slug: GuideSlug }) {
       <Breadcrumbs locale={locale} page={page} label={c.heading} />
       <header className="article-hero page-section">
         <p className="eyebrow">
+          <span className="eyebrow-dot" aria-hidden="true" />
           {zh ? "动手做一页" : "Make a page, step by step"}
         </p>
         <h1>{c.heading}</h1>
         <p className="lead">{c.intro}</p>
         <p className="byline">
-          {zh ? "作者" : "By"}{" "}
-          <Link href={localizedPath(locale, "about")}>
-            @lemon · LRAI STUDIO
-          </Link>
+          <span>
+            {zh ? "作者 " : "By "}
+            <Link href={localizedPath(locale, "about")}>
+              @lemon · LRAI STUDIO
+            </Link>
+          </span>
+          <span className="byline-sep" aria-hidden="true">
+            ·
+          </span>
           <span>
             {c.minutes} {zh ? "分钟阅读" : "min read"}
+          </span>
+          <span className="byline-sep" aria-hidden="true">
+            ·
           </span>
           <time dateTime={appFacts.contentUpdated}>
             {zh ? "更新于 2026年10月15日" : "Updated October 15, 2026"}
@@ -235,9 +291,14 @@ function GuidePage({ locale, slug }: { locale: Locale; slug: GuideSlug }) {
       <div className="article-layout page-section">
         <aside className="article-index">
           <p>{zh ? "跟着这些步骤" : "In this guide"}</p>
-          {c.sections.map((s) => (
+          {c.sections.map((s, index) => (
             <a href={`#${s.id}`} key={s.id}>
-              {s.title}
+              {!/^\d+\./.test(s.title) && (
+                <span className="toc-num" aria-hidden="true">
+                  0{index + 1}
+                </span>
+              )}
+              <span>{s.title}</span>
             </a>
           ))}
         </aside>
@@ -256,7 +317,7 @@ function GuidePage({ locale, slug }: { locale: Locale; slug: GuideSlug }) {
             />
           </div>
           <EditorialSections sections={c.sections} locale={locale} />
-          <section>
+          <section data-reveal>
             <h2>{zh ? "常见问题" : "Common questions"}</h2>
             <Faq items={c.faq} />
           </section>
@@ -267,6 +328,7 @@ function GuidePage({ locale, slug }: { locale: Locale; slug: GuideSlug }) {
     </>
   );
 }
+
 function GuidesIndex({ locale }: { locale: Locale }) {
   const zh = locale === "zh";
   return (
@@ -278,6 +340,7 @@ function GuidesIndex({ locale }: { locale: Locale }) {
       />
       <section className="article-hero page-section">
         <p className="eyebrow">
+          <span className="eyebrow-dot" aria-hidden="true" />
           {zh ? "让第一张纸，不再空白" : "A little help getting started"}
         </p>
         <h1>
@@ -292,7 +355,7 @@ function GuidesIndex({ locale }: { locale: Locale }) {
         </p>
       </section>
       <div className="guide-index-list page-section">
-        {guideSlugs.map((slug) => {
+        {guideSlugs.map((slug, index) => {
           const c = getGuide(locale, slug),
             image =
               slug === "photo-stickers"
@@ -301,7 +364,7 @@ function GuidesIndex({ locale }: { locale: Locale }) {
                   ? media.travel
                   : media.inspiration;
           return (
-            <article key={slug}>
+            <article key={slug} data-reveal>
               <Link
                 href={localizedPath(locale, `guides/${slug}`)}
                 className="guide-index-image"
@@ -312,8 +375,9 @@ function GuidesIndex({ locale }: { locale: Locale }) {
                   sizes="(max-width:700px) 85vw, 260px"
                 />
               </Link>
-              <div>
+              <div className="guide-index-copy">
                 <p className="eyebrow">
+                  <span className="section-num">0{index + 1}</span>
                   {c.minutes} {zh ? "分钟阅读" : "min read"}
                 </p>
                 <h2>
@@ -338,6 +402,7 @@ function GuidesIndex({ locale }: { locale: Locale }) {
     </>
   );
 }
+
 function RichText({ text }: { text: string }) {
   const chunks = text.split(/(\[[^\]]+\]\([^)]+\))/g);
   return (
@@ -355,6 +420,7 @@ function RichText({ text }: { text: string }) {
     </>
   );
 }
+
 function LegalPage({ locale, slug }: { locale: Locale; slug: LegalSlug }) {
   const c = getLegal(locale, slug),
     zh = locale === "zh";
@@ -362,10 +428,17 @@ function LegalPage({ locale, slug }: { locale: Locale; slug: LegalSlug }) {
     <>
       <Breadcrumbs locale={locale} page={slug} label={c.title} />
       <header className="article-hero legal-hero page-section">
+        <p className="eyebrow">
+          <span className="eyebrow-dot" aria-hidden="true" />
+          LRAI STUDIO · PINYPINY
+        </p>
         <h1>{c.title}</h1>
         <p className="lead">{c.summary}</p>
         <p className="byline">
-          LRAI STUDIO · PinyPiny
+          <span>LRAI STUDIO · PinyPiny</span>
+          <span className="byline-sep" aria-hidden="true">
+            ·
+          </span>
           <time dateTime={c.updated}>
             {zh ? "更新于 2026年10月15日" : "Updated October 15, 2026"}
           </time>
@@ -377,15 +450,21 @@ function LegalPage({ locale, slug }: { locale: Locale; slug: LegalSlug }) {
           aria-label={zh ? "本页目录" : "On this page"}
         >
           <p>{zh ? "本页目录" : "On this page"}</p>
-          {c.sections.map((s) => (
+          {c.sections.map((s, index) => (
             <a key={s.id} href={`#${s.id}`}>
-              {s.title}
+              <span className="toc-num" aria-hidden="true">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <span>{s.title}</span>
             </a>
           ))}
         </nav>
         <article className="article-body legal-content">
-          {c.sections.map((s) => (
+          {c.sections.map((s, index) => (
             <section id={s.id} key={s.id}>
+              <span className="article-sec-num" aria-hidden="true">
+                {String(index + 1).padStart(2, "0")}
+              </span>
               <h2>{s.title}</h2>
               {s.paragraphs.map((text) => (
                 <p key={text}>
@@ -409,6 +488,7 @@ function LegalPage({ locale, slug }: { locale: Locale; slug: LegalSlug }) {
     </>
   );
 }
+
 function About({ locale }: { locale: Locale }) {
   const zh = locale === "zh";
   const facts = zh
@@ -435,12 +515,14 @@ function About({ locale }: { locale: Locale }) {
     <>
       <Breadcrumbs locale={locale} page="about" label={zh ? "关于" : "About"} />
       <section className="about-hero page-section">
-        <Image
-          src="/assets/pinypiny/app-icon.png"
-          alt="PinyPiny"
-          width={112}
-          height={112}
-        />
+        <div className="about-icon-frame">
+          <Image
+            src="/assets/pinypiny/app-icon.png"
+            alt="PinyPiny"
+            width={112}
+            height={112}
+          />
+        </div>
         <p className="eyebrow">LRAI STUDIO</p>
         <h1>
           {zh
@@ -454,7 +536,10 @@ function About({ locale }: { locale: Locale }) {
         </p>
       </section>
       <article className="about-body page-section">
-        <section>
+        <section data-reveal>
+          <span className="article-sec-num" aria-hidden="true">
+            01
+          </span>
           <h2>
             {zh
               ? "记下内容，也留下它的样子。"
@@ -471,7 +556,10 @@ function About({ locale }: { locale: Locale }) {
               : "Start with a photo and a sentence only you could write. Type, color, photos and stickers are materials for expression. So is empty space. You do not have to become a designer to keep something personal."}
           </p>
         </section>
-        <section>
+        <section data-reveal>
+          <span className="article-sec-num" aria-hidden="true">
+            02
+          </span>
           <h2>
             {zh
               ? "翻阅，也是记录的一部分。"
@@ -483,7 +571,10 @@ function About({ locale }: { locale: Locale }) {
               : "A finished note becomes a card in a stack you can browse again. Paper and cards carry the app’s character; the tools are there to help, while what you put on the page stays at the center."}
           </p>
         </section>
-        <section>
+        <section className="fact-ledger-section" data-reveal>
+          <span className="article-sec-num" aria-hidden="true">
+            03
+          </span>
           <h2>{zh ? "PinyPiny 产品信息" : "PinyPiny at a glance"}</h2>
           <dl className="fact-list">
             {facts.map(([label, detail]) => (
@@ -494,7 +585,10 @@ function About({ locale }: { locale: Locale }) {
             ))}
           </dl>
         </section>
-        <section>
+        <section data-reveal>
+          <span className="article-sec-num" aria-hidden="true">
+            04
+          </span>
           <h2>{zh ? "联系开发者" : "Talk to the maker"}</h2>
           <p>
             {zh
@@ -515,6 +609,7 @@ function About({ locale }: { locale: Locale }) {
     </>
   );
 }
+
 function Support({ locale }: { locale: Locale }) {
   const zh = locale === "zh";
   const questions = zh
@@ -634,6 +729,7 @@ function Support({ locale }: { locale: Locale }) {
       />
       <header className="article-hero page-section">
         <p className="eyebrow">
+          <span className="eyebrow-dot" aria-hidden="true" />
           {zh ? "需要一点帮助？" : "A little help, when you need it"}
         </p>
         <h1>
@@ -646,7 +742,7 @@ function Support({ locale }: { locale: Locale }) {
             ? "从第一篇笔记，到导出、购买和同步。先看看下面的回答，或直接写信给开发者。"
             : "From your first page to export, purchases and sync. Find an answer below, or write directly to the maker."}
         </p>
-        <a className="text-link" href={`mailto:${siteConfig.supportEmail}`}>
+        <a className="text-link support-mail" href={`mailto:${siteConfig.supportEmail}`}>
           {siteConfig.supportEmail}
           <ArrowIcon />
         </a>
@@ -660,23 +756,26 @@ function Support({ locale }: { locale: Locale }) {
           />
         </div>
         <Faq items={questions} />
-        <h2>{zh ? "想边看边做？" : "Prefer a walkthrough?"}</h2>
-        <div className="related-links">
-          {guideSlugs.map((s) => (
-            <Link
-              key={s}
-              className="text-link"
-              href={localizedPath(locale, `guides/${s}`)}
-            >
-              {getGuide(locale, s).heading}
-              <ArrowIcon />
-            </Link>
-          ))}
+        <div className="support-walkthroughs" data-reveal>
+          <h2>{zh ? "想边看边做？" : "Prefer a walkthrough?"}</h2>
+          <div className="related-links">
+            {guideSlugs.map((s) => (
+              <Link
+                key={s}
+                className="text-link"
+                href={localizedPath(locale, `guides/${s}`)}
+              >
+                {getGuide(locale, s).heading}
+                <ArrowIcon />
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
     </>
   );
 }
+
 export function ContentPage({
   locale,
   page,

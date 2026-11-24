@@ -60,32 +60,29 @@ export function LockIcon({ className = "" }: IconProps) {
 export function FeatureIcon({ kind }: FeatureIconProps) {
   if (kind === "text") {
     return (
-      <svg className="feature-icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-        <rect x="8" y="7" width="32" height="34" rx="4" stroke="currentColor" strokeWidth="2.2" />
-        <path d="M15 16h18M15 23h18M15 30h11" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+      <svg className="feature-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <rect x="4.5" y="4" width="23" height="24" rx="3.5" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M9.5 11.5h13M9.5 16.5h13M9.5 21.5h7.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
       </svg>
     );
   }
 
   if (kind === "photo") {
     return (
-      <svg className="feature-icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-        <rect x="7" y="10" width="34" height="28" rx="4" stroke="currentColor" strokeWidth="2.2" />
-        <circle cx="31" cy="18" r="3" stroke="currentColor" strokeWidth="2.2" />
-        <path d="m10 33 9-9 6 6 4-4 9 9" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+      <svg className="feature-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <rect x="4" y="6" width="24" height="20" rx="3.5" stroke="currentColor" strokeWidth="1.5" />
+        <circle cx="21" cy="12" r="2" stroke="currentColor" strokeWidth="1.5" />
+        <path d="m6.5 22.5 6.2-6.2 4.2 4.2 2.8-2.8 5.8 4.8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     );
   }
 
   return (
-    <svg className="feature-icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-      <path
-        d="m24 7 4.2 8.5 9.4 1.4-6.8 6.6 1.6 9.3-8.4-4.4-8.4 4.4 1.6-9.3-6.8-6.6 9.4-1.4L24 7Z"
-        stroke="currentColor"
-        strokeWidth="2.2"
-        strokeLinejoin="round"
-      />
-      <circle cx="24" cy="23" r="3" fill="currentColor" />
+    <svg className="feature-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <rect x="7" y="5" width="18" height="22" rx="3" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M10.5 2.5h11a3 3 0 0 1 3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity="0.45" />
+      <path d="M11 12.5h10M11 17h6.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <circle cx="20.5" cy="21" r="1.5" fill="currentColor" />
     </svg>
   );
 }

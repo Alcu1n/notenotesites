@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { localizedPath, type Locale } from "@/lib/routes";
 import { siteConfig } from "@/lib/site-config";
+
 export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
   const zh = locale === "zh";
   return (
@@ -12,12 +13,15 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
             <Image
               src="/assets/pinypiny/app-icon.png"
               alt=""
-              width={48}
-              height={48}
+              width={46}
+              height={46}
             />
-            <span>PinyPiny</span>
+            <span className="wordmark-text">
+              <span>PinyPiny</span>
+              {zh && <small className="wordmark-sub">拼拼笔记</small>}
+            </span>
           </Link>
-          <p>
+          <p className="footer-tagline">
             {zh ? "把日子，拼成喜欢的样子。" : "Life, in your own arrangement."}
           </p>
           <small>
@@ -64,7 +68,9 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
         <a href={`mailto:${siteConfig.supportEmail}`}>
           {siteConfig.supportEmail}
         </a>
-        <a href="#main-content">{zh ? "回到顶部 ↑" : "Back to top ↑"}</a>
+        <a href="#main-content" className="footer-top-link">
+          {zh ? "回到顶部 ↑" : "Back to top ↑"}
+        </a>
       </div>
     </footer>
   );
