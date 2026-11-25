@@ -44,6 +44,24 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
           <Link href={localizedPath(locale, "guides")}>
             {zh ? "教程与灵感" : "Guides & ideas"}
           </Link>
+          <Link href={localizedPath(locale, "blog")}>
+            {zh ? "编辑博客" : "Editorial blog"}
+          </Link>
+        </div>
+        <div className="footer-group">
+          <span>{zh ? "产品对比" : "Compare"}</span>
+          <Link href={localizedPath(locale, "vs")}>
+            {zh ? "全部 App 对比" : "All comparisons"}
+          </Link>
+          <Link href={localizedPath(locale, "vs/apple-journal")}>
+            {zh ? "对比苹果「手记」" : "vs Apple Journal"}
+          </Link>
+          <Link href={localizedPath(locale, "vs/day-one")}>
+            {zh ? "对比 Day One" : "vs Day One"}
+          </Link>
+          <Link href={localizedPath(locale, "vs/zinnia")}>
+            {zh ? "对比 Zinnia" : "vs Zinnia"}
+          </Link>
         </div>
         <div className="footer-group">
           <span>{zh ? "关于与帮助" : "A little more"}</span>

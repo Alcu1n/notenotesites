@@ -143,9 +143,14 @@ export function ScrollChoreography({ locale = "en" }: { locale?: Locale }) {
       }
     }
 
-    // Progressive scroll reveal choreography (opt-in; 100% visible without JS or under reduced motion)
+    // Progressive scroll reveal choreography (100% visible without JS, under reduced motion, or for search/AI crawlers)
+    const isAutomatedCrawler =
+      navigator.webdriver ||
+      /(bot|crawler|spider|googlebot|bingbot|duckduckbot|baiduspider|yandex|slurp|gptbot|oai-searchbot|chatgpt|perplexity|claudebot|lighthouse|pagespeed|headless)/i.test(
+        navigator.userAgent,
+      );
     let revealObserver: IntersectionObserver | null = null;
-    if (!reducedMotion && "IntersectionObserver" in window) {
+    if (!reducedMotion && !isAutomatedCrawler && "IntersectionObserver" in window) {
       const nodes = Array.from(
         document.querySelectorAll<HTMLElement>("[data-reveal]"),
       );

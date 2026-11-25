@@ -9,16 +9,26 @@ const slugs = [
   "guides/iphone-digital-scrapbook",
   "guides/photo-stickers",
   "guides/travel-journal-ideas",
+  "blog",
+  "blog/digital-scrapbook-layout-ideas",
+  "blog/private-offline-photo-journal-iphone",
+  "blog/everyday-photo-journal-prompts",
+  "blog/scrapbook-vs-photo-journal-vs-notes-app",
+  "vs",
+  "vs/apple-journal",
+  "vs/day-one",
+  "vs/zinnia",
   "about",
   "support",
   "privacy",
   "terms",
 ];
 
-test("all 24 pages are complete, canonical and reciprocally localized", async ({
+test("all 42 pages are complete, canonical and reciprocally localized", async ({
   page,
   request,
 }) => {
+  test.setTimeout(90_000);
   const titles = new Set<string>();
   for (const locale of ["en", "zh"]) {
     for (const slug of slugs) {
@@ -56,9 +66,11 @@ test("all 24 pages are complete, canonical and reciprocally localized", async ({
   }
   const sitemap = await request.get("/sitemap.xml");
   expect(sitemap.status()).toBe(200);
-  expect((await sitemap.text()).match(/<loc>/g)?.length).toBe(24);
+  expect((await sitemap.text()).match(/<loc>/g)?.length).toBe(42);
   expect((await request.get("/robots.txt")).status()).toBe(200);
   expect((await request.get("/llms.txt")).status()).toBe(200);
+  expect((await request.get("/pricing.md")).status()).toBe(200);
+  expect((await request.get("/no-such-page-xyz-991")).status()).toBe(404);
 });
 
 test("a search visitor can read a guide, change language and download when analytics is blocked", async ({

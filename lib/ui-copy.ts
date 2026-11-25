@@ -5,7 +5,7 @@ export const homeCopy = {
     title: "Life, beautifully",
     emphasis: "pieced together.",
     summary:
-      "A photo, a few words, a little piece of today. Make a page that feels like you — then keep it in a stack worth coming back to.",
+      "A photo, a few words, a little piece of today. Make a page that feels like you, then keep it in a stack worth coming back to.",
     downloadNote: "Free to download · Optional Pro features",
     seeDemo: "Watch it come together",
     heroAlt:
@@ -76,7 +76,7 @@ export const homeCopy = {
     ],
     proTitle: "Start with a page. Add more with Pro.",
     proText:
-      "PinyPiny is free to download. Pro adds more ways to express yourself; available prices and purchase options appear in the app.",
+      "PinyPiny is free to download ($0) with core visual note tools. Optional Pro is available via Apple In-App Purchase (subscription or one-time Lifetime option); local prices and terms appear in the app and App Store.",
     proRows: [
       [
         "Start creating",
@@ -217,7 +217,7 @@ export const homeCopy = {
     ],
     proTitle: "从一张纸开始，用 Pro 多表达一点。",
     proText:
-      "拼拼笔记可以免费下载。Pro 提供更多创作方式，具体价格与购买选项以 App 内显示为准。",
+      "拼拼笔记可免费下载并使用基础图文笔记功能。可选 Pro 通过 Apple App 内购买提供（支持订阅或一次性终身买断选项），当地价格与条款以 App 内和 App Store 显示为准。",
     proRows: [
       ["开始记录", "文字、普通照片、贴纸与基础笔记编辑"],
       [
@@ -281,3 +281,117 @@ export const homeCopy = {
   },
 } as const;
 export const copyFor = (locale: Locale) => homeCopy[locale];
+
+export function supportFaqFor(
+  locale: Locale,
+  supportEmail: string,
+): { question: string; answer: string }[] {
+  return locale === "zh"
+    ? [
+        {
+          question: "第一次打开，先做什么？",
+          answer:
+            "创建一篇笔记，先写一句话，再用照片入口添加一张自己的照片。想做抠图贴纸时进入贴纸工作室；想换纸张、字体或颜色时打开对应样式选项。不要急着填满页面。",
+        },
+        {
+          question: "照片和贴纸有什么不同？",
+          answer:
+            "普通照片会保留完整画面。贴纸工作室可以识别并提取照片中的主体，生成带透明背景的贴纸，再加入当前笔记。照片来源允许手动选择识别出的主体，相机来源会先提取主要主体。",
+        },
+        {
+          question: "怎样导出图片？",
+          answer:
+            "在笔记编辑器中打开导出选项，选择可用的导出样式并保存到系统相册。允许所需的相册权限，并检查设备可用空间。导出是图片，不会创建可共同编辑的网页或 PDF。",
+        },
+        {
+          question: "哪些功能需要 Pro？",
+          answer:
+            "高级纸张与字体、正文内嵌照片、特殊照片边框、动画及 iCloud 同步属于 Pro。App 可以免费下载并使用基础编辑。具体商品、价格与条款以购买界面和 Apple 显示为准。",
+        },
+        {
+          question: "已经买过 Pro，怎样恢复？",
+          answer:
+            "确认设备登录了购买时使用的 Apple 账户，在 Pro 购买界面选择“恢复购买”，保持网络可用，并等待结果。恢复购买不会新建一笔购买；如果没有找到记录，请核对 Apple 的购买历史。",
+        },
+        {
+          question: "怎样取消订阅或申请退款？",
+          answer:
+            "在系统设置中打开 Apple 账户的订阅管理，查看或取消 PinyPiny 的订阅。卸载 App 不会自动取消订阅。退款申请由 Apple 按其政策处理。终身购买不是自动续订订阅。",
+        },
+        {
+          question: "iCloud 同步没有完成怎么办？",
+          answer:
+            "同步需要 Pro、可用的 Apple iCloud 账户、网络和足够的 iCloud 存储。查看 App 的 iCloud 同步状态与提示，确认两台设备使用相同 Apple 账户并安装可用更新。不要为排查问题先删除 App 或本地数据；仍有问题请联系支持。同步不是独立备份。",
+        },
+        {
+          question: "离线时哪些功能可以用？",
+          answer:
+            "基础笔记编辑和已保存内容可离线使用。尚未缓存的字体、天气、商店交易及 iCloud 同步需要网络。即使云端暂不可用，也请保留设备上的本地数据。",
+        },
+        {
+          question: "怎么管理照片、相机或定位权限？",
+          answer:
+            "在 iOS 或 iPadOS 设置中找到 PinyPiny，查看并调整权限。基础文字记录不要求相机或定位。定位只用于你允许的地点与天气上下文，不持续追踪行程。",
+        },
+        {
+          question: "我的问题不在这里？",
+          answer: `请发邮件到 ${supportEmail}，附上设备型号、系统版本、App 版本和复现步骤。截图请先遮住私人笔记、照片和 Apple 账户信息。`,
+        },
+      ]
+    : [
+        {
+          question: "How do I make my first page?",
+          answer:
+            "Create a note, write a sentence, then add a photo using the photo control. Open Sticker Studio when you want a cut-out subject. Use the available paper, type and color controls to style the page. It is fine to leave space.",
+        },
+        {
+          question: "What is the difference between a photo and a sticker?",
+          answer:
+            "A photo keeps the complete picture. Sticker Studio extracts recognized subjects into a transparent sticker you can add to the current note. With a library photo, select recognized subjects; the camera flow first extracts the main subject.",
+        },
+        {
+          question: "How do I export a page?",
+          answer:
+            "Open the export options in the note editor, choose an available export style, and save the image to Photos. Allow the required Photos permission and check available device storage. Export creates an image, not a shared editing page or PDF.",
+        },
+        {
+          question: "Which features need Pro?",
+          answer:
+            "Additional papers and fonts, inline photos, special photo frames, animation and iCloud sync require Pro. The app is free to download with core editing. Available products, local prices and purchase terms are shown in the app and by Apple.",
+        },
+        {
+          question: "How do I restore a previous Pro purchase?",
+          answer:
+            "Use the Apple account that made the purchase, open the Pro purchase screen and choose Restore Purchases. Keep a network connection and wait for the result. Restoring does not make a new purchase. If no purchase is found, check your Apple purchase history.",
+        },
+        {
+          question: "How do I cancel a subscription or request a refund?",
+          answer:
+            "Open subscriptions in your Apple account settings to manage or cancel a PinyPiny subscription. Deleting the app does not cancel it. Apple handles refund requests under its policies. A Lifetime purchase is not an auto-renewing subscription.",
+        },
+        {
+          question: "What if iCloud sync has not completed?",
+          answer:
+            "Sync needs Pro, an available Apple iCloud account, a connection and sufficient iCloud storage. Check the app’s iCloud status and messages, use the same Apple account on your devices, and install available updates. Do not start troubleshooting by deleting the app or local data. Contact support if needed. Sync is not an independent backup.",
+        },
+        {
+          question: "What works offline?",
+          answer:
+            "Core note editing and saved content work offline. Uncached fonts, weather, store transactions and iCloud sync need a connection. Keep the local data on your device if cloud services are temporarily unavailable.",
+        },
+        {
+          question: "Where do I change permissions?",
+          answer:
+            "Find PinyPiny in iOS or iPadOS Settings to review Photos, Camera and location permissions. Basic writing does not require camera or location access. Location supplies optional place and weather context; it does not continuously track a journey.",
+        },
+        {
+          question: "Does PinyPiny have an Android or web editor?",
+          answer:
+            "PinyPiny is an iPhone and iPad app. This website explains the app and shows real example pages; it is not an online notebook editor.",
+        },
+        {
+          question: "How can I get more help?",
+          answer: `Email ${supportEmail} with your device, system version, app version and steps to reproduce the problem. Remove private notes, photos and Apple account details from screenshots before sending them.`,
+        },
+      ];
+}

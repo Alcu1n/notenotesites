@@ -1,0 +1,50 @@
+{
+  "productName": "PinyPiny",
+  "chineseName": "拼拼笔记",
+  "publisher": "LRAI STUDIO",
+  "websiteUrl": "https://pinypiny.lraitech.com",
+  "chineseWebsiteUrl": "https://pinypiny.lraitech.com/zh",
+  "appStoreUrl": "https://apps.apple.com/app/id6804919805",
+  "supportUrl": "https://pinypiny.lraitech.com/support",
+  "pricingFactsUrl": "https://pinypiny.lraitech.com/pricing.md",
+  "contactName": "Media Relations",
+  "contactEmail": "alcuin.ch@gmail.com",
+  "platforms": ["iOS 18+", "iPadOS 18+"],
+  "languages": ["English", "Simplified Chinese", "Traditional Chinese", "Japanese", "Korean"],
+  "pricingModel": "Free download with optional Pro (subscription or one-time Lifetime IAP)",
+  "tagline_40c": "Visual notes & collage journal for iOS",
+  "tagline_60c": "Freeform photo journal, digital scrapbook & card stack",
+  "description_160c": "Arrange photos, words, and on-device cutout stickers freely on paper-like pages for iPhone and iPad. Local-first storage, card-stack browsing, and image export.",
+  "description_500c": "PinyPiny is a visual notes, photo journal, and freeform digital scrapbook app for iPhone and iPad (iOS/iPadOS 18+). Arrange words, ordinary photos, and on-device Sticker Studio photo cutouts freely on warm paper-like pages, then revisit completed notes in a tactile card stack. Core editing runs locally on your device without creating a separate account, and finished pages export cleanly as images to Apple Photos. PinyPiny is free to download, with optional Pro (subscription or one-time Lifetime purchase) adding extra papers and fonts, inline photos, special photo frames, animation, and private Apple iCloud sync.",
+  "awesome_list_bullet": "- [PinyPiny](https://pinypiny.lraitech.com) - Local-first visual notes, photo journal, and freeform digital scrapbook app for iPhone and iPad with on-device photo cutout stickers.",
+  "assets": {
+    "icon": "public/assets/pinypiny/app-icon.png",
+    "ogEn": "public/assets/pinypiny/og-en.jpg",
+    "ogZh": "public/assets/pinypiny/og-zh.jpg",
+    "screenshots": [
+      "public/assets/pinypiny/showcase/daily.webp",
+      "public/assets/pinypiny/showcase/travel.webp",
+      "public/assets/pinypiny/showcase/inspiration.webp"
+    ]
+  },
+  "priorityDirectories": {
+    "wave1ReviewAndDiscovery": [
+      "AlternativeTo",
+      "SaaSHub",
+      "Product Hunt",
+      "AppAdvice"
+    ],
+    "wave2ChineseCommunities": [
+      "少数派 (sspai.com)",
+      "小众软件 (appinn.com)",
+      "V2EX (/go/share)",
+      "AppSo"
+    ],
+    "wave3DesignAndCommunity": [
+      "One Page Love",
+      "Minimal Gallery",
+      "r/iOSApps",
+      "r/digitaljournaling"
+    ]
+  }
+}

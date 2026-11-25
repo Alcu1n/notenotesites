@@ -38,6 +38,7 @@ export type ScenarioContent = {
   description: string;
   eyebrow: string;
   heading: string;
+  anchorLabel: string;
   intro: string;
   image: "daily" | "travel" | "inspiration";
   imageAlt: string;
@@ -66,7 +67,8 @@ const scenarios: Record<Locale, Record<ScenarioSlug, ScenarioContent>> = {
       description:
         "Make a digital scrapbook with your own photos, words, and photo stickers. Explore a simple page-making approach in PinyPiny for iPhone and iPad.",
       eyebrow: "Digital scrapbooking",
-      heading: "A little scrapbook. Entirely your own.",
+      heading: "A digital scrapbook. Entirely your own.",
+      anchorLabel: "Digital scrapbook app for iPhone & iPad",
       intro:
         "PinyPiny is a digital scrapbook and visual notes app for iPhone and iPad. Arrange photos, text, and stickers freely on the page, then revisit your finished notes as a stack of cards. Start with something small: a coffee, a ticket, a thought you want to keep.",
       image: "inspiration",
@@ -102,7 +104,7 @@ const scenarios: Record<Locale, Record<ScenarioSlug, ScenarioContent>> = {
           id: "make-it-personal",
           title: "Make the decoration part of the memory",
           paragraphs: [
-            "Instead of looking for a sticker that almost fits, make one from a photo of something that was there: a flower, a cup, a pet, or a souvenir. Open Sticker Studio, choose a photo, select the detected subject, and preview the cutout before placing it on the paper.",
+            "Instead of looking for a sticker that almost fits, make one from a photo of something that was there: a flower, a cup, a pet, or a souvenir. Open Sticker Studio, choose a photo, select the detected subject, and preview the cutout before placing it on the paper. Follow the step-by-step [photo sticker guide](/guides/photo-stickers) for both library and camera cutouts.",
             "You can also take a new picture from Sticker Studio. The camera flow prepares a sticker preview from the main detected subject. A clear subject against a simple background is a useful starting point; recognition depends on the photo.",
           ],
           image: "sticker",
@@ -145,7 +147,8 @@ const scenarios: Record<Locale, Record<ScenarioSlug, ScenarioContent>> = {
       description:
         "Turn an everyday photo and a few words into a personal journal page. Find photo diary ideas and free-form layouts in PinyPiny for iPhone and iPad.",
       eyebrow: "Everyday photo journaling",
-      heading: "A photo keeps the scene. You keep the feeling.",
+      heading: "Your photo journal, beyond the camera roll.",
+      anchorLabel: "Photo journal app for iPhone & iPad",
       intro:
         "A photo journal pairs a picture with the details only you remember. PinyPiny gives those photos and words a place of their own, with freely arranged pages and a card stack for revisiting ordinary days on iPhone and iPad.",
       image: "daily",
@@ -168,7 +171,7 @@ const scenarios: Record<Locale, Record<ScenarioSlug, ScenarioContent>> = {
           id: "three-ways-to-write",
           title: "The same photo can tell three different stories",
           paragraphs: [
-            "Try a minimal page when the picture says enough: one large image and a short line beneath it. For a diary page, make room for a paragraph beside the photo. For a collage, add a cutout detail and a small title to turn the scene into something more playful.",
+            "Try a minimal page when the picture says enough: one large image and a short line beneath it. For a diary page, make room for a paragraph beside the photo. For a collage, add a [custom photo sticker](/guides/photo-stickers) and a small title to turn the scene into a [digital scrapbook page](/digital-scrapbook).",
             "These are composition ideas, not modes you need to unlock. Place the photo and text as separate elements, then change the balance yourself. Photos embedded directly within running text are a separate Pro feature.",
           ],
           steps: [
@@ -222,7 +225,8 @@ const scenarios: Record<Locale, Record<ScenarioSlug, ScenarioContent>> = {
       description:
         "Make a travel scrapbook from photos, small discoveries, and your own words. Plan a simple travel journal page in PinyPiny for iPhone and iPad.",
       eyebrow: "A travel scrapbook",
-      heading: "Bring the trip home, one page at a time.",
+      heading: "A travel journal, one page at a time.",
+      anchorLabel: "Travel journal & scrapbook app for iPhone",
       intro:
         "Use PinyPiny as a travel journal to collect the parts of a trip that a photo album misses: the first meal, a wrong turn, a phrase you kept hearing. Put photos, text, and personal stickers together on your iPhone or iPad, then keep each finished day as a card.",
       image: "travel",
@@ -245,7 +249,7 @@ const scenarios: Record<Locale, Record<ScenarioSlug, ScenarioContent>> = {
           title: "Choose a story before choosing a layout",
           paragraphs: [
             "A day page works well with a place name, one main photo, and three short moments in the order you remember them. A food page can use a close-up, the dish name, and the taste you want to describe. A final-trip page might need only one image and the answer to “What will I miss?”",
-            "Keep the place or date easy to find. Arrange secondary photos and stickers around the main image, leaving enough space for a readable caption. Use a similar title treatment across entries if you want the trip to feel like one collection.",
+            "Keep the place or date easy to find. Arrange secondary photos and [personal souvenir stickers](/guides/photo-stickers) around the main image, leaving enough space for a readable caption. Use a similar title treatment across entries if you want the trip to feel like one collection.",
           ],
           steps: [
             "Choose one subject: a day, a meal, a neighborhood, or a discovery.",
@@ -302,7 +306,8 @@ const scenarios: Record<Locale, Record<ScenarioSlug, ScenarioContent>> = {
       description:
         "用自己的照片、文字和照片贴纸，做一页自由排版的电子手帐。看看拼拼笔记里的拼贴思路，从一个小片刻开始记录。支持 iPhone 与 iPad。",
       eyebrow: "电子手帐 · 自由拼贴",
-      heading: "把生活碎片，拼成一页自己的手帐。",
+      heading: "把生活碎片，拼成一页电子手帐。",
+      anchorLabel: "电子手帐与自由拼贴 App",
       intro:
         "拼拼笔记是一款适用于 iPhone 和 iPad 的电子手帐与视觉笔记 App。照片、文字、贴纸可以在纸面上自由摆放，完成的笔记则收成一张张卡片。第一篇不必盛大：一杯咖啡、一张车票、一句突然想留下的话，就够了。",
       image: "inspiration",
@@ -338,7 +343,7 @@ const scenarios: Record<Locale, Record<ScenarioSlug, ScenarioContent>> = {
           id: "make-it-personal",
           title: "把当时的小物，做成自己的贴纸",
           paragraphs: [
-            "不必总去寻找“差不多合适”的装饰。那天拿在手里的杯子、买到的一朵花、路上遇见的小猫，都可以从照片里变成贴纸。打开贴纸工作室，从照片中选图，选择识别出的主体，预览后放到纸上。",
+            "不必总去寻找“差不多合适”的装饰。那天拿在手里的杯子、买到的一朵花、路上遇见的小猫，都可以从照片里变成贴纸。打开贴纸工作室，从照片中选图，选择识别出的主体，预览后放到纸上。详细步骤可参考[照片贴纸制作教程](/zh/guides/photo-stickers)。",
             "也可以直接从贴纸工作室打开相机拍摄。相机会根据识别到的主要主体生成贴纸预览。主体完整、背景简单的照片更适合作为起点；实际识别结果会随照片变化。",
           ],
           image: "sticker",
@@ -379,7 +384,8 @@ const scenarios: Record<Locale, Record<ScenarioSlug, ScenarioContent>> = {
       description:
         "把一张日常照片和几句心情，排成值得回看的图文日记。了解照片日记的写法、极简与拼贴排版，在 iPhone、iPad 上开始拼拼笔记。",
       eyebrow: "照片日记 · 日常记录",
-      heading: "照片记住画面，你补上那天的心情。",
+      heading: "照片日记：留住画面，也留住那天的心情。",
+      anchorLabel: "iPhone 与 iPad 照片日记 App",
       intro:
         "照片日记，是给照片加上只有你知道的细节。拼拼笔记让图与文在纸面上自由组合，把早餐、散步和没什么特别的一天，都留成可以在 iPhone、iPad 上翻阅的卡片笔记。",
       image: "daily",
@@ -400,7 +406,7 @@ const scenarios: Record<Locale, Record<ScenarioSlug, ScenarioContent>> = {
           id: "three-ways-to-write",
           title: "同一张照片，可以写成三种样子",
           paragraphs: [
-            "极简排法，让照片占据主要位置，旁边只留一句话。日记排法，多给文字一点空间，记下当时发生了什么。想做拼贴时，就添一个从照片做成的贴纸，再用小标题把画面串起来。",
+            "极简排法，让照片占据主要位置，旁边只留一句话。日记排法，多给文字一点空间，记下当时发生了什么。想做拼贴时，就添一个[从照片抠出的个人贴纸](/zh/guides/photo-stickers)，再用小标题把画面串成一页[自由拼贴电子手帐](/zh/digital-scrapbook)。",
             "这三种是排版思路，不是需要解锁的固定模式。把照片与文字分别放到纸面上，就能自己调整比例；将照片直接嵌入正文文字之间，则属于另一项 Pro 功能。",
           ],
           steps: [
@@ -454,7 +460,8 @@ const scenarios: Record<Locale, Record<ScenarioSlug, ScenarioContent>> = {
       description:
         "把旅途照片、当地的一句话和小发现，做成自己的旅行手帐。了解旅行日记记什么、怎么排版，在 iPhone 与 iPad 上用拼拼笔记开始记录。",
       eyebrow: "旅行手帐 · 旅途拼贴",
-      heading: "把旅途带回家，一次留一页。",
+      heading: "旅行手帐：把旅途带回家，一次留一页。",
+      anchorLabel: "旅行手帐与旅途拼贴 App",
       intro:
         "旅行手帐可以留下照片之外的旅途：第一顿早餐、绕错的一条路、反复听见的一句话。用拼拼笔记把这些文字、照片与个人贴纸放在一起，在 iPhone 或 iPad 上把一次旅行慢慢收成一叠卡片。",
       image: "travel",
@@ -478,7 +485,7 @@ const scenarios: Record<Locale, Record<ScenarioSlug, ScenarioContent>> = {
           title: "一页只讲一件事，排版就有了方向",
           paragraphs: [
             "想记一整天，可以用地点作标题、一张照片作主图，再按顺序写三个片刻。想记一顿饭，就给食物特写、菜名和口味各留一点位置。旅程最后一页，也许只需要一张图和一句“回去以后最想念什么”。",
-            "让地点或日期容易找到，把次要照片与贴纸围在主图旁边，别挤掉正文。如果希望多篇笔记有一本旅行册的感觉，可以沿用相似的标题大小和文字颜色，不必每页重新设计。",
+            "让地点或日期容易找到，把次要照片与[纪念品照片贴纸](/zh/guides/photo-stickers)围在主图旁边，别挤掉正文。如果希望多篇笔记有一本旅行册的感觉，可以沿用相似的标题大小和文字颜色，不必每页重新设计。",
           ],
           steps: [
             "先选主题：一天、一顿饭、一片街区，或一个新发现。",
@@ -555,7 +562,7 @@ const guides: Record<Locale, Record<GuideSlug, GuideContent>> = {
           id: "place-the-main-photo",
           title: "2. Put the main photo on the page",
           paragraphs: [
-            "Add your chosen photo as a separate element. Move and resize it until it becomes the focal point, leaving space for a title and a caption. You might keep it straight for a quiet page or turn it slightly for a looser scrapbook feel.",
+            "Add your chosen photo as a separate element. Move and resize it until it becomes the focal point, leaving space for a title and a caption. You might keep it straight for a quiet page or turn it slightly for a looser scrapbook feel. Browse more [digital scrapbook layout ideas](/blog/digital-scrapbook-layout-ideas) if you want repeatable ratios for your [digital scrapbook](/digital-scrapbook).",
             "This approach uses a photo placed on the paper. Inserting a photo directly inside running text is a different feature and requires Pro. You do not need inline photos to complete this example.",
           ],
           image: "daily",
@@ -579,8 +586,8 @@ const guides: Record<Locale, Record<GuideSlug, GuideContent>> = {
           id: "make-a-personal-sticker",
           title: "4. Add one sticker that belongs to the story",
           paragraphs: [
-            "Open Sticker Studio and choose a photo with a clear subject. Select the subject you want to keep, generate its preview, then place the result on the paper. A flower from the walk or the cup from breakfast makes the decoration part of the memory.",
-            "Position the sticker beside the main photo instead of over the important detail. If the cutout is not clear, try another image with better separation between the subject and background. This is a useful finishing detail, not a required step.",
+            "Open Sticker Studio and choose a photo with a clear subject. Select the subject you want to keep, generate its preview, then place the result on the paper. A flower from the walk or the cup from breakfast makes the decoration part of the memory. See the full [photo sticker tutorial](/guides/photo-stickers) for library and camera steps.",
+            "Position the sticker beside the main photo instead of over the important detail. If the cutout is not clear, try another image with better separation between the subject and background. This is a useful finishing detail for both [digital scrapbooks](/digital-scrapbook) and everyday [photo journals](/photo-journal), not a required step.",
           ],
           image: "sticker",
           caption:
@@ -632,7 +639,7 @@ const guides: Record<Locale, Record<GuideSlug, GuideContent>> = {
           title: "1. Start with a subject you can see clearly",
           paragraphs: [
             "A cup, a flower, a pet, or a small souvenir is a good first subject. Use a photo where the whole object is visible and does not blend into the background. Fine hair, transparent objects, shadows, and crowded scenes can make a cutout less predictable.",
-            "Open a note and its Sticker Studio. Choose the photo route for an image already in your library, or the camera route when the object is in front of you. Only grant permissions you need for the route you use.",
+            "Open a note and its Sticker Studio. Choose the photo route for an image already in your library, or the camera route when the object is in front of you. Only grant permissions you need for the route you use. Because extraction runs locally, it fits naturally into a [private offline photo journal](/blog/private-offline-photo-journal-iphone) or [digital scrapbook](/digital-scrapbook).",
           ],
         },
         {
@@ -667,7 +674,7 @@ const guides: Record<Locale, Record<GuideSlug, GuideContent>> = {
           title: "4. Place the sticker where it helps the page",
           paragraphs: [
             "Confirm the preview to add the sticker to your note. Move and resize it like a page element. Try putting a small cutout beside a title, or let it overlap the edge of a photo while keeping the important part of that photo visible.",
-            "One personal sticker often gives a page enough character. If you need a second, use it to guide the eye toward the caption rather than to cover unused space. The aim is to connect the decoration to the story.",
+            "One personal sticker often gives a [digital scrapbook page](/digital-scrapbook) or [everyday photo journal](/photo-journal) enough character. If you are building your very first page, follow our [iPhone digital scrapbook walkthrough](/guides/iphone-digital-scrapbook) alongside this step.",
           ],
           image: "inspiration",
           caption:
@@ -702,7 +709,7 @@ const guides: Record<Locale, Record<GuideSlug, GuideContent>> = {
     },
     "travel-journal-ideas": {
       slug: "travel-journal-ideas",
-      title: "Travel Journal Ideas: What to Write & How to Lay It Out",
+      title: "Travel Journal Ideas: What to Write & Layout | PinyPiny",
       description:
         "Five practical ways to build a travel journal page, from collecting small details to arranging photos and captions in PinyPiny on iPhone or iPad.",
       heading: "A travel journal you can start before the trip is over.",
@@ -716,7 +723,7 @@ const guides: Record<Locale, Record<GuideSlug, GuideContent>> = {
           title: "1. Give the day one small question",
           paragraphs: [
             "Before you fill a page, choose what it is about. “What surprised me today?” produces a different entry from “What did I eat?” or “Where did I feel most at home?” One question gives your photos and captions a reason to sit together.",
-            "For a short trip, you could make an arrival page, a favorite meal page, and a last-day reflection. For a longer trip, a few place-based entries may be easier to keep than a strict daily record.",
+            "For a short trip, you could make an arrival page, a favorite meal page, and a last-day reflection. For a longer trip, a few place-based entries may be easier to keep than a strict daily record. You can also explore our [travel journal app workflow](/travel-journal) or pull ideas from [25 everyday photo journal prompts](/blog/everyday-photo-journal-prompts).",
           ],
           steps: [
             "A first impression: what did you notice as soon as you arrived?",
@@ -751,7 +758,7 @@ const guides: Record<Locale, Record<GuideSlug, GuideContent>> = {
           title: "4. Build the layout around the part you remember",
           paragraphs: [
             "Place the strongest photo first. Add a clear title with the place or day, then group the caption beside the picture it explains. Keep the second image smaller so the page has an obvious starting point.",
-            "A photo sticker of a souvenir can connect the pieces without adding another full photograph. Use the same accent color or title style across the trip to give the collection some continuity. Premium paper and font choices are optional Pro features, not a requirement for the layout.",
+            "A [photo sticker of a souvenir](/guides/photo-stickers) can connect the pieces without adding another full photograph. Use the same accent color or title style across your [iPhone travel journal](/travel-journal) to give the collection continuity. Premium paper and font choices are optional Pro features, not a requirement for the layout.",
           ],
           steps: [
             "Lead with one photo and a short place or day title.",
@@ -819,7 +826,7 @@ const guides: Record<Locale, Record<GuideSlug, GuideContent>> = {
           id: "place-the-main-photo",
           title: "2. 先摆主照片，再给文字留位置",
           paragraphs: [
-            "把选好的照片作为独立元素添加到纸面，调整它的位置和大小，在旁边留出标题、短文字的空间。想清爽一点就摆正，想更像纸质拼贴，可以稍微转一个角度。",
+            "把选好的照片作为独立元素添加到纸面，调整它的位置和大小，在旁边留出标题、短文字的空间。想清爽一点就摆正，想更像纸质拼贴，可以稍微转一个角度。想参考更多比例与留白技巧，可以看[iPhone 电子手帐排版技巧](/zh/blog/digital-scrapbook-layout-ideas)或回到[电子手帐场景页](/zh/digital-scrapbook)。",
             "这里使用的是摆在纸面上的照片。把照片直接插在正文文字之间，是另一项需要 Pro 的功能；完成这一页不需要使用正文内嵌照片。",
           ],
           image: "daily",
@@ -842,8 +849,8 @@ const guides: Record<Locale, Record<GuideSlug, GuideContent>> = {
           id: "make-a-personal-sticker",
           title: "4. 加一张和故事有关的贴纸",
           paragraphs: [
-            "打开贴纸工作室，从照片里选一张主体清楚的图片，选择想保留的主体，生成预览，再放到纸上。散步遇见的花、早餐时的杯子，都能让装饰本身成为记录的一部分。",
-            "把贴纸放在主图旁边，尽量别盖住最重要的地方。切出的边缘不理想时，可以换一张主体与背景分得更开的照片。贴纸是收尾的小细节，这一步也可以留到以后再做。",
+            "打开贴纸工作室，从照片里选一张主体清楚的图片，选择想保留的主体，生成预览，再放到纸上。散步遇见的花、早餐时的杯子，都能让装饰本身成为记录的一部分；完整步骤可见[照片贴纸制作教程](/zh/guides/photo-stickers)。",
+            "把贴纸放在主图旁边，尽量别盖住最重要的地方。切出的边缘不理想时，可以换一张主体与背景分得更开的照片。无论是[电子手帐](/zh/digital-scrapbook)还是日常[照片日记](/zh/photo-journal)，贴纸都是收尾的小细节，也可以留到以后再做。",
           ],
           image: "sticker",
           caption: "从自己的照片里选择识别出的主体，制作个人贴纸。",
@@ -893,7 +900,7 @@ const guides: Record<Locale, Record<GuideSlug, GuideContent>> = {
           title: "1. 先找一张主体清楚的图",
           paragraphs: [
             "第一次可以试试杯子、花、宠物或旅行带回的小物件。主体尽量完整，不要和背景混在一起。透明物体、细碎毛发、很重的阴影或拥挤场景，都可能让分离结果更难判断。",
-            "在一篇笔记中打开贴纸工作室。有现成照片就从相册选图，东西就在眼前则可以选相机。按照实际使用的入口，授予所需权限即可。",
+            "在一篇笔记中打开贴纸工作室。有现成照片就从相册选图，东西就在眼前则可以选相机。按照实际使用的入口，授予所需权限即可。由于主体识别在设备本地完成，很适合搭配[离线私密照片日记](/zh/blog/private-offline-photo-journal-iphone)和[电子手帐](/zh/digital-scrapbook)使用。",
           ],
         },
         {
@@ -926,7 +933,7 @@ const guides: Record<Locale, Record<GuideSlug, GuideContent>> = {
           title: "4. 放进纸面，让贴纸帮你讲故事",
           paragraphs: [
             "确认预览后，将贴纸加入当前笔记，再像其他页面元素一样调整位置与大小。可以把小物放在标题旁，也可以稍微压住照片边缘，但别盖掉照片里的主角。",
-            "先加一张往往就够。如果还想加第二张，让它把视线引向正文，而不是仅仅填满空位。那天真正出现过的小东西，比一堆无关装饰更能帮你想起当时。",
+            "先加一张往往就够让一页[电子手帐](/zh/digital-scrapbook)或[照片日记](/zh/photo-journal)有了重点。如果是第一次排版，可以配合[iPhone 电子手帐入门教程](/zh/guides/iphone-digital-scrapbook)一起完成。",
           ],
           image: "inspiration",
           caption: "制作示例：照片主体成为拼贴页面中的一个小细节。",
@@ -974,7 +981,7 @@ const guides: Record<Locale, Record<GuideSlug, GuideContent>> = {
           title: "1. 先给今天一个小问题",
           paragraphs: [
             "动手排版前，先确定这一页回答什么。“今天最意外的事是什么？”“吃到了什么？”“哪里让我想多待一会儿？”不同问题会帮你选出不同的照片，也让文字有话可写。",
-            "短途旅行可以留到达、最喜欢的一餐、离开前的心情三篇；长途旅行也可以按地点记几页，不必强迫自己每天交一份作业。先选适合这趟旅行的节奏。",
+            "短途旅行可以留到达、最喜欢的一餐、离开前的心情三篇；长途旅行也可以按地点记几页，不必强迫自己每天交一份作业。也可以结合[旅行手帐 App 场景页](/zh/travel-journal)和[25 个照片日记灵感](/zh/blog/everyday-photo-journal-prompts)找到适合这趟旅行的节奏。",
           ],
           steps: [
             "第一印象：刚到的时候，最先注意到了什么？",
@@ -1007,7 +1014,7 @@ const guides: Record<Locale, Record<GuideSlug, GuideContent>> = {
           title: "4. 用清楚的主次，排出这一页的顺序",
           paragraphs: [
             "先摆最重要的照片，用简短标题写地点或日期，再把说明文字靠近对应图片。第二张照片适当缩小，页面就会有明确的阅读起点，不必靠很多装饰来撑起版面。",
-            "想加一点个人感，可以把纪念品做成照片贴纸。几页之间沿用一种点缀色或标题样式，也能慢慢形成整本旅行册的感觉。高级纸张和字体是可选 Pro 权益，不是完成这套排版的必要条件。",
+            "想加一点个人感，可以把纪念品做成[照片抠图贴纸](/zh/guides/photo-stickers)。在整本[旅行手帐](/zh/travel-journal)里沿用一种点缀色或标题样式，也能慢慢形成统一感。高级纸张和字体是可选 Pro 权益，不是完成这套排版的必要条件。",
           ],
           steps: [
             "一张主图，配一个容易找到的地点或日期标题。",

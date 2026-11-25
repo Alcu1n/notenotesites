@@ -9,15 +9,48 @@ import {
   type GuideSlug,
   type EditorialSection,
 } from "@/lib/editorial-content";
+import {
+  getBlogPost,
+  getAllBlogPosts,
+  type BlogSlug,
+  type BlogSection,
+} from "@/lib/blog-content";
+import {
+  getComparison,
+  getAllComparisons,
+  vsSlugs,
+  type VsSlug,
+} from "@/lib/vs-content";
 import { getLegal, type LegalSlug } from "@/lib/legal-content";
 import { media } from "@/lib/media";
 import { localizedPath, type Locale, type PageSlug } from "@/lib/routes";
 import { siteConfig, appFacts } from "@/lib/site-config";
+import { supportFaqFor } from "@/lib/ui-copy";
 import { SiteFrame } from "./site-frame";
 import { StructuredData } from "./structured-data";
 import { DownloadArea } from "./download-area";
 import { Faq } from "./faq";
 import { ArrowIcon } from "./icons";
+
+function formatDate(iso: string, locale: Locale): string {
+  const [year, month, day] = iso.split("-").map(Number);
+  if (locale === "zh") return `${year}年${month}月${day}日`;
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  return `${months[(month || 1) - 1]} ${day}, ${year}`;
+}
 
 function Breadcrumbs({
   locale,
@@ -28,22 +61,27 @@ function Breadcrumbs({
   page: string;
   label: string;
 }) {
+  const zh = locale === "zh";
+  const parent = page.startsWith("guides/")
+    ? { slug: "guides", label: zh ? "教程" : "Guides" }
+    : page.startsWith("blog/")
+      ? { slug: "blog", label: zh ? "博客" : "Blog" }
+      : page.startsWith("vs/")
+        ? { slug: "vs", label: zh ? "产品对比" : "Compare" }
+        : null;
+
   return (
     <nav
       className="breadcrumbs"
-      aria-label={locale === "zh" ? "当前位置" : "Breadcrumb"}
+      aria-label={zh ? "当前位置" : "Breadcrumb"}
     >
-      <Link href={localizedPath(locale)}>
-        {locale === "zh" ? "首页" : "Home"}
-      </Link>
+      <Link href={localizedPath(locale)}>{zh ? "首页" : "Home"}</Link>
       <span className="breadcrumb-sep" aria-hidden="true">
         /
       </span>
-      {page.startsWith("guides/") && (
+      {parent && (
         <>
-          <Link href={localizedPath(locale, "guides")}>
-            {locale === "zh" ? "教程" : "Guides"}
-          </Link>
+          <Link href={localizedPath(locale, parent.slug)}>{parent.label}</Link>
           <span className="breadcrumb-sep" aria-hidden="true">
             /
           </span>
@@ -81,17 +119,43 @@ function Closing({ locale, page }: { locale: Locale; page: string }) {
   );
 }
 
+function RichText({ text }: { text: string }) {
+  const chunks = text.split(/(\[[^\]]+\]\([^)]+\))/g);
+  return (
+    <>
+      {chunks.map((chunk, index) => {
+        const match = chunk.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+        if (!match || !/^(https:\/\/|mailto:|\/(?!\/))/.test(match[2]))
+          return chunk;
+        if (match[2].startsWith("/")) {
+          return (
+            <Link href={match[2]} key={index}>
+              {match[1]}
+            </Link>
+          );
+        }
+        return (
+          <a href={match[2]} key={index}>
+            {match[1]}
+          </a>
+        );
+      })}
+    </>
+  );
+}
+
 function EditorialSections({
   sections,
   locale,
 }: {
-  sections: EditorialSection[];
+  sections: (EditorialSection | BlogSection)[];
   locale: Locale;
 }) {
   return (
     <>
       {sections.map((section, index) => {
         const hasLeadingNum = /^\d+\./.test(section.title);
+        const blogSection = section as BlogSection;
         return (
           <section id={section.id} key={section.id} data-reveal>
             {!hasLeadingNum && (
@@ -101,14 +165,58 @@ function EditorialSections({
             )}
             <h2>{section.title}</h2>
             {section.paragraphs.map((text) => (
-              <p key={text}>{text}</p>
+              <p key={text}>
+                <RichText text={text} />
+              </p>
             ))}
+            {blogSection.bullets && (
+              <ul className="editorial-bullets">
+                {blogSection.bullets.map((item) => (
+                  <li key={item}>
+                    <RichText text={item} />
+                  </li>
+                ))}
+              </ul>
+            )}
             {section.steps && (
               <ol className="editorial-steps">
                 {section.steps.map((step) => (
-                  <li key={step}>{step}</li>
+                  <li key={step}>
+                    <RichText text={step} />
+                  </li>
                 ))}
               </ol>
+            )}
+            {blogSection.table && (
+              <div className="editorial-table-wrap">
+                <table className="editorial-table">
+                  <caption>{blogSection.table.caption}</caption>
+                  <thead>
+                    <tr>
+                      {blogSection.table.headers.map((header) => (
+                        <th scope="col" key={header}>
+                          {header}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {blogSection.table.rows.map((row, rowIndex) => (
+                      <tr key={rowIndex}>
+                        {row.map((cell, cellIndex) =>
+                          cellIndex === 0 ? (
+                            <th scope="row" key={cellIndex}>
+                              {cell}
+                            </th>
+                          ) : (
+                            <td key={cellIndex}>{cell}</td>
+                          ),
+                        )}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             )}
             {section.image && (
               <figure className="article-figure">
@@ -143,6 +251,14 @@ function ScenarioPage({
 }) {
   const c = getScenario(locale, slug),
     zh = locale === "zh";
+  const companionBlogSlug: BlogSlug =
+    slug === "digital-scrapbook"
+      ? "digital-scrapbook-layout-ideas"
+      : slug === "photo-journal"
+        ? "everyday-photo-journal-prompts"
+        : "private-offline-photo-journal-iphone";
+  const companionBlog = getBlogPost(locale, companionBlogSlug);
+
   return (
     <>
       <Breadcrumbs locale={locale} page={slug} label={c.eyebrow} />
@@ -204,16 +320,31 @@ function ScenarioPage({
         <article className="article-body">
           <EditorialSections sections={c.sections} locale={locale} />
           <section className="article-callout" data-reveal>
-            <p className="eyebrow">{zh ? "配套教程" : "COMPANION GUIDE"}</p>
+            <p className="eyebrow">{zh ? "配套教程与深度阅读" : "COMPANION GUIDE & READING"}</p>
             <h2>{zh ? "跟着做一页" : "Make your first page"}</h2>
             <p>{getGuide(locale, c.guide).intro}</p>
-            <Link
-              className="text-link"
-              href={localizedPath(locale, `guides/${c.guide}`)}
-            >
-              {getGuide(locale, c.guide).heading}
-              <ArrowIcon />
-            </Link>
+            <div className="related-links" style={{ marginTop: 16 }}>
+              <Link
+                className="text-link"
+                href={localizedPath(locale, `guides/${c.guide}`)}
+              >
+                {getGuide(locale, c.guide).heading}
+                <ArrowIcon />
+              </Link>
+              <Link
+                className="text-link"
+                href={localizedPath(locale, `blog/${companionBlog.slug}`)}
+              >
+                {companionBlog.heading}
+                <ArrowIcon />
+              </Link>
+              <Link className="text-link" href={localizedPath(locale, "vs")}>
+                {zh
+                  ? "对比苹果手记、Day One 与 Zinnia"
+                  : "Compare PinyPiny vs Apple Journal, Day One & Zinnia"}
+                <ArrowIcon />
+              </Link>
+            </div>
           </section>
           <section data-reveal>
             <h2>{zh ? "你可能还想知道" : "A few useful answers"}</h2>
@@ -244,7 +375,7 @@ function RelatedScenarios({
           .filter((s) => s !== current)
           .map((s) => (
             <Link className="text-link" href={localizedPath(locale, s)} key={s}>
-              {getScenario(locale, s).heading}
+              {getScenario(locale, s).anchorLabel}
               <ArrowIcon />
             </Link>
           ))}
@@ -284,13 +415,15 @@ function GuidePage({ locale, slug }: { locale: Locale; slug: GuideSlug }) {
             ·
           </span>
           <time dateTime={appFacts.contentUpdated}>
-            {zh ? "更新于 2026年10月15日" : "Updated October 15, 2026"}
+            {zh
+              ? `更新于 ${formatDate(appFacts.contentUpdated, "zh")}`
+              : `Updated ${formatDate(appFacts.contentUpdated, "en")}`}
           </time>
         </p>
       </header>
       <div className="article-layout page-section">
         <aside className="article-index">
-          <p>{zh ? "跟着这些步骤" : "In this guide"}</p>
+          <p>{zh ? "跟着这些步骤" : "Step outline"}</p>
           {c.sections.map((s, index) => (
             <a href={`#${s.id}`} key={s.id}>
               {!/^\d+\./.test(s.title) && (
@@ -306,8 +439,8 @@ function GuidePage({ locale, slug }: { locale: Locale; slug: GuideSlug }) {
           <div className="guide-intro-note" data-primary-download>
             <p>
               {zh
-                ? "在拼拼笔记中跟着操作。App 可免费下载，文中提及的高级纸张、字体或样式可能需要 Pro。"
-                : "Follow along in PinyPiny. The app is free to download; premium paper, fonts or styling mentioned in this guide may require Pro."}
+                ? "在拼拼笔记中跟着操作。App 可免费下载，下文提及的高级纸张、字体或样式可能需要 Pro。"
+                : "Follow along in PinyPiny. The app is free to download; premium paper, fonts or styling shown below may require Pro."}
             </p>
             <DownloadArea
               locale={locale}
@@ -317,11 +450,27 @@ function GuidePage({ locale, slug }: { locale: Locale; slug: GuideSlug }) {
             />
           </div>
           <EditorialSections sections={c.sections} locale={locale} />
+          <section className="article-callout" data-reveal>
+            <p className="eyebrow">
+              {zh ? "对应使用场景" : "BUILT FOR THIS WORKFLOW"}
+            </p>
+            <h2>{getScenario(locale, c.scenario).anchorLabel}</h2>
+            <p>{getScenario(locale, c.scenario).intro}</p>
+            <Link
+              className="text-link"
+              href={localizedPath(locale, c.scenario)}
+            >
+              {zh
+                ? `探索${getScenario(locale, c.scenario).anchorLabel}`
+                : `Explore ${getScenario(locale, c.scenario).anchorLabel}`}
+              <ArrowIcon />
+            </Link>
+          </section>
           <section data-reveal>
             <h2>{zh ? "常见问题" : "Common questions"}</h2>
             <Faq items={c.faq} />
           </section>
-          <RelatedScenarios locale={locale} current="" />
+          <RelatedScenarios locale={locale} current={c.scenario} />
         </article>
       </div>
       <Closing locale={locale} page={page} />
@@ -345,8 +494,8 @@ function GuidesIndex({ locale }: { locale: Locale }) {
         </p>
         <h1>
           {zh
-            ? "把手边的照片，\n变成自己的记录。"
-            : "From your camera roll\nto a page of your own."}
+            ? "电子手帐与\n照片日记教程。"
+            : "Digital scrapbook &\nphoto journal guides."}
         </h1>
         <p className="lead">
           {zh
@@ -398,25 +547,521 @@ function GuidesIndex({ locale }: { locale: Locale }) {
           );
         })}
       </div>
+      <div className="page-section">
+        <section className="article-callout" data-reveal>
+          <p className="eyebrow">{zh ? "延伸阅读" : "FURTHER READING"}</p>
+          <h2>
+            {zh
+              ? "想看更多排版思路与工具对比？"
+              : "Looking for layout recipes or app comparisons?"}
+          </h2>
+          <p>
+            {zh
+              ? "在拼拼笔记博客阅读电子手帐排版比例、离线私密方案与 25 个日常照片日记灵感，或直接查看与苹果手记、Day One、Zinnia 的客观对比。"
+              : "Read essays on iPhone scrapbook ratios, offline local-first privacy, and 25 photo journal prompts in the blog, or compare PinyPiny side by side with other iOS journal apps."}
+          </p>
+          <div className="related-links" style={{ marginTop: 16 }}>
+            <Link className="text-link" href={localizedPath(locale, "blog")}>
+              {zh ? "进入拼拼笔记博客" : "Browse all blog articles"}
+              <ArrowIcon />
+            </Link>
+            <Link className="text-link" href={localizedPath(locale, "vs")}>
+              {zh ? "查看 iPhone 手帐与日记 App 对比" : "Compare journal apps"}
+              <ArrowIcon />
+            </Link>
+          </div>
+        </section>
+      </div>
+      <div className="page-section">
+        <RelatedScenarios locale={locale} current="" />
+      </div>
       <Closing locale={locale} page="guides" />
     </>
   );
 }
 
-function RichText({ text }: { text: string }) {
-  const chunks = text.split(/(\[[^\]]+\]\([^)]+\))/g);
+function BlogIndex({ locale }: { locale: Locale }) {
+  const zh = locale === "zh";
+  const allPosts = getAllBlogPosts(locale);
   return (
     <>
-      {chunks.map((chunk, index) => {
-        const match = chunk.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
-        if (!match || !/^(https:\/\/|mailto:|\/(?!\/))/.test(match[2]))
-          return chunk;
-        return (
-          <a href={match[2]} key={index}>
-            {match[1]}
+      <Breadcrumbs
+        locale={locale}
+        page="blog"
+        label={zh ? "博客" : "Blog"}
+      />
+      <section className="article-hero page-section">
+        <p className="eyebrow">
+          <span className="eyebrow-dot" aria-hidden="true" />
+          {zh ? "拼拼笔记博客 · 编辑专栏" : "PINYPINY BLOG · EDITORIAL NOTES"}
+        </p>
+        <h1>
+          {zh
+            ? "电子手帐排版、\n隐私与记录灵感。"
+            : "Digital scrapbooking,\nprivacy & journaling notes."}
+        </h1>
+        <p className="lead">
+          {zh
+            ? "围绕 iPhone 与 iPad 上的真实记录习惯：分享可复用的手帐排版比例、免注册离线照片日记方案、日常写作灵感，以及手帐和日记 App 的选择思路。"
+            : "Practical essays on laying out iPhone scrapbook pages, keeping a private offline photo journal without an account, beating blank-page friction, and choosing the right memory app."}
+        </p>
+      </section>
+      <div className="guide-index-list page-section">
+        {allPosts.map((post, index) => (
+          <article key={post.slug} data-reveal>
+            <Link
+              href={localizedPath(locale, `blog/${post.slug}`)}
+              className="guide-index-image"
+            >
+              <Image
+                {...media[post.coverImage]}
+                alt={post.coverAlt}
+                sizes="(max-width:700px) 85vw, 260px"
+              />
+            </Link>
+            <div className="guide-index-copy">
+              <p className="eyebrow">
+                <span className="section-num">0{index + 1}</span>
+                {post.category} · {post.minutes} {zh ? "分钟阅读" : "min read"}
+              </p>
+              <h2>
+                <Link href={localizedPath(locale, `blog/${post.slug}`)}>
+                  {post.heading}
+                </Link>
+              </h2>
+              <p>{post.intro}</p>
+              <Link
+                className="text-link"
+                href={localizedPath(locale, `blog/${post.slug}`)}
+              >
+                {zh ? "阅读全文" : "Read article"}
+                <ArrowIcon />
+              </Link>
+            </div>
+          </article>
+        ))}
+      </div>
+      <div className="page-section">
+        <section className="article-callout" data-reveal>
+          <p className="eyebrow">{zh ? "客观产品对比" : "HONEST COMPARISONS"}</p>
+          <h2>
+            {zh
+              ? "还在对比不同的 iPhone 日记与手帐 App？"
+              : "Comparing iPhone journal and scrapbook apps?"}
+          </h2>
+          <p>
+            {zh
+              ? "我们整理了基于公开信息核对的对比页，明确写清每款工具各自更胜一筹的场景。"
+              : "Read fact-checked side-by-side breakdowns showing where each app wins and when PinyPiny fits best."}
+          </p>
+          <div className="related-links" style={{ marginTop: 16 }}>
+            {vsSlugs.map((slug) => (
+              <Link
+                key={slug}
+                className="text-link"
+                href={localizedPath(locale, `vs/${slug}`)}
+              >
+                {getComparison(locale, slug).heading}
+                <ArrowIcon />
+              </Link>
+            ))}
+          </div>
+        </section>
+      </div>
+      <div className="page-section">
+        <RelatedScenarios locale={locale} current="" />
+      </div>
+      <Closing locale={locale} page="blog" />
+    </>
+  );
+}
+
+function BlogPostPage({ locale, slug }: { locale: Locale; slug: BlogSlug }) {
+  const post = getBlogPost(locale, slug);
+  const page = `blog/${slug}`;
+  const zh = locale === "zh";
+  const splitIndex = post.calloutAfterSectionIndex + 1;
+  const firstHalf = post.sections.slice(0, splitIndex);
+  const secondHalf = post.sections.slice(splitIndex);
+
+  return (
+    <>
+      <Breadcrumbs locale={locale} page={page} label={post.category} />
+      <header className="article-hero page-section">
+        <p className="eyebrow">
+          <span className="eyebrow-dot" aria-hidden="true" />
+          {post.category}
+        </p>
+        <h1>{post.heading}</h1>
+        <p className="lead">{post.intro}</p>
+        <p className="byline">
+          <span>
+            {zh ? "作者 " : "By "}
+            <Link href={localizedPath(locale, "about")}>
+              @lemon · LRAI STUDIO
+            </Link>
+          </span>
+          <span className="byline-sep" aria-hidden="true">
+            ·
+          </span>
+          <span>
+            {post.minutes} {zh ? "分钟阅读" : "min read"}
+          </span>
+          <span className="byline-sep" aria-hidden="true">
+            ·
+          </span>
+          <time dateTime={post.updatedAt}>
+            {zh
+              ? `更新于 ${formatDate(post.updatedAt, "zh")}`
+              : `Updated ${formatDate(post.updatedAt, "en")}`}
+          </time>
+        </p>
+      </header>
+      <div className="article-layout page-section">
+        <aside className="article-index">
+          <p>{zh ? "本文目录" : "On this page"}</p>
+          {post.sections.map((s, index) => (
+            <a href={`#${s.id}`} key={s.id}>
+              <span className="toc-num" aria-hidden="true">
+                0{index + 1}
+              </span>
+              <span>{s.title}</span>
+            </a>
+          ))}
+        </aside>
+        <article className="article-body">
+          <EditorialSections sections={firstHalf} locale={locale} />
+          <section className="article-callout" data-primary-download data-reveal>
+            <p className="eyebrow">{post.callout.eyebrow}</p>
+            <h2>{post.callout.title}</h2>
+            <p>{post.callout.body}</p>
+            <div className="blog-callout-actions">
+              <Link
+                className="text-link"
+                href={localizedPath(locale, post.callout.targetSlug)}
+              >
+                {post.callout.linkLabel}
+                <ArrowIcon />
+              </Link>
+              <DownloadArea
+                locale={locale}
+                page={page}
+                qr={false}
+                position="blog-callout"
+              />
+            </div>
+          </section>
+          <EditorialSections sections={secondHalf} locale={locale} />
+          <section data-reveal>
+            <h2>{zh ? "常见问题" : "Common questions"}</h2>
+            <Faq items={post.faq} />
+          </section>
+          <section className="related-section" data-reveal>
+            <h2>{zh ? "延伸阅读与配套教程" : "Related reading & guides"}</h2>
+            <div className="related-links">
+              <Link
+                className="text-link"
+                href={localizedPath(locale, post.primaryScenario)}
+              >
+                {getScenario(locale, post.primaryScenario).anchorLabel}
+                <ArrowIcon />
+              </Link>
+              {post.relatedGuides.map((gSlug) => (
+                <Link
+                  className="text-link"
+                  href={localizedPath(locale, `guides/${gSlug}`)}
+                  key={gSlug}
+                >
+                  {getGuide(locale, gSlug).heading}
+                  <ArrowIcon />
+                </Link>
+              ))}
+              {post.relatedBlogSlugs.map((bSlug) => (
+                <Link
+                  className="text-link"
+                  href={localizedPath(locale, `blog/${bSlug}`)}
+                  key={bSlug}
+                >
+                  {getBlogPost(locale, bSlug).heading}
+                  <ArrowIcon />
+                </Link>
+              ))}
+            </div>
+          </section>
+        </article>
+      </div>
+      <Closing locale={locale} page={page} />
+    </>
+  );
+}
+
+function VsIndex({ locale }: { locale: Locale }) {
+  const zh = locale === "zh";
+  const all = getAllComparisons(locale);
+  return (
+    <>
+      <Breadcrumbs
+        locale={locale}
+        page="vs"
+        label={zh ? "产品对比" : "Compare"}
+      />
+      <section className="article-hero page-section">
+        <p className="eyebrow">
+          <span className="eyebrow-dot" aria-hidden="true" />
+          {zh ? "事实核对 · 客观取舍" : "FACT-CHECKED COMPARISONS"}
+        </p>
+        <h1>
+          {zh
+            ? "拼拼笔记与其他\niPhone 日记 App 对比。"
+            : "PinyPiny vs other\niPhone journal apps."}
+        </h1>
+        <p className="lead">
+          {zh
+            ? "每款记录工具都有自己最擅长的方向。以下对比基于 2026 年 11 月 25 日核对的公开官方资料，既写清拼拼笔记的优势，也明确标出竞品更适合你的场景。"
+            : "Every journaling app makes different design trade-offs. Each comparison below is verified against official documentation on November 25, 2026 and clearly states where the other app wins."}
+        </p>
+      </section>
+      <section className="page-section" style={{ paddingTop: 0 }}>
+        <div className="vs-index-grid">
+          {all.map((item, index) => (
+            <article className="vs-index-card" key={item.slug} data-reveal>
+              <p className="eyebrow">
+                <span className="section-num">0{index + 1}</span>
+                {zh ? `核对日期 ${item.checkedDate}` : `Checked ${item.checkedDate}`}
+              </p>
+              <h2>
+                <Link href={localizedPath(locale, `vs/${item.slug}`)}>
+                  {item.heading}
+                </Link>
+              </h2>
+              <p>{item.verdict}</p>
+              <Link
+                className="text-link"
+                href={localizedPath(locale, `vs/${item.slug}`)}
+              >
+                {zh
+                  ? `查看与 ${item.competitorName} 的完整对比`
+                  : `Read PinyPiny vs ${item.competitorName}`}
+                <ArrowIcon />
+              </Link>
+            </article>
+          ))}
+        </div>
+      </section>
+      <div className="page-section">
+        <RelatedScenarios locale={locale} current="" />
+      </div>
+      <Closing locale={locale} page="vs" />
+    </>
+  );
+}
+
+function VsDetailPage({ locale, slug }: { locale: Locale; slug: VsSlug }) {
+  const c = getComparison(locale, slug);
+  const page = `vs/${slug}`;
+  const zh = locale === "zh";
+  const otherComparisons = vsSlugs.filter((s) => s !== slug);
+
+  return (
+    <>
+      <Breadcrumbs
+        locale={locale}
+        page={page}
+        label={zh ? `对比 ${c.competitorName}` : `vs ${c.competitorName}`}
+      />
+      <header className="article-hero page-section">
+        <p className="eyebrow">
+          <span className="eyebrow-dot" aria-hidden="true" />
+          {c.eyebrow}
+        </p>
+        <h1>{c.heading}</h1>
+        <div className="vs-verdict-box">
+          <p className="eyebrow">{zh ? "一句话结论" : "SHORT VERDICT"}</p>
+          <p className="lead" style={{ marginTop: 8 }}>
+            {c.verdict}
+          </p>
+        </div>
+        <p className="byline">
+          <span>
+            {zh ? "整理自公开官方信息" : "Verified from official docs"}
+          </span>
+          <span className="byline-sep" aria-hidden="true">
+            ·
+          </span>
+          <time dateTime={c.checkedDate}>
+            {zh
+              ? `核对日期 ${formatDate(c.checkedDate, "zh")}`
+              : `Checked ${formatDate(c.checkedDate, "en")}`}
+          </time>
+        </p>
+      </header>
+      <div className="article-layout page-section">
+        <aside className="article-index">
+          <p>{zh ? "对比目录" : "On this page"}</p>
+          <a href="#comparison-table">
+            <span className="toc-num" aria-hidden="true">
+              01
+            </span>
+            <span>{zh ? "核心差异表" : "Key differences"}</span>
           </a>
-        );
-      })}
+          <a href="#pricing-reality">
+            <span className="toc-num" aria-hidden="true">
+              02
+            </span>
+            <span>{zh ? "价格与付费方式" : "Pricing & model"}</span>
+          </a>
+          <a href="#who-wins">
+            <span className="toc-num" aria-hidden="true">
+              03
+            </span>
+            <span>{zh ? "各自更适合谁" : "Which fits you"}</span>
+          </a>
+          <a href="#switching-steps">
+            <span className="toc-num" aria-hidden="true">
+              04
+            </span>
+            <span>{zh ? "如何衔接使用" : "Getting started"}</span>
+          </a>
+        </aside>
+        <article className="article-body">
+          <section id="comparison-table" data-reveal>
+            <span className="article-sec-num" aria-hidden="true">
+              01
+            </span>
+            <h2>
+              {zh
+                ? `拼拼笔记与 ${c.competitorName} 核心差异一览`
+                : `PinyPiny vs ${c.competitorName}: side-by-side triggers`}
+            </h2>
+            <div className="editorial-table-wrap">
+              <table className="editorial-table">
+                <caption>
+                  {zh
+                    ? `拼拼笔记与 ${c.competitorName} 核心功能与边界对比（核对日期：${c.checkedDate}）`
+                    : `Side-by-side comparison of ${c.competitorName} and PinyPiny (checked ${c.checkedDate})`}
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">{zh ? "对比维度" : "Decision factor"}</th>
+                    <th scope="col">{c.competitorName}</th>
+                    <th scope="col">{zh ? "拼拼笔记 PinyPiny" : "PinyPiny"}</th>
+                    <th scope="col">{zh ? "核对来源" : "Source"}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {c.summaryRows.map((row) => (
+                    <tr key={row.trigger}>
+                      <th scope="row">{row.trigger}</th>
+                      <td>{row.competitor}</td>
+                      <td>{row.pinypiny}</td>
+                      <td>{row.source}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="pricing-reality" data-reveal>
+            <span className="article-sec-num" aria-hidden="true">
+              02
+            </span>
+            <h2>{c.pricingHeading}</h2>
+            {c.pricingParagraphs.map((text) => (
+              <p key={text}>{text}</p>
+            ))}
+            <p className="media-note" style={{ marginTop: 18 }}>
+              {c.pricingNote}
+            </p>
+          </section>
+
+          <section id="who-wins" data-reveal>
+            <span className="article-sec-num" aria-hidden="true">
+              03
+            </span>
+            <h2>
+              {zh
+                ? `应该选 ${c.competitorName} 还是拼拼笔记？`
+                : `Should you pick ${c.competitorName} or PinyPiny?`}
+            </h2>
+            <div className="vs-split-grid">
+              <div className="vs-win-card">
+                <h3>{c.competitorWinsHeading}</h3>
+                <ul className="editorial-bullets">
+                  {c.competitorWins.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="vs-win-card vs-win-card--accent">
+                <h3>{c.pinypinyWinsHeading}</h3>
+                <ul className="editorial-bullets">
+                  {c.pinypinyWins.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section id="switching-steps" data-reveal>
+            <span className="article-sec-num" aria-hidden="true">
+              04
+            </span>
+            <h2>{c.migrationHeading}</h2>
+            <p>{c.migrationIntro}</p>
+            <ol className="editorial-steps">
+              {c.migrationSteps.map((step) => (
+                <li key={step}>{step}</li>
+              ))}
+            </ol>
+            <div style={{ marginTop: 28 }} data-primary-download>
+              <DownloadArea
+                locale={locale}
+                page={page}
+                qr={false}
+                position="vs-migration"
+              />
+            </div>
+          </section>
+
+          <section data-reveal>
+            <h2>{zh ? "常见问题" : "Common questions"}</h2>
+            <Faq items={c.faq} />
+          </section>
+
+          <section className="related-section" data-reveal>
+            <h2>{zh ? "更多对比与相关阅读" : "More comparisons & reading"}</h2>
+            <div className="related-links">
+              {otherComparisons.map((other) => (
+                <Link
+                  key={other}
+                  className="text-link"
+                  href={localizedPath(locale, `vs/${other}`)}
+                >
+                  {getComparison(locale, other).heading}
+                  <ArrowIcon />
+                </Link>
+              ))}
+              <Link
+                className="text-link"
+                href={localizedPath(locale, c.relatedScenario)}
+              >
+                {getScenario(locale, c.relatedScenario).anchorLabel}
+                <ArrowIcon />
+              </Link>
+              <Link
+                className="text-link"
+                href={localizedPath(locale, `blog/${c.relatedBlogSlug}`)}
+              >
+                {getBlogPost(locale, c.relatedBlogSlug).heading}
+                <ArrowIcon />
+              </Link>
+            </div>
+          </section>
+        </article>
+      </div>
+      <Closing locale={locale} page={page} />
     </>
   );
 }
@@ -440,7 +1085,9 @@ function LegalPage({ locale, slug }: { locale: Locale; slug: LegalSlug }) {
             ·
           </span>
           <time dateTime={c.updated}>
-            {zh ? "更新于 2026年10月15日" : "Updated October 15, 2026"}
+            {zh
+              ? `更新于 ${formatDate(c.updated, "zh")}`
+              : `Updated ${formatDate(c.updated, "en")}`}
           </time>
         </p>
       </header>
@@ -496,19 +1143,33 @@ function About({ locale }: { locale: Locale }) {
         ["是什么", "视觉笔记与自由拼贴手帐"],
         ["适用设备", "iPhone 与 iPad，iOS / iPadOS 18 及以上"],
         ["开发者", "LRAI STUDIO · @lemon"],
-        ["购买方式", "免费下载，可选 Pro App 内购买"],
-        ["数据保存", "设备本地；Pro 支持私人 iCloud 同步"],
+        ["购买方式", "免费下载，可选 Pro App 内购买（订阅或终身买断）"],
+        ["数据保存", "设备本地优先，无需注册账号；Pro 支持私人 iCloud 同步"],
         ["App 语言", "简体中文、繁体中文、英语、日语、韩语"],
+        [
+          "明确边界",
+          "不使用生成式 AI 自动写日记，不提供手绘笔刷、PDF 导出、模板导入或网页编辑器",
+        ],
       ]
     : [
         ["What it is", "Visual notes and a freeform collage journal"],
         ["Devices", "iPhone and iPad, iOS / iPadOS 18 or later"],
         ["Made by", "LRAI STUDIO · @lemon"],
-        ["Availability", "Free download, with optional Pro in-app purchases"],
-        ["Your content", "Local storage; Pro includes private iCloud sync"],
+        [
+          "Availability",
+          "Free download, with optional Pro (subscription or one-time Lifetime)",
+        ],
+        [
+          "Your content",
+          "Local-first storage with no separate account; Pro includes private iCloud sync",
+        ],
         [
           "App languages",
           "English, Simplified Chinese, Traditional Chinese, Japanese, Korean",
+        ],
+        [
+          "What it is not",
+          "No generative AI auto-writing, no Apple Pencil drawing tools, no PDF/template import, and no web editor",
         ],
       ];
   return (
@@ -526,8 +1187,8 @@ function About({ locale }: { locale: Locale }) {
         <p className="eyebrow">LRAI STUDIO</p>
         <h1>
           {zh
-            ? "给生活碎片，\n一张自己的纸。"
-            : "A page for the pieces\nthat make a life."}
+            ? "关于拼拼笔记：\n给生活碎片一张纸。"
+            : "About PinyPiny,\na visual notebook for your life."}
         </h1>
         <p className="lead">
           {zh
@@ -552,8 +1213,8 @@ function About({ locale }: { locale: Locale }) {
           </p>
           <p>
             {zh
-              ? "你可以从很简单的一页开始：一张照片、一句只有自己知道意思的话。字体、颜色、照片和贴纸是表达的材料，空白也是。不必先成为设计师，才能把自己的生活收好。"
-              : "Start with a photo and a sentence only you could write. Type, color, photos and stickers are materials for expression. So is empty space. You do not have to become a designer to keep something personal."}
+              ? "你可以从很简单的一页开始：一张照片、一句只有自己知道意思的话。拼拼笔记不会用 AI 替你编造回忆；字体、颜色、照片和贴纸是表达的材料，空白也是。"
+              : "Start with a photo and a sentence only you could write. PinyPiny does not use generative AI to write captions for you; type, color, photos and stickers are materials for your own voice."}
           </p>
         </section>
         <section data-reveal>
@@ -568,7 +1229,7 @@ function About({ locale }: { locale: Locale }) {
           <p>
             {zh
               ? "完成的笔记不会只变成列表里的一行。它会回到一叠纸张卡片中，等待你再翻过来。我们把产品最鲜明的表达留给纸面和卡片，希望工具在需要时出现，内容始终是主角。"
-              : "A finished note becomes a card in a stack you can browse again. Paper and cards carry the app’s character; the tools are there to help, while what you put on the page stays at the center."}
+              : "A finished note becomes a card in a stack you can browse again. Paper and cards carry the app's character; the tools are there to help, while what you put on the page stays at the center."}
           </p>
         </section>
         <section className="fact-ledger-section" data-reveal>
@@ -599,11 +1260,18 @@ function About({ locale }: { locale: Locale }) {
             </a>
             {zh ? "。" : "."}
           </p>
-          <Link className="text-link" href={localizedPath(locale, "support")}>
-            {zh ? "查看帮助与支持" : "Visit help & support"}
-            <ArrowIcon />
-          </Link>
+          <div className="related-links" style={{ marginTop: 14 }}>
+            <Link className="text-link" href={localizedPath(locale, "support")}>
+              {zh ? "查看帮助与支持" : "Visit help & support"}
+              <ArrowIcon />
+            </Link>
+            <Link className="text-link" href={localizedPath(locale, "blog")}>
+              {zh ? "阅读拼拼笔记博客" : "Read the PinyPiny blog"}
+              <ArrowIcon />
+            </Link>
+          </div>
         </section>
+        <RelatedScenarios locale={locale} current="" />
       </article>
       <Closing locale={locale} page="about" />
     </>
@@ -612,114 +1280,7 @@ function About({ locale }: { locale: Locale }) {
 
 function Support({ locale }: { locale: Locale }) {
   const zh = locale === "zh";
-  const questions = zh
-    ? [
-        {
-          question: "第一次打开，先做什么？",
-          answer:
-            "创建一篇笔记，先写一句话，再用照片入口添加一张自己的照片。想做抠图贴纸时进入贴纸工作室；想换纸张、字体或颜色时打开对应样式选项。不要急着填满页面。",
-        },
-        {
-          question: "照片和贴纸有什么不同？",
-          answer:
-            "普通照片会保留完整画面。贴纸工作室可以识别并提取照片中的主体，生成带透明背景的贴纸，再加入当前笔记。照片来源允许手动选择识别出的主体，相机来源会先提取主要主体。",
-        },
-        {
-          question: "怎样导出图片？",
-          answer:
-            "在笔记编辑器中打开导出选项，选择可用的导出样式并保存到系统相册。允许所需的相册权限，并检查设备可用空间。导出是图片，不会创建可共同编辑的网页或 PDF。",
-        },
-        {
-          question: "哪些功能需要 Pro？",
-          answer:
-            "高级纸张与字体、正文内嵌照片、特殊照片边框、动画及 iCloud 同步属于 Pro。App 可以免费下载并使用基础编辑。具体商品、价格与条款以购买界面和 Apple 显示为准。",
-        },
-        {
-          question: "已经买过 Pro，怎样恢复？",
-          answer:
-            "确认设备登录了购买时使用的 Apple 账户，在 Pro 购买界面选择“恢复购买”，保持网络可用，并等待结果。恢复购买不会新建一笔购买；如果没有找到记录，请核对 Apple 的购买历史。",
-        },
-        {
-          question: "怎样取消订阅或申请退款？",
-          answer:
-            "在系统设置中打开 Apple 账户的订阅管理，查看或取消 PinyPiny 的订阅。卸载 App 不会自动取消订阅。退款申请由 Apple 按其政策处理。终身购买不是自动续订订阅。",
-        },
-        {
-          question: "iCloud 同步没有完成怎么办？",
-          answer:
-            "同步需要 Pro、可用的 Apple iCloud 账户、网络和足够的 iCloud 存储。查看 App 的 iCloud 同步状态与提示，确认两台设备使用相同 Apple 账户并安装可用更新。不要为排查问题先删除 App 或本地数据；仍有问题请联系支持。同步不是独立备份。",
-        },
-        {
-          question: "离线时哪些功能可以用？",
-          answer:
-            "基础笔记编辑和已保存内容可离线使用。尚未缓存的字体、天气、商店交易及 iCloud 同步需要网络。即使云端暂不可用，也请保留设备上的本地数据。",
-        },
-        {
-          question: "怎么管理照片、相机或定位权限？",
-          answer:
-            "在 iOS 或 iPadOS 设置中找到 PinyPiny，查看并调整权限。基础文字记录不要求相机或定位。定位只用于你允许的地点与天气上下文，不持续追踪行程。",
-        },
-        {
-          question: "我的问题不在这里？",
-          answer: `请发邮件到 ${siteConfig.supportEmail}，附上设备型号、系统版本、App 版本和复现步骤。截图请先遮住私人笔记、照片和 Apple 账户信息。`,
-        },
-      ]
-    : [
-        {
-          question: "How do I make my first page?",
-          answer:
-            "Create a note, write a sentence, then add a photo using the photo control. Open Sticker Studio when you want a cut-out subject. Use the available paper, type and color controls to style the page. It is fine to leave space.",
-        },
-        {
-          question: "What is the difference between a photo and a sticker?",
-          answer:
-            "A photo keeps the complete picture. Sticker Studio extracts recognized subjects into a transparent sticker you can add to the current note. With a library photo, select recognized subjects; the camera flow first extracts the main subject.",
-        },
-        {
-          question: "How do I export a page?",
-          answer:
-            "Open the export options in the note editor, choose an available export style, and save the image to Photos. Allow the required Photos permission and check available device storage. Export creates an image, not a shared editing page or PDF.",
-        },
-        {
-          question: "Which features need Pro?",
-          answer:
-            "Additional papers and fonts, inline photos, special photo frames, animation and iCloud sync require Pro. The app is free to download with core editing. Available products, local prices and purchase terms are shown in the app and by Apple.",
-        },
-        {
-          question: "How do I restore a previous Pro purchase?",
-          answer:
-            "Use the Apple account that made the purchase, open the Pro purchase screen and choose Restore Purchases. Keep a network connection and wait for the result. Restoring does not make a new purchase. If no purchase is found, check your Apple purchase history.",
-        },
-        {
-          question: "How do I cancel a subscription or request a refund?",
-          answer:
-            "Open subscriptions in your Apple account settings to manage or cancel a PinyPiny subscription. Deleting the app does not cancel it. Apple handles refund requests under its policies. A Lifetime purchase is not an auto-renewing subscription.",
-        },
-        {
-          question: "What if iCloud sync has not completed?",
-          answer:
-            "Sync needs Pro, an available Apple iCloud account, a connection and sufficient iCloud storage. Check the app’s iCloud status and messages, use the same Apple account on your devices, and install available updates. Do not start troubleshooting by deleting the app or local data. Contact support if needed. Sync is not an independent backup.",
-        },
-        {
-          question: "What works offline?",
-          answer:
-            "Core note editing and saved content work offline. Uncached fonts, weather, store transactions and iCloud sync need a connection. Keep the local data on your device if cloud services are temporarily unavailable.",
-        },
-        {
-          question: "Where do I change permissions?",
-          answer:
-            "Find PinyPiny in iOS or iPadOS Settings to review Photos, Camera and location permissions. Basic writing does not require camera or location access. Location supplies optional place and weather context; it does not continuously track a journey.",
-        },
-        {
-          question: "Does PinyPiny have an Android or web editor?",
-          answer:
-            "PinyPiny is an iPhone and iPad app. This website explains the app and shows real example pages; it is not an online notebook editor.",
-        },
-        {
-          question: "How can I get more help?",
-          answer: `Email ${siteConfig.supportEmail} with your device, system version, app version and steps to reproduce the problem. Remove private notes, photos and Apple account details from screenshots before sending them.`,
-        },
-      ];
+  const questions = supportFaqFor(locale, siteConfig.supportEmail);
   return (
     <>
       <Breadcrumbs
@@ -733,16 +1294,17 @@ function Support({ locale }: { locale: Locale }) {
           {zh ? "需要一点帮助？" : "A little help, when you need it"}
         </p>
         <h1>
-          {zh
-            ? "把问题放下，\n继续写下一页。"
-            : "Back to making\nsomething yours."}
+          {zh ? "拼拼笔记\n帮助与支持。" : "PinyPiny\nhelp & support."}
         </h1>
         <p className="lead">
           {zh
             ? "从第一篇笔记，到导出、购买和同步。先看看下面的回答，或直接写信给开发者。"
             : "From your first page to export, purchases and sync. Find an answer below, or write directly to the maker."}
         </p>
-        <a className="text-link support-mail" href={`mailto:${siteConfig.supportEmail}`}>
+        <a
+          className="text-link support-mail"
+          href={`mailto:${siteConfig.supportEmail}`}
+        >
           {siteConfig.supportEmail}
           <ArrowIcon />
         </a>
@@ -769,6 +1331,16 @@ function Support({ locale }: { locale: Locale }) {
                 <ArrowIcon />
               </Link>
             ))}
+            <Link
+              className="text-link"
+              href={localizedPath(
+                locale,
+                "blog/private-offline-photo-journal-iphone",
+              )}
+            >
+              {getBlogPost(locale, "private-offline-photo-journal-iphone").heading}
+              <ArrowIcon />
+            </Link>
           </div>
         </div>
       </section>
@@ -787,10 +1359,16 @@ export function ContentPage({
   if (page === "privacy" || page === "terms")
     content = <LegalPage locale={locale} slug={page} />;
   else if (page === "guides") content = <GuidesIndex locale={locale} />;
+  else if (page === "blog") content = <BlogIndex locale={locale} />;
+  else if (page === "vs") content = <VsIndex locale={locale} />;
   else if (page === "about") content = <About locale={locale} />;
   else if (page === "support") content = <Support locale={locale} />;
   else if (page.startsWith("guides/"))
     content = <GuidePage locale={locale} slug={page.slice(7) as GuideSlug} />;
+  else if (page.startsWith("blog/"))
+    content = <BlogPostPage locale={locale} slug={page.slice(5) as BlogSlug} />;
+  else if (page.startsWith("vs/"))
+    content = <VsDetailPage locale={locale} slug={page.slice(3) as VsSlug} />;
   else content = <ScenarioPage locale={locale} slug={page as ScenarioSlug} />;
   return (
     <SiteFrame locale={locale} page={page}>

@@ -33,6 +33,15 @@ export function SiteHeader({
       text: zh ? "教程" : "Guides",
       active: page === "guides" || page.startsWith("guides/"),
     },
+    {
+      href: localizedPath(locale, "blog"),
+      text: zh ? "博客" : "Blog",
+      active:
+        page === "blog" ||
+        page.startsWith("blog/") ||
+        page === "vs" ||
+        page.startsWith("vs/"),
+    },
   ];
   return (
     <header className="site-header">

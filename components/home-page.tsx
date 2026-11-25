@@ -16,6 +16,7 @@ import {
 import { Faq } from "./faq";
 import { ArrowIcon } from "./icons";
 import { getGuide, guideSlugs } from "@/lib/editorial-content";
+import { getAllBlogPosts } from "@/lib/blog-content";
 import { StructuredData } from "./structured-data";
 
 export function HomePage({ locale }: { locale: Locale }) {
@@ -25,6 +26,7 @@ export function HomePage({ locale }: { locale: Locale }) {
     const g = getGuide(locale, slug);
     return { slug, heading: g.heading, intro: g.intro, minutes: g.minutes };
   });
+  const blogPosts = getAllBlogPosts(locale);
 
   return (
     <SiteFrame locale={locale}>
@@ -218,6 +220,42 @@ export function HomePage({ locale }: { locale: Locale }) {
           </Link>
         </div>
         <GuideFolios locale={locale} guides={guides} />
+
+        <div className="home-editorial-strip" data-reveal>
+          <div className="home-editorial-head">
+            <div>
+              <p className="eyebrow">
+                {zh ? "拼拼笔记博客与客观对比" : "FROM THE BLOG & COMPARISONS"}
+              </p>
+              <h3>
+                {zh
+                  ? "排版技巧、离线隐私指南与日记 App 对比"
+                  : "Layout essays, privacy notes & honest app comparisons"}
+              </h3>
+            </div>
+            <div className="home-editorial-hubs">
+              <Link className="text-link" href={localizedPath(locale, "blog")}>
+                {zh ? "全部博客文章" : "All blog articles"}
+                <ArrowIcon />
+              </Link>
+              <Link className="text-link" href={localizedPath(locale, "vs")}>
+                {zh ? "对比其他 App" : "Compare journal apps"}
+                <ArrowIcon />
+              </Link>
+            </div>
+          </div>
+          <ul className="home-blog-list">
+            {blogPosts.map((post) => (
+              <li key={post.slug}>
+                <Link href={localizedPath(locale, `blog/${post.slug}`)}>
+                  <span className="home-blog-cat">{post.category}</span>
+                  <span className="home-blog-title">{post.heading}</span>
+                  <ArrowIcon />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
 
       <section className="faq-section page-section" data-reveal>

@@ -25,6 +25,23 @@ export const appFacts = {
   supportedLanguages: ["English", "简体中文", "繁體中文", "日本語", "한국어"],
   verifiedStoreVersion: "1.0.3",
   contentUpdated: "2026-10-15",
+  editorialUpdated: "2026-11-25",
 } as const;
 
 export const legalLastUpdated = "2026-10-15";
+
+export function pageLastModified(page: string): string {
+  if (page === "privacy" || page === "terms") return legalLastUpdated;
+  if (
+    page === "blog" ||
+    page.startsWith("blog/") ||
+    page === "vs" ||
+    page.startsWith("vs/") ||
+    page === "" ||
+    page === "about" ||
+    page === "guides"
+  ) {
+    return appFacts.editorialUpdated;
+  }
+  return appFacts.contentUpdated;
+}
